@@ -1,0 +1,1129 @@
+
+/* =====================================================
+   SILVERAURA - PREMIUM THREE COLUMN HERO
+   Left: Hero Content
+   Center: Jewellery Carousel
+   Right: Live Silver Rate Calculator
+===================================================== */
+
+.sa-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  width: 100%;
+  height: 680px;
+  min-height: 680px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr) minmax(340px, 0.85fr);
+  align-items: center;
+
+  background: #f7f0e7;
+}
+
+/* =====================================================
+   BACKGROUND IMAGE
+===================================================== */
+
+.sa-hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sa-hero-background img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+  object-position: center;
+
+  filter: blur(17px) brightness(1.12) saturate(0.92);
+  opacity: 0.48;
+
+  transform: scale(1.12);
+}
+
+/* Background cream overlay */
+
+.sa-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: linear-gradient(
+    100deg,
+    rgba(250, 244, 236, 0.80),
+    rgba(247, 235, 222, 0.48),
+    rgba(250, 244, 236, 0.78)
+  );
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   LEFT SIDE - HERO CONTENT
+===================================================== */
+
+.sa-hero-content {
+  position: relative;
+  z-index: 5;
+
+  min-width: 0;
+  padding: 40px 15px 40px clamp(35px, 5vw, 85px);
+}
+
+.sa-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  color: #b58a50;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+
+  margin-bottom: 24px;
+}
+
+.sa-eyebrow span {
+  width: 35px;
+  height: 1px;
+  background: #b58a50;
+  flex-shrink: 0;
+}
+
+.sa-hero-content h1 {
+  font-family: Georgia, serif;
+  color: #102033;
+
+  font-size: clamp(37px, 3.6vw, 59px);
+  font-weight: 400;
+
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+
+  margin: 0 0 22px;
+}
+
+.sa-hero-content h1 em {
+  color: #b58a50;
+  font-style: italic;
+}
+
+.sa-hero-content p {
+  max-width: 410px;
+
+  font-family: Georgia, serif;
+  font-size: 15px;
+  line-height: 1.8;
+
+  color: #625647;
+
+  margin: 0 0 27px;
+}
+
+/* =====================================================
+   HERO BUTTONS
+===================================================== */
+
+.sa-hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sa-primary-button,
+.sa-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 13px 19px;
+
+  border-radius: 35px;
+
+  text-decoration: none;
+
+  font-family: Georgia, serif;
+  font-size: 13px;
+
+  transition: all 0.3s ease;
+}
+
+.sa-primary-button {
+  color: white;
+  background: #102033;
+  border: 1px solid #102033;
+}
+
+.sa-primary-button:hover {
+  background: #b58a50;
+  border-color: #b58a50;
+  transform: translateY(-3px);
+}
+
+.sa-secondary-button {
+  color: #102033;
+  border: 1px solid #102033;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.sa-secondary-button:hover {
+  color: white;
+  background: #102033;
+  transform: translateY(-3px);
+}
+
+/* =====================================================
+   HERO SLIDE INDICATORS
+===================================================== */
+
+.sa-hero-progress {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 35px;
+}
+
+.sa-hero-progress button,
+.sa-carousel-dots button {
+  width: 9px;
+  height: 9px;
+
+  padding: 0;
+  border: none;
+  border-radius: 20px;
+
+  background: #c9c0b5;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.sa-hero-progress button.active {
+  width: 27px;
+  background: #102033;
+}
+
+/* =====================================================
+   CENTER - JEWELLERY CAROUSEL
+===================================================== */
+
+.sa-hero-carousel {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+
+
+.sa-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 490px;
+  perspective: 1600px;
+}
+
+/* =====================================================
+   JEWELLERY CARDS
+===================================================== */
+.sa-carousel-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: clamp(190px, 18vw, 250px);
+  height: clamp(270px, 29vw, 350px);
+
+  translate: -50% -50%;
+
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  background: white;
+
+  box-shadow: 0 20px 45px rgba(48, 35, 20, 0.2);
+
+  z-index: var(--layer);
+  outline: none;
+}
+
+.sa-carousel-card:hover {
+  border-color: #c59b60;
+  box-shadow: 0 25px 55px rgba(48, 35, 20, 0.25);
+}
+
+.sa-carousel-card.active {
+  border-color: #c59b60;
+  box-shadow: 0 25px 60px rgba(48, 35, 20, 0.28);
+}
+
+.sa-carousel-card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+/* =====================================================
+   CAROUSEL CARD CAPTION
+===================================================== */
+
+.sa-card-caption {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 38px 10px 17px;
+
+  text-align: center;
+  color: white;
+
+  background: linear-gradient(
+    transparent,
+    rgba(16, 32, 51, 0.94)
+  );
+}
+
+.sa-card-caption small {
+  color: #e6c28a;
+
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.sa-card-caption h3 {
+  font-family: Georgia, serif;
+
+  font-size: 15px;
+  font-weight: 400;
+
+  margin: 7px 0 0;
+}
+
+/* =====================================================
+   CAROUSEL DOTS
+===================================================== */
+
+.sa-carousel-dots {
+  position: absolute;
+
+  bottom: 28px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  z-index: 20;
+}
+
+.sa-carousel-dots button.active {
+  width: 27px;
+  background: #b58a50;
+}
+
+/* =====================================================
+   RIGHT SIDE - LIVE SILVER RATE
+===================================================== */
+
+.sa-hero-rate {
+  position: relative;
+  z-index: 6;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding: 22px 22px 22px 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main widget */
+
+.sa-hero-rate .silver-compact {
+  width: 100%;
+  max-width: 390px;
+  min-width: 0;
+
+  margin: 0;
+
+  box-sizing: border-box;
+
+  background: #fffaf4;
+
+  border: 1px solid #d5b078;
+  border-radius: 23px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 16px 45px rgba(30, 38, 48, 0.16),
+    0 3px 12px rgba(181, 138, 80, 0.12);
+}
+
+/* =====================================================
+   LIVE RATE HEADER
+===================================================== */
+
+.sa-hero-rate .silver-compact-trigger {
+  width: calc(100% - 18px);
+
+  min-height: 75px;
+
+  margin: 9px;
+  padding: 12px 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: #102033;
+  color: white;
+
+  cursor: pointer;
+
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.sa-hero-rate .silver-compact-icon {
+  font-size: 27px;
+  color: #d8b477;
+}
+
+.sa-hero-rate .silver-compact-info {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sa-hero-rate .silver-compact-info small {
+  color: #e7c58d;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+.sa-hero-rate .silver-compact-info strong {
+  color: #fff;
+
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.sa-hero-rate .silver-compact-graph {
+  color: #2bc982;
+  font-size: 24px;
+  letter-spacing: -3px;
+}
+
+.sa-hero-rate .silver-compact-arrow {
+  color: #e7c58d;
+  font-size: 20px;
+}
+
+/* =====================================================
+   EXPANDED WIDGET PANEL
+===================================================== */
+
+.sa-hero-rate .silver-compact-panel {
+  width: 100%;
+
+  padding: 13px 18px 17px;
+
+  box-sizing: border-box;
+
+  background: #fffaf4;
+}
+
+/* Market heading */
+
+.sa-hero-rate .silver-compact-heading {
+  margin-bottom: 18px;
+}
+
+.sa-hero-rate .silver-compact-heading small {
+  color: #b58a50;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.sa-hero-rate .silver-compact-heading h2 {
+  color: #102033;
+
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+
+  margin: 7px 0;
+}
+
+.sa-hero-rate .silver-compact-heading strong {
+  display: block;
+
+  color: #102033;
+
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 700;
+
+  margin: 8px 0;
+}
+
+.sa-hero-rate .silver-compact-heading p {
+  color: #75695c;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* =====================================================
+   WEIGHT CALCULATOR
+===================================================== */
+
+.sa-hero-rate .silver-compact-calculator {
+  padding: 13px;
+
+  background: #fff;
+
+  border: 1px solid #e8dfd2;
+  border-radius: 13px;
+}
+
+.sa-hero-rate .silver-compact-calculator label {
+  display: block;
+
+  color: #102033;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  margin-bottom: 9px;
+}
+
+.sa-hero-rate .silver-compact-input {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  border: 1px solid #d9d0c5;
+  border-radius: 9px;
+
+  overflow: hidden;
+  background: white;
+}
+
+.sa-hero-rate .silver-compact-input input {
+  flex: 1;
+  min-width: 0;
+
+  padding: 11px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #102033;
+  font-size: 15px;
+}
+
+.sa-hero-rate .silver-compact-input span {
+  padding: 12px 10px;
+
+  color: #7e8794;
+  background: #f2eee9;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* Preset buttons */
+
+.sa-hero-rate .silver-compact-presets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+  gap: 6px;
+
+  margin-top: 12px;
+}
+
+.sa-hero-rate .silver-compact-presets button {
+  padding: 7px 10px;
+
+  border: 1px solid #e2d8cc;
+  border-radius: 8px;
+
+  background: #f7f2ec;
+
+  color: #102033;
+  font-size: 11px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.sa-hero-rate .silver-compact-presets button:hover,
+.sa-hero-rate .silver-compact-presets button.selected {
+  background: #102033;
+  border-color: #102033;
+  color: white;
+}
+
+/* Total price */
+
+.sa-hero-rate .silver-compact-total {
+  margin-top: 13px;
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    110deg,
+    #f4e4ca,
+    #f9eddb
+  );
+}
+
+.sa-hero-rate .silver-compact-total small {
+  display: block;
+
+  color: #80623c;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.sa-hero-rate .silver-compact-total strong {
+  display: block;
+
+  color: #102033;
+
+  font-family: Georgia, serif;
+  font-size: 24px;
+
+  margin-top: 5px;
+}
+
+/* =====================================================
+   WEIGHT PRICE GRAPH
+===================================================== */
+
+.sa-hero-rate .silver-mini-chart {
+  margin-top: 17px;
+  padding: 12px;
+
+  border: 1px solid #e8dfd2;
+  border-radius: 12px;
+
+  background: white;
+}
+
+.sa-hero-rate .silver-mini-chart-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #102033;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.sa-hero-rate .silver-mini-chart-title span:last-child {
+  color: #b58a50;
+}
+
+.sa-hero-rate .silver-mini-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  height: 100px;
+
+  gap: 9px;
+  padding-top: 10px;
+}
+
+.sa-hero-rate .silver-mini-column {
+  display: flex;
+  flex: 1;
+
+  height: 100%;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 6px;
+}
+
+.sa-hero-rate .silver-mini-track {
+  width: 100%;
+  max-width: 27px;
+
+  height: 76px;
+
+  display: flex;
+  align-items: flex-end;
+
+  border-radius: 5px;
+  overflow: hidden;
+
+  background: #f0ebe5;
+}
+
+.sa-hero-rate .silver-mini-bar {
+  width: 100%;
+
+  min-height: 3px;
+
+  background: linear-gradient(
+    180deg,
+    #a6b5c6,
+    #102033
+  );
+
+  border-radius: 5px 5px 0 0;
+}
+
+.sa-hero-rate .silver-mini-column small {
+  color: #625647;
+  font-size: 9px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.sa-hero-rate .silver-compact-footer {
+  text-align: center;
+  padding-top: 13px;
+}
+
+.sa-hero-rate .silver-compact-footer a {
+  color: #102033;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.sa-hero-rate .silver-compact-footer a:hover {
+  color: #b58a50;
+  text-decoration: underline;
+}
+
+/* =====================================================
+   LOADING / ERROR
+===================================================== */
+
+.sa-hero-rate .silver-rate-status {
+  position: absolute;
+
+  bottom: 8px;
+
+  color: #8b6034;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+/* =====================================================
+   LAPTOP RESPONSIVE
+===================================================== */
+
+@media (max-width: 1250px) and (min-width: 901px) {
+
+  .sa-hero {
+    grid-template-columns: 0.9fr 1fr 340px;
+    height: 650px;
+    min-height: 650px;
+  }
+
+  .sa-hero-content {
+    padding-left: 30px;
+    padding-right: 5px;
+  }
+
+  .sa-hero-content h1 {
+    font-size: clamp(36px, 3.3vw, 46px);
+  }
+
+  .sa-hero-carousel {
+    overflow: hidden;
+  }
+
+  .sa-carousel-card {
+    width: 130px;
+    height: 210px;
+  }
+
+  .sa-hero-rate {
+    padding-right: 12px;
+  }
+
+  .sa-hero-rate .silver-compact-heading h2 {
+    font-size: 19px;
+  }
+
+  .sa-hero-rate .silver-compact-heading strong {
+    font-size: 19px;
+  }
+}
+
+/* =====================================================
+   TABLET RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .sa-hero {
+    height: auto;
+    min-height: auto;
+
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 450px auto;
+  }
+
+  .sa-hero-content {
+    padding: 45px 15px 30px 30px;
+  }
+
+  .sa-hero-content h1 {
+    font-size: clamp(35px, 5vw, 48px);
+  }
+
+  .sa-hero-carousel {
+    height: 450px;
+  }
+
+  .sa-hero-rate {
+    grid-column: 1 / -1;
+
+    height: auto;
+    padding: 25px;
+
+    align-items: center;
+  }
+
+  .sa-hero-rate .silver-compact {
+    max-width: 600px;
+  }
+
+  .sa-hero-rate .silver-compact-panel {
+    padding: 20px;
+  }
+
+  .sa-hero-rate .silver-mini-bars {
+    height: 110px;
+  }
+}
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .sa-hero {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 340px auto;
+  }
+
+  .sa-hero-content {
+    padding: 45px 22px 10px;
+    text-align: center;
+  }
+
+  .sa-eyebrow {
+    justify-content: center;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
+
+  .sa-hero-content h1 {
+    font-size: 43px;
+  }
+
+  .sa-hero-content p {
+    font-size: 14px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sa-hero-buttons {
+    justify-content: center;
+  }
+
+  .sa-hero-progress {
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .sa-hero-carousel {
+    height: 340px;
+  }
+
+  .sa-carousel-track {
+    height: 340px;
+  }
+
+  .sa-carousel-card {
+    width: 145px;
+    height: 210px;
+  }
+
+  .sa-carousel-dots {
+    bottom: 8px;
+  }
+
+  .sa-hero-rate {
+    grid-column: 1;
+
+    height: auto;
+
+    padding: 20px 15px 35px;
+  }
+
+  .sa-hero-rate .silver-compact {
+    max-width: 440px;
+  }
+
+  .sa-hero-rate .silver-compact-panel {
+    padding: 14px;
+  }
+
+  .sa-hero-rate .silver-compact-heading h2 {
+    font-size: 21px;
+  }
+
+  .sa-hero-rate .silver-compact-heading strong {
+    font-size: 23px;
+  }
+
+  .sa-hero-rate .silver-mini-bars {
+    height: 95px;
+  }
+
+  .sa-hero-background img {
+    filter: blur(12px) brightness(1.12);
+    opacity: 0.5;
+  }
+
+  .sa-hero-overlay {
+    background: rgba(247, 240, 231, 0.62);
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sa-hero *,
+  .sa-hero *::before,
+  .sa-hero *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* =====================================================
+   SILVERAURA FINAL DESKTOP FIX
+   - Keep the live-rate calculator beside the carousel
+   - Raise the rate panel slightly
+   - Let the expanded calculator and graph labels remain visible
+   This block intentionally comes last to override earlier rules.
+===================================================== */
+
+@media (min-width: 901px) {
+  .sa-hero {
+    height: auto;
+    min-height: 790px;
+    overflow: visible;
+    align-items: stretch;
+  }
+
+  .sa-hero-content,
+  .sa-hero-carousel {
+    min-height: 790px;
+  }
+
+  .sa-hero-rate {
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    padding: 8px 22px 28px 5px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    transform: translateY(-14px);
+    overflow: visible;
+  }
+
+  .sa-hero-rate .silver-compact {
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .sa-hero-rate .silver-compact-panel {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding-bottom: 19px;
+  }
+
+  .sa-hero-rate .silver-mini-chart,
+  .sa-hero-rate .silver-mini-bars,
+  .sa-hero-rate .silver-mini-column {
+    overflow: visible;
+  }
+
+  .sa-hero-rate .silver-mini-bars {
+    min-height: 104px;
+    height: 104px;
+    padding-bottom: 2px;
+    box-sizing: content-box;
+  }
+
+  .sa-hero-rate .silver-mini-column {
+    min-height: 100%;
+  }
+
+  .sa-hero-rate .silver-mini-column small {
+    display: block;
+    line-height: 1.25;
+    white-space: nowrap;
+    padding-bottom: 2px;
+  }
+}
+
+/* Smaller desktop/laptop: preserve the three-column layout,
+   but give the calculator enough room to display all content. */
+@media (max-width: 1250px) and (min-width: 901px) {
+  .sa-hero {
+    min-height: 790px;
+    height: auto;
+    overflow: visible;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr) minmax(320px, 0.9fr);
+  }
+
+  .sa-hero-content,
+  .sa-hero-carousel {
+    min-height: 790px;
+  }
+
+  .sa-hero-rate {
+    padding: 8px 12px 28px 4px;
+    transform: translateY(-12px);
+  }
+
+  .sa-hero-rate .silver-compact {
+    max-width: 360px;
+  }
+
+  .sa-hero-rate .silver-compact-presets {
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .sa-hero-rate .silver-compact-presets button {
+    padding: 7px 8px;
+  }
+}
+
+/* Tablet and mobile: stack the rate calculator below the hero content.
+   Do not apply the desktop upward shift on these screens. */
+@media (max-width: 900px) {
+  .sa-hero {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .sa-hero-rate {
+    transform: none;
+    align-self: stretch;
+    overflow: visible;
+  }
+
+  .sa-hero-rate .silver-compact {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .sa-hero-rate .silver-compact-panel,
+  .sa-hero-rate .silver-mini-chart,
+  .sa-hero-rate .silver-mini-bars {
+    overflow: visible;
+  }
+
+  .sa-hero-rate .silver-mini-column small {
+    display: block;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+}
