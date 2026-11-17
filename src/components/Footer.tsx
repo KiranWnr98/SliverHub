@@ -6,8 +6,8 @@ export default function Footer() {
     <footer className="main-footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <h2>SilverAura</h2>
-          <span>PURE SILVER ORNAMENTS</span>
+          <h2>SILVER HUB</h2>
+          <span>HOUSE OF 925</span>
           <p>
             Discover timeless elegance through beautifully
             crafted silver jewellery.
@@ -34,15 +34,25 @@ export default function Footer() {
         <div>
           <h3>Get in Touch</h3>
           <p>We would love to hear from you.</p>
-          <p>Email: support@silveraura.in</p>
+          <p>Email: support@silverhub.in</p>
           <p>India</p>
         </div>
       </div>
 
+      
       <div className="footer-bottom">
-        <p>© 2026 SilverAura. All Rights Reserved.</p>
-        <p>Crafted with elegance ♡</p>
+        <div className="footer-copyright">
+          <p>© 2026 SILVER HUB. All Rights Reserved.</p>
+          <p className="footer-powered">
+            Powered by WINR Technologies Pvt. Ltd.
+          </p>
+        </div>
+
+        <p className="footer-made">
+          Crafted with elegance ♡
+        </p>
       </div>
+
     </footer>
   );
 }

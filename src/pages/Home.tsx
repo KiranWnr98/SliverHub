@@ -83,7 +83,7 @@ export default function Home() {
         <div className="section-heading">
           <div className="heading-title">
             <span />
-            <h2>Why SilverAura?</h2>
+            <h2>Why SILVERHUB?</h2>
             <span />
           </div>
 
@@ -143,9 +143,7 @@ export default function Home() {
           ))}
         </div>
 
-        <p className="review-note">
-          Sample reviews – replace with verified customer reviews.
-        </p>
+
       </section>
 
       {/* NEWSLETTER */}
