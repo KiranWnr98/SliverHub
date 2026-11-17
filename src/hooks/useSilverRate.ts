@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { SilverRate } from "../types/silver";
 
-const API_URL = "/api/silver-rate";
+const API_URL = "/.netlify/functions/silver-rate";
 const REFRESH_INTERVAL = 5 * 60 * 1000;
 
 export function useSilverRate() {
@@ -18,14 +18,15 @@ export function useSilverRate() {
         const response = await fetch(API_URL);
 
         if (!response.ok) {
-          throw new Error(
-            `Silver API failed: ${response.status}`
-          );
+          throw new Error(`Silver API failed: ${response.status}`);
         }
 
         const data: SilverRate = await response.json();
 
-        if (data.price == null || !Number.isFinite(data.price)) {
+        if (
+          data.price == null ||
+          !Number.isFinite(data.price)
+        ) {
           throw new Error("Invalid silver rate received");
         }
 
