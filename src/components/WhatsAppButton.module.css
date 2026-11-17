@@ -1,0 +1,104 @@
+
+.whatsappFloat {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 9999;
+
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(145deg, #ffffff, #cfd3d6);
+  color: #0b1b2d;
+
+  border: 1px solid #b8bec4;
+  border-radius: 50%;
+
+  box-shadow: 0 4px 15px rgba(11, 27, 45, 0.2);
+
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsappFloat:hover {
+  transform: scale(1.06);
+  background: linear-gradient(145deg, #ffffff, #cfd3d6);
+  color: #0b1b2d;
+  box-shadow: 0 6px 18px rgba(11, 27, 45, 0.25);
+}
+
+.whatsappFloat svg {
+  width: 32px;
+  height: 32px;
+  color: #0b1b2d;
+}
+
+/* Chat bubble */
+.tooltip {
+  position: absolute;
+  right: 76px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 13px 22px;
+
+  background: linear-gradient(145deg, #ffffff, #d9dee2);
+  color: #26384a;
+
+  border: 1px solid #c5cbd0;
+  border-radius: 5px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+
+  box-shadow: 0 4px 12px rgba(11, 27, 45, 0.15);
+
+  opacity: 1;
+  visibility: visible;
+
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Speech bubble arrow */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -9px;
+
+  width: 16px;
+  height: 16px;
+
+  background: #d9dee2;
+  border-top: 1px solid #c5cbd0;
+  border-right: 1px solid #c5cbd0;
+
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.whatsappFloat:hover .tooltip {
+  background: linear-gradient(145deg, #ffffff, #d9dee2);
+  color: #26384a;
+}
+
+@media (max-width: 600px) {
+  .whatsappFloat {
+    right: 18px;
+    bottom: 18px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .tooltip {
+    right: 66px;
+    padding: 10px 15px;
+    font-size: 15px;
+  }
+}

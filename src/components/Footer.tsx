@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="main-footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <h2>SILVER HUB</h2>
+          <h2>SILVERHUB</h2>
           <span>HOUSE OF 925</span>
           <p>
             Discover timeless elegance through beautifully
@@ -42,10 +42,19 @@ export default function Footer() {
       
       <div className="footer-bottom">
         <div className="footer-copyright">
-          <p>© 2026 SILVER HUB. All Rights Reserved.</p>
-          <p className="footer-powered">
-            Powered by WINR Technologies Pvt. Ltd.
-          </p>
+          <p>© 2026 SILVERHUB. All Rights Reserved.</p>
+         <p className="footer-powered">
+  Powered by{" "}
+  <a
+    href={`https://wa.me/918074543183?text=${encodeURIComponent(
+      "Hello WINR Technologies! I would like to know more about your services."
+    )}`}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    WINR Technologies Pvt. Ltd.
+  </a>
+</p>
         </div>
 
         <p className="footer-made">

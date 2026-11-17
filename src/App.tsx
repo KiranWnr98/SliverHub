@@ -13,6 +13,7 @@ import Wishlist from './pages/Wishlist';
 
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
+import WhatsAppButton from "./components/WhatsAppButton";
 
 import SparkleBackground from './components/SparkleBackground';
 
@@ -34,6 +35,7 @@ function App() {
           </MainLayout>
 
           <SparkleBackground />
+          <WhatsAppButton />
         </WishlistProvider>
       </CartProvider>
     </BrowserRouter>
