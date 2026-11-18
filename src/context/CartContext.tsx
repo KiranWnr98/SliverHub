@@ -1,25 +1,13 @@
 
 
 import {
-  createContext,
-  useContext,
   useState,
   useEffect,
   type ReactNode,
 } from 'react';
 
 import type { CartItem, Product } from '../types';
-
-interface CartContextType {
-  cart: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
-  cartCount: number;
-  cartTotal: number;
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined);
+import { CartContext } from './CartContextValue';
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -94,14 +82,4 @@ export function CartProvider({ children }: { children: ReactNode }) {
       {children}
     </CartContext.Provider>
   );
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-
-  if (!context) {
-    throw new Error('useCart must be used inside CartProvider');
-  }
-
-  return context;
 }

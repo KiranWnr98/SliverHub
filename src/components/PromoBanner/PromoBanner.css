@@ -1,0 +1,53 @@
+/* PROMOTION */
+
+.promo-section {
+  min-height: 340px;
+  margin: 25px 5%;
+  background:
+    linear-gradient(90deg, rgba(8,23,40,.95), rgba(8,23,40,.55)),
+    url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1600&q=85')
+    center 45% / cover;
+  display: flex;
+  align-items: center;
+  padding: 55px 8%;
+  color: white;
+  border-radius: 12px;
+}
+
+.promo-content > span,
+.newsletter-section > div > span {
+  color: #d9b57e;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+.promo-content h2,
+.newsletter-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(35px, 5vw, 54px);
+  margin: 14px 0;
+}
+
+.promo-content p {
+  font-size: 15px;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.promo-button {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  background: #d4ae76;
+  color: #0b1b2d;
+  padding: 13px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.promo-button:hover {
+  background: white;
+  transform: translateY(-3px);
+}
+

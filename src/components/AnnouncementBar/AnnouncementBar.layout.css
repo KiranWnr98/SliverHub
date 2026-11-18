@@ -1,0 +1,26 @@
+/* Announcement */
+
+.announcement {
+  height: 56px;
+  background: #faf5ee;
+  color: #171717;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.announcement span:first-child,
+.announcement span:last-child {
+  color: var(--gold);
+}
+
+.announcement i {
+  height: 22px;
+  width: 1px;
+  background: #c9bda9;
+}
+

@@ -1,0 +1,65 @@
+/* NEW ARRIVALS */
+
+.new-arrivals-section {
+  padding: 75px 5%;
+  background: #f1e9dd;
+}
+
+.new-arrivals-section .product-card {
+  background: #fffaf4;
+}
+
+.new-arrivals-section .sale-label {
+  background: #b38a50;
+  color: white;
+}
+
+.new-arrivals-section .product-image {
+  height: 280px;
+}
+
+@media (max-width: 600px) {
+  .new-arrivals-section {
+    padding: 50px 17px;
+  }
+
+  .new-arrivals-section .product-image {
+    height: 190px;
+  }
+}
+
+
+
+.product-heart {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-heart.saved {
+  color: #b38a50;
+  background: #fff;
+}
+
+.product-heart:hover {
+  transform: scale(1.12);
+}
+
+.add-cart-button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-cart-button:hover {
+  background: #b38a50;
+  color: white;
+}
+
+.add-cart-button:active {
+  transform: scale(0.97);
+}
+
+.count {
+  transition: all 0.3s ease;
+}
+
+

@@ -1,0 +1,12 @@
+/* Footer */
+
+.footer {
+  min-height: 70px;
+  background: var(--navy);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+}
+

@@ -1,0 +1,636 @@
+/* PREMIUM COMPACT SILVER RATE */
+
+
+.silver-rate-widget {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  color: #173d32;
+  background: linear-gradient(120deg, #e3e8e8, #fbfcfb, #d5dddd);
+  border-top: 1px solid #c4ccce;
+  border-bottom: 1px solid #c4ccce;
+}
+
+.silver-rate-trigger {
+  width: 100%;
+  min-height: 76px;
+  padding: 12px 7%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  text-align: left;
+  color: #173d32;
+}
+
+.silver-rate-icon {
+  font-size: 34px;
+  color: #087052;
+}
+
+.silver-rate-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.silver-rate-summary small,
+.silver-rate-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #087052;
+}
+
+.silver-rate-summary strong {
+  font-size: 19px;
+}
+
+.silver-rate-status {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #087052;
+  font-weight: 700;
+}
+
+.silver-rate-arrow {
+  font-size: 25px;
+}
+
+.silver-rate-details {
+  padding: 42px 7%;
+  border-top: 1px solid #c4ccce;
+  max-width: 1050px;
+  margin: auto;
+}
+
+.silver-rate-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.silver-rate-heading h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 400;
+  margin: 12px 0;
+  color: #173d32;
+}
+
+.silver-rate-heading p {
+  color: #697873;
+  font-size: 13px;
+}
+
+.silver-price-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.silver-price-card {
+  padding: 24px;
+  border: 1px solid #c7d0ce;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff, #e9eeee);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.silver-price-card span,
+.silver-calculator-heading,
+.silver-total span,
+.silver-chart-heading > div > span {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: #537267;
+}
+
+.silver-price-card strong {
+  font-size: clamp(19px, 3vw, 27px);
+  color: #07543f;
+}
+
+.silver-calculator {
+  padding: 28px;
+  border-radius: 14px;
+  background: #f8faf9;
+  border: 1px solid #d1d9d7;
+  margin-bottom: 24px;
+}
+
+.silver-calculator-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.silver-calculator-heading span:last-child {
+  font-size: 22px;
+  color: #087052;
+}
+
+.silver-calculator label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #53665e;
+}
+
+.silver-weight-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #b9c7c2;
+  border-radius: 8px;
+  background: white;
+  padding: 0 16px;
+}
+
+.silver-weight-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #173d32;
+  font-size: 20px;
+}
+
+.silver-weight-input span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #087052;
+  font-weight: 700;
+}
+
+.silver-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 16px 0 22px;
+}
+
+.silver-presets button {
+  padding: 8px 17px;
+  border: 1px solid #c2ceca;
+  border-radius: 30px;
+  background: white;
+  color: #315b4c;
+  cursor: pointer;
+}
+
+.silver-presets button.active,
+.silver-presets button:hover {
+  background: #07543f;
+  color: white;
+  border-color: #07543f;
+}
+
+.silver-total {
+  padding: 23px;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #e1e7e6, #f4f7f6);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.silver-total strong {
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 5vw, 38px);
+  color: #07543f;
+}
+
+.silver-total small {
+  font-size: 12px;
+  color: #65756e;
+}
+
+.silver-chart {
+  padding: 26px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #f9fbfa, #e5ebea);
+  border: 1px solid #cbd5d2;
+}
+
+.silver-chart-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.silver-chart-heading h3 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 23px;
+  margin-top: 8px;
+  color: #173d32;
+}
+
+.silver-chart-icon {
+  font-size: 26px;
+  color: #087052;
+}
+
+.silver-chart-bars {
+  height: 230px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 12px;
+  border-bottom: 1px solid #bfcac6;
+  padding: 0 8px;
+}
+
+.silver-chart-column {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.silver-chart-amount {
+  font-size: 10px;
+  color: #315b4c;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.silver-chart-track {
+  height: 165px;
+  width: min(42px, 75%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.silver-chart-bar {
+  width: 100%;
+  min-height: 3px;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(180deg, #75a997, #07543f);
+  transition: height 0.35s ease;
+}
+
+.silver-chart-weight {
+  font-size: 11px;
+  color: #315b4c;
+  padding-bottom: 9px;
+}
+
+.silver-chart-note {
+  margin-top: 16px;
+  font-size: 11px;
+  color: #6b7973;
+  text-align: center;
+}
+
+.silver-rate-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.silver-rate-footer a {
+  color: #07543f;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.silver-rate-warning {
+  color: #946200;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+  .silver-rate-trigger {
+    padding: 12px 4%;
+    gap: 10px;
+  }
+
+  .silver-rate-summary strong {
+    font-size: 14px;
+  }
+
+  .silver-rate-status {
+    font-size: 8px;
+  }
+
+  .silver-rate-details {
+    padding: 28px 4%;
+  }
+
+  .silver-price-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .silver-calculator,
+  .silver-chart {
+    padding: 18px;
+  }
+
+  .silver-chart-bars {
+    gap: 5px;
+  }
+
+  .silver-chart-amount {
+    font-size: 8px;
+  }
+}
+
+
+@keyframes ratePanelOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .silver-rate-trigger {
+    gap: 12px;
+    min-height: 60px;
+  }
+
+  .silver-mini-graph {
+    width: 65px;
+  }
+
+  .silver-detail-prices {
+    grid-template-columns: 1fr;
+  }
+
+  .silver-details-heading h3 {
+    font-size: 17px;
+  }
+}
+
+.silver-compact {
+  background: linear-gradient(90deg, #dce1e2, #f8faf9);
+  border-top: 1px solid #c4ccce;
+  border-bottom: 1px solid #c4ccce;
+  color: #07543f;
+}
+
+.silver-compact-trigger {
+  width: 100%;
+  min-height: 58px;
+  padding: 8px 6%;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  color: #07543f;
+  text-align: left;
+}
+
+.silver-compact-icon {
+  font-size: 28px;
+}
+
+.silver-compact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.silver-compact-info small {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.silver-compact-info strong {
+  font-size: 15px;
+}
+
+.silver-compact-graph {
+  font-size: 19px;
+  letter-spacing: 1px;
+  color: #087052;
+}
+
+.silver-compact-arrow {
+  font-size: 20px;
+}
+
+.silver-compact-panel {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  border-top: 1px solid #c4ccce;
+}
+
+.silver-compact-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.silver-compact-heading small,
+.silver-mini-chart-title {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: #557568;
+}
+
+.silver-compact-heading h2 {
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+  margin: 8px 0;
+}
+
+.silver-compact-heading strong {
+  display: block;
+  font-size: 25px;
+  color: #07543f;
+}
+
+.silver-compact-heading p {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.silver-compact-calculator {
+  padding: 18px;
+  background: #f8faf9;
+  border: 1px solid #cbd5d2;
+  border-radius: 12px;
+}
+
+.silver-compact-calculator label {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.silver-compact-input {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: white;
+  border: 1px solid #b9c7c2;
+  border-radius: 7px;
+}
+
+.silver-compact-input input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  padding: 12px 0;
+  font-size: 18px;
+  background: transparent;
+  color: #07543f;
+}
+
+.silver-compact-input span {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.silver-compact-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 12px 0;
+}
+
+.silver-compact-presets button {
+  border: 1px solid #c4ccce;
+  border-radius: 20px;
+  background: white;
+  padding: 6px 13px;
+  color: #07543f;
+  cursor: pointer;
+}
+
+.silver-compact-presets button.selected,
+.silver-compact-presets button:hover {
+  background: #07543f;
+  color: white;
+}
+
+.silver-compact-total {
+  padding: 14px;
+  background: linear-gradient(110deg, #e0e7e5, #f5f8f7);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.silver-compact-total small {
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.silver-compact-total strong {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  color: #07543f;
+}
+
+.silver-mini-chart {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid #d1d9d7;
+  border-radius: 10px;
+  background: #f8faf9;
+}
+
+.silver-mini-chart-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.silver-mini-bars {
+  height: 95px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 12px;
+}
+
+.silver-mini-column {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  flex: 1;
+}
+
+.silver-mini-track {
+  height: 75px;
+  width: 22px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.silver-mini-bar {
+  width: 100%;
+  min-height: 3px;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(#8bb7a7, #07543f);
+}
+
+.silver-mini-column small {
+  font-size: 9px;
+  color: #315b4c;
+}
+
+.silver-compact-footer {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 10px;
+}
+
+.silver-compact-footer a {
+  color: #07543f;
+  font-weight: 700;
+}
+
+.silver-compact-warning {
+  color: #946200;
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .silver-compact-trigger {
+    padding: 8px 4%;
+    gap: 9px;
+  }
+
+  .silver-compact-info strong {
+    font-size: 13px;
+  }
+
+  .silver-compact-panel {
+    padding: 20px 12px;
+  }
+}
+

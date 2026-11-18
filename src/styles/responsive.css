@@ -1,0 +1,272 @@
+/* Responsive */
+
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 0 3%;
+    gap: 15px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .search-box {
+    width: 230px;
+  }
+
+  .nav-actions {
+    gap: 17px;
+  }
+
+  .hero-content {
+    padding-left: 9%;
+  }
+
+  .benefit-item {
+    gap: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    height: 82px;
+  }
+
+  .brand-text strong {
+    font-size: 30px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 82px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: var(--navy);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 19px;
+  }
+
+  .mobile-menu {
+    display: flex;
+    border: none;
+    background: transparent;
+    color: white;
+  }
+
+  .mobile-menu svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mobile-search {
+    display: flex;
+  }
+
+  .search-box {
+    display: none;
+    position: absolute;
+    top: 90px;
+    right: 15px;
+    background: var(--navy);
+    width: min(90%, 350px);
+  }
+
+  .search-box.show {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 570px;
+    height: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-content {
+    padding: 55px 7% 100px;
+  }
+
+  .hero h1 {
+    font-size: clamp(45px, 6vw, 65px);
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    gap: 8px;
+  }
+
+  .eyebrow span {
+    width: 30px;
+  }
+
+  .hero-content p {
+    font-size: 19px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 0 20px;
+    font-size: 17px;
+  }
+
+  .benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .benefit-item:nth-child(2) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .announcement {
+    height: 38px;
+    font-size: 12px;
+    gap: 9px;
+  }
+
+  .announcement i {
+    height: 14px;
+  }
+
+  .announcement span:nth-of-type(3) {
+    display: none;
+  }
+
+  .navbar {
+    height: 72px;
+    padding: 0 17px;
+  }
+
+  .brand-symbol {
+    font-size: 36px;
+  }
+
+  .brand {
+    gap: 5px;
+  }
+
+  .brand-text strong {
+    font-size: 26px;
+  }
+
+  .brand-text small {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .nav-actions {
+    gap: 15px;
+  }
+
+  .icon-button svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .account {
+    display: none;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: unset;
+  }
+
+  .hero-content {
+    order: 2;
+    padding: 45px 25px 35px;
+    text-align: center;
+  }
+
+  .hero-image {
+    order: 1;
+    height: 330px;
+    width: 100%;
+    background-position: center;
+  }
+
+  .eyebrow {
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-size: clamp(47px, 12vw, 66px);
+  }
+
+  .hero-content p {
+    font-size: 19px;
+    margin-top: 20px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-height: 49px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+
+  .slider-dots {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .benefits {
+    margin: 0 15px 25px;
+    padding: 15px 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 0;
+  }
+
+  .benefit-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 7px;
+    border-right: 1px solid #e3d9ce;
+    padding: 12px 5px;
+  }
+
+  .benefit-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .benefit-item svg {
+    width: 29px;
+    height: 29px;
+  }
+
+  .benefit-item h3 {
+    font-size: 16px;
+  }
+
+  .benefit-item p {
+    font-size: 14px;
+  }
+}
+
+
+

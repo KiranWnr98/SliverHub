@@ -1,0 +1,135 @@
+/* FEATURED PRODUCTS */
+
+.featured-section {
+  padding: 75px 5%;
+  background: #fffaf4;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 25px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(11,27,45,.07);
+  transition: box-shadow .3s;
+}
+
+.product-card:hover {
+  box-shadow: 0 15px 30px rgba(11,27,45,.13);
+}
+
+.product-image {
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  background: #eee8df;
+}
+
+.product-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform .6s;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.08);
+}
+
+.sale-label {
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  background: var(--navy);
+  color: white;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 8px 10px;
+}
+
+.product-heart {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+}
+
+.product-heart.saved {
+  color: #b33b4b;
+}
+
+.product-heart svg {
+  width: 20px;
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-category {
+  color: var(--gold);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.product-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  margin: 8px 0;
+}
+
+.product-rating {
+  color: #ad803d;
+  font-size: 13px;
+}
+
+.product-prices {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 13px 0;
+}
+
+.product-prices strong {
+  font-size: 19px;
+  color: var(--navy);
+}
+
+.product-prices del {
+  color: #999;
+  font-size: 14px;
+}
+
+.add-cart-button {
+  width: 100%;
+  height: 43px;
+  background: var(--navy);
+  color: white;
+  border: 1px solid var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: .3s;
+}
+
+.add-cart-button:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+

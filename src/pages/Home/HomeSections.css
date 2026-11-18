@@ -1,0 +1,92 @@
+/* WHY SILVERAURA */
+
+.why-section {
+  padding: 75px 5% 35px;
+  background: #f8f1e8;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.why-grid > div {
+  text-align: center;
+  padding: 28px 15px;
+  background: #fffaf4;
+  border-radius: 12px;
+  transition: transform .3s;
+}
+
+.why-grid > div:hover {
+  transform: translateY(-7px);
+}
+
+.why-grid svg {
+  width: 36px;
+  height: 36px;
+  color: var(--gold);
+  margin-bottom: 15px;
+}
+
+.why-grid h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  margin-bottom: 9px;
+}
+
+.why-grid p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #746b60;
+}
+
+/* REVIEWS */
+
+.reviews-section {
+  padding: 75px 5% 35px;
+  background: #fffaf4;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1250px;
+  margin: auto;
+}
+
+.reviews-grid article {
+  background: #f8f1e8;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #eee0cc;
+}
+
+.review-stars {
+  color: #b38a50;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.reviews-grid article p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.reviews-grid h4 {
+  margin-top: 20px;
+  color: var(--navy);
+}
+
+.review-note {
+  text-align: center;
+  margin-top: 20px;
+  color: #847969;
+  font-size: 11px;
+}
+

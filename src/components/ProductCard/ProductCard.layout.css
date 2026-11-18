@@ -1,0 +1,74 @@
+/* =========================================
+   PRODUCT CARD - EQUAL HEIGHT ALIGNMENT
+========================================= */
+
+/* Make every product card a vertical flex layout */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Keep product images consistent */
+.product-card .product-image {
+  flex-shrink: 0;
+}
+
+/* Product information fills the remaining space */
+.product-card .product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Keep product details from shrinking unexpectedly */
+.product-card .product-category,
+.product-card .product-info h3,
+.product-card .product-rating,
+.product-card .product-prices {
+  flex-shrink: 0;
+}
+
+/* Align Add to Box buttons at the bottom */
+.product-card .add-cart-button {
+  width: 100%;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Keep quantity controls aligned too */
+.product-card .quantity-control {
+  width: 100%;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Added confirmation */
+.product-card .added-message {
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* =========================================
+   MOBILE PRODUCT CARD
+========================================= */
+
+@media (max-width: 600px) {
+  .product-card {
+    height: 100%;
+  }
+
+  .product-card .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card .add-cart-button,
+  .product-card .quantity-control {
+    margin-top: auto;
+  }
+}
+

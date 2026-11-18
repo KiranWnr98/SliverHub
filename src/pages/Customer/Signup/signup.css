@@ -1,0 +1,457 @@
+
+/* ==========================================
+   SILVER HUB - CUSTOMER SIGNUP
+========================================== */
+
+.customer-signup-page {
+  min-height: 100vh;
+  color: #0b1b2d;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(255, 246, 232, 0.95),
+      transparent 65%
+    ),
+    linear-gradient(
+      120deg,
+      #eee5d9,
+      #f8f1e8,
+      #e9dfd2
+    );
+}
+
+/* Main section */
+
+.customer-signup-main {
+  min-height: calc(100vh - 130px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 42px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background decorative lighting */
+
+.customer-signup-main::before,
+.customer-signup-main::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+.customer-signup-main::before {
+  width: 300px;
+  height: 300px;
+  top: 5%;
+  left: 4%;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.customer-signup-main::after {
+  width: 260px;
+  height: 260px;
+  right: 4%;
+  bottom: 0;
+  background: rgba(214, 173, 112, 0.15);
+}
+
+/* Main card */
+
+.customer-signup-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  width: min(1150px, 100%);
+  min-height: 680px;
+  overflow: hidden;
+  border: 1px solid rgba(180, 147, 99, 0.6);
+  border-radius: 28px;
+  background: #fffaf3;
+  box-shadow:
+    0 30px 80px rgba(35, 38, 44, 0.15),
+    0 5px 20px rgba(35, 38, 44, 0.05);
+}
+
+/* ==========================================
+   LEFT IMAGE PANEL
+========================================== */
+
+.signup-visual {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 680px;
+  padding: 45px;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 27, 45, 0.02) 35%,
+      rgba(11, 27, 45, 0.78) 100%
+    ),
+    url("/signup-pendant.png");
+
+  background-size: cover;
+  background-position: center;
+}
+
+.signup-visual::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.signup-visual-content {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+  color: #fff;
+}
+
+.signup-visual-eyebrow {
+  display: block;
+  margin-bottom: 16px;
+  color: #e4c18c;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.signup-visual-content h2 {
+  margin: 0 0 14px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.signup-visual-content p {
+  max-width: 300px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   RIGHT FORM PANEL
+========================================== */
+
+.signup-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px clamp(28px, 5vw, 65px);
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(214, 173, 112, 0.13),
+      transparent 30%
+    ),
+    #fffaf3;
+}
+
+.signup-form-content {
+  width: 100%;
+  max-width: 540px;
+}
+
+.signup-eyebrow {
+  margin-bottom: 13px;
+  color: #a47a40;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.signup-form-content h1 {
+  margin: 0 0 8px;
+  color: #0b1b2d;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(36px, 4vw, 49px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.signup-description {
+  margin-bottom: 23px;
+  color: #657080;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Demo notice */
+
+.signup-demo-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 23px;
+  padding: 14px 16px;
+  border: 1px solid #e5d2b4;
+  border-radius: 10px;
+  color: #a17b43;
+  background: #faf3e8;
+}
+
+.signup-demo-notice svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.signup-demo-notice strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #4a4134;
+  font-size: 12px;
+}
+
+.signup-demo-notice p {
+  margin: 0;
+  color: #81715b;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   FORM FIELDS
+========================================== */
+
+.customer-signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-signup-form label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 8px;
+  color: #25364a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.customer-signup-form label svg {
+  color: #697586;
+}
+
+.customer-signup-form > input,
+.signup-password-wrapper input {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 18px;
+  padding: 0 15px;
+  border: 1px solid #d5d4d0;
+  border-radius: 9px;
+  outline: none;
+  color: #25364a;
+  background: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.customer-signup-form input:focus {
+  border-color: #b99867;
+  box-shadow: 0 0 0 3px rgba(185, 152, 103, 0.13);
+}
+
+.customer-signup-form input::placeholder {
+  color: #a3a8ae;
+}
+
+/* Password field */
+
+.signup-password-wrapper {
+  position: relative;
+}
+
+.signup-password-wrapper input {
+  padding-right: 48px;
+}
+
+.signup-password-toggle {
+  position: absolute;
+  top: 10px;
+  right: 13px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: #697586;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ==========================================
+   CREATE ACCOUNT BUTTON
+========================================== */
+
+.customer-signup-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  min-height: 54px;
+  margin-top: 5px;
+  border: 1px solid #0b1b2d;
+  border-radius: 30px;
+  color: #fff;
+  background: linear-gradient(
+    110deg,
+    #142a42,
+    #0b1b2d
+  );
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.customer-signup-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 22px rgba(11, 27, 45, 0.2);
+}
+
+/* Sign in link */
+
+.signup-login-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 23px;
+  color: #737c87;
+  font-size: 12px;
+}
+
+.signup-login-link a {
+  color: #a47a40;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.signup-login-link a:hover {
+  color: #78572c;
+}
+
+/* Legal and feedback */
+
+.signup-legal {
+  max-width: 400px;
+  margin: 23px auto 0;
+  color: #9a9fa5;
+  font-size: 10px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.signup-feedback {
+  margin-top: 12px;
+  color: #52705c;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 900px) {
+  .customer-signup-card {
+    grid-template-columns: 0.8fr 1.2fr;
+    min-height: 620px;
+  }
+
+  .signup-visual {
+    min-height: 620px;
+    padding: 28px;
+  }
+
+  .signup-form-panel {
+    padding: 38px 28px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 650px) {
+  .customer-signup-main {
+    padding: 24px 15px 35px;
+  }
+
+  .customer-signup-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    border-radius: 18px;
+  }
+
+.signup-visual {
+    min-height: 240px;
+    padding: 24px;
+    background-size: cover;
+    background-position: center 55%;
+  }
+
+  .signup-visual::after {
+    inset: 9px;
+    border-radius: 12px;
+  }
+
+  .signup-visual-content h2 {
+    font-size: 30px;
+  }
+
+  .signup-visual-content p {
+    max-width: 260px;
+    font-size: 11px;
+  }
+
+  .signup-form-panel {
+    padding: 32px 23px;
+  }
+
+  .signup-form-content h1 {
+    font-size: 37px;
+  }
+
+  .signup-description {
+    font-size: 12px;
+  }
+
+  .signup-demo-notice {
+    padding: 12px;
+  }
+
+  .customer-signup-form > input,
+  .signup-password-wrapper input {
+    height: 46px;
+  }
+
+  .customer-signup-button {
+    min-height: 49px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customer-signup-card *,
+  .customer-signup-card *::before,
+  .customer-signup-card *::after {
+    transition: none !important;
+  }
+}

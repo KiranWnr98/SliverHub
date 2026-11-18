@@ -1,20 +1,11 @@
 
 import {
-  createContext,
-  useContext,
   useState,
   useEffect,
   type ReactNode,
 } from 'react';
 
-interface WishlistContextType {
-  wishlist: number[];
-  toggleWishlist: (id: number) => void;
-  isWishlisted: (id: number) => boolean;
-}
-
-const WishlistContext =
-  createContext<WishlistContextType | undefined>(undefined);
+import { WishlistContext } from './WishlistContextValue';
 
 export function WishlistProvider({
   children,
@@ -56,14 +47,4 @@ export function WishlistProvider({
       {children}
     </WishlistContext.Provider>
   );
-}
-
-export function useWishlist() {
-  const context = useContext(WishlistContext);
-
-  if (!context) {
-    throw new Error('useWishlist must be used inside WishlistProvider');
-  }
-
-  return context;
 }

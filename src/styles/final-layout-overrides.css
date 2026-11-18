@@ -1,0 +1,289 @@
+/* =========================================================
+   SILVER HUB - FINAL FOOTER + RESPONSIVE BRAND OVERRIDES
+   Keep these rules at the very end of App.css.
+========================================================= */
+
+/* Main footer */
+.main-footer {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  padding: 58px 6% 0;
+  background: #071525;
+  color: #ffffff;
+  isolation: isolate;
+}
+
+.main-footer,
+.main-footer * {
+  box-sizing: border-box;
+}
+
+.main-footer .footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.3fr);
+  align-items: start;
+  gap: 36px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 0 42px;
+}
+
+.main-footer .footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.main-footer .footer-brand h2 {
+  display: block;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(30px, 3vw, 38px);
+  font-weight: 600;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.main-footer .footer-brand > span {
+  display: block;
+  margin-top: 5px;
+  color: #d6ad72;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.main-footer .footer-brand p,
+.main-footer .footer-grid > div > p {
+  display: block;
+  margin: 14px 0 0;
+  color: #c1c7d0;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.main-footer .footer-grid h3 {
+  display: block;
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.main-footer .footer-grid a {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 12px;
+  color: #c1c7d0;
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.25s ease;
+}
+
+.main-footer .footer-grid a:hover {
+  color: #d6ad72;
+}
+
+.main-footer .footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 0 22px;
+  border-top: 1px solid #344052;
+  color: #c1c7d0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.main-footer .footer-copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.main-footer .footer-powered {
+  display: block;
+  color: #c69a55;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Also support the older footer class if the component still uses it. */
+footer.footer {
+  width: 100%;
+}
+
+/* Brand lockup: SILVER HUB on one line, HOUSE OF 925 directly below. */
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.navbar .brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  line-height: 1;
+}
+
+.navbar .brand-text strong {
+  display: block;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(25px, 2.3vw, 36px);
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.navbar .brand-text small {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: #d8c5a5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Mobile footer: two clear columns, with each link on its own line. */
+@media (max-width: 600px) {
+  .main-footer {
+    padding: 38px 20px 0;
+    background: #071525;
+    color: #ffffff;
+  }
+
+  .main-footer .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 18px;
+    padding-bottom: 30px;
+  }
+
+  .main-footer .footer-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+  }
+
+  .main-footer .footer-brand h2 {
+    font-size: 27px;
+    white-space: nowrap;
+  }
+
+  .main-footer .footer-brand > span {
+    font-size: 10px;
+    letter-spacing: 1.7px;
+  }
+
+  .main-footer .footer-brand p,
+  .main-footer .footer-grid > div > p {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .main-footer .footer-grid h3 {
+    margin-bottom: 11px;
+    font-size: 20px;
+  }
+
+  .main-footer .footer-grid a {
+    display: block;
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .main-footer .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 0 22px;
+    text-align: center;
+  }
+
+  .main-footer .footer-copyright {
+    align-items: center;
+    text-align: center;
+  }
+
+  .main-footer .footer-powered {
+    font-size: 11px;
+    letter-spacing: 0.7px;
+  }
+
+  .navbar .brand {
+    gap: 6px;
+  }
+
+  .navbar .brand-text {
+    gap: 4px;
+  }
+
+  .navbar .brand-text strong {
+    font-size: 21px;
+    letter-spacing: 0.4px;
+  }
+
+  .navbar .brand-text small {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .main-footer {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .main-footer .footer-grid {
+    gap: 24px 12px;
+  }
+
+  .main-footer .footer-brand h2 {
+    font-size: 24px;
+  }
+
+  .navbar .brand-text strong {
+    font-size: 19px;
+  }
+
+  .navbar .brand-text small {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+  }
+}

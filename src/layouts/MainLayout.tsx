@@ -1,8 +1,8 @@
 
 import type { ReactNode } from 'react';
-import AnnouncementBar from '../components/AnnouncementBar';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import AnnouncementBar from '../components/AnnouncementBar/AnnouncementBar';
+import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
 
 interface Props {
   children: ReactNode;

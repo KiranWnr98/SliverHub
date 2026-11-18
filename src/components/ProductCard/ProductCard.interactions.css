@@ -1,0 +1,511 @@
+/* Jewellery Box Button */
+
+.add-cart-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 12px;
+  background: #101f32;
+  color: white;
+  border: 1px solid #101f32;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.add-cart-button:hover {
+  background: #b38a50;
+  border-color: #b38a50;
+  transform: translateY(-2px);
+}
+
+.add-cart-button.added {
+  background: #b38a50;
+  border-color: #b38a50;
+  color: white;
+}
+
+.icon-button {
+  position: relative;
+}
+
+.icon-button .count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c49a5a;
+  color: white;
+  font-size: 11px;
+  border-radius: 50%;
+  font-weight: 600;
+  transition: transform 0.25s ease;
+}
+
+.product-heart.saved {
+  color: #b38a50;
+}
+
+
+/* =================================
+   SILVERAURA JEWELLERY BOX ICON
+================================= */
+
+.jewelry-box-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.jewelry-box-button:hover .jewelry-box-icon {
+  transform: scale(1.12);
+}
+
+.jewelry-box-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart count badge */
+.jewelry-box-button .count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #c99b55;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .jewelry-box-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+.jewelry-box-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jewelry-box-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.jewelry-box-button:hover .jewelry-box-icon {
+  transform: scale(1.1);
+}
+
+.jewelry-box-button .count {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+}
+
+
+
+.jewelry-box-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+}
+
+.jewelry-box-button svg {
+  width: 36px;
+  height: 36px;
+  stroke: #d8dce2;
+  transition: all 0.3s ease;
+}
+
+.jewelry-box-button:hover svg {
+  color: #c9a36b;
+  stroke: #c9a36b;
+  transform: translateY(-2px);
+}
+
+
+/* Jewellery Box Product Button */
+
+.add-cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  position: relative;
+  width: 100%;
+  padding: 11px 14px;
+  background: #0d1c2e;
+  color: #ffffff;
+  border: 1px solid #0d1c2e;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.add-cart-button:hover {
+  background: #c49a5a;
+  border-color: #c49a5a;
+  color: #ffffff;
+}
+
+.add-cart-button svg {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.add-cart-button.in-box {
+  background: #182d40;
+  border-color: #c49a5a;
+}
+
+.product-cart-quantity {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 23px;
+  height: 23px;
+  padding: 0 6px;
+  border-radius: 50%;
+  background: #c49a5a;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+
+/* =====================================
+   SILVERAURA PREMIUM QUANTITY SELECTOR
+===================================== */
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: fit-content;
+  min-width: 145px;
+  height: 44px;
+
+  margin: 8px auto 0;
+  padding: 4px 7px;
+
+  background: #f5efe6;
+  border: 1px solid #e3d4bd;
+  border-radius: 30px;
+
+  transition: all 0.3s ease;
+}
+
+.quantity-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #0d1c2e;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.quantity-btn:hover {
+  background: #bd9456;
+  transform: scale(1.08);
+  box-shadow: 0 3px 8px rgba(13, 28, 46, 0.15);
+}
+
+.quantity-btn:active {
+  transform: scale(0.92);
+}
+
+.quantity-value {
+  min-width: 22px;
+
+  color: #0d1c2e;
+  font-size: 16px;
+  font-weight: 700;
+
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Add to Box button */
+
+.add-cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  width: 100%;
+  height: 42px;
+
+  background: #0d1c2e;
+  color: #ffffff;
+
+  border: 1px solid #0d1c2e;
+  border-radius: 4px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-cart-button:hover {
+  background: #bd9456;
+  border-color: #bd9456;
+  transform: translateY(-2px);
+}
+
+/* Consistent product card spacing */
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info .quantity-control,
+.product-info .add-cart-button {
+  margin-top: 12px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .quantity-control {
+    min-width: 135px;
+    height: 42px;
+  }
+
+  .quantity-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+}
+
+
+
+/* ====================================
+   SILVERAURA INTERACTION ANIMATIONS
+==================================== */
+
+/* Product image zoom */
+.product-image {
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image img {
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+/* Product card hover */
+.product-card {
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.product-card:hover {
+  box-shadow: 0 14px 35px rgba(13, 28, 46, 0.12);
+}
+
+/* Wishlist heart */
+.product-heart {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+
+  color: #0d1c2e;
+  cursor: pointer;
+
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  overflow: visible;
+}
+
+.product-heart.saved {
+  color: #d94b64;
+}
+
+.product-heart svg {
+  transition: color 0.25s ease;
+}
+
+/* Floating heart */
+.heart-pop {
+  position: absolute;
+  left: 50%;
+  top: 0;
+
+  color: #d94b64;
+  font-size: 50px;
+  font-weight: bold;
+
+  pointer-events: none;
+  text-shadow: 0 2px 5px rgba(217,75,100,0.2);
+}
+
+/* Add to Box button */
+.add-cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  width: 100%;
+  height: 42px;
+
+  background: #0d1c2e;
+  color: #ffffff;
+
+  border: 1px solid #0d1c2e;
+  border-radius: 4px;
+
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: background 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.add-cart-button:hover {
+  background: #bd9456;
+  border-color: #bd9456;
+  box-shadow: 0 5px 14px rgba(189,148,86,0.25);
+}
+
+/* Quantity selector */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: fit-content;
+  min-width: 145px;
+  height: 44px;
+
+  margin: 8px auto 0;
+  padding: 4px 7px;
+
+  background: #f5efe6;
+  border: 1px solid #e3d4bd;
+  border-radius: 30px;
+}
+
+.quantity-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #0d1c2e;
+  color: white;
+
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.quantity-btn:hover {
+  background: #bd9456;
+}
+
+.quantity-value {
+  min-width: 22px;
+  text-align: center;
+  color: #0d1c2e;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Confirmation message */
+.added-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  margin-top: 8px;
+
+  color: #477a56;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-image img,
+  .product-heart,
+  .add-cart-button,
+  .quantity-btn {
+    transition: none !important;
+  }
+}
+
+
+

@@ -1,0 +1,131 @@
+/* Hero */
+
+.hero {
+  min-height: 650px;
+  height: min(72vw, 690px);
+  display: grid;
+  grid-template-columns: 46% 54%;
+  position: relative;
+  background: var(--cream);
+  overflow: hidden;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  padding: 50px 8% 105px 14%;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #a87939;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 35px;
+}
+
+.eyebrow span {
+  height: 1px;
+  width: 65px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(55px, 5.2vw, 86px);
+  line-height: .92;
+  font-weight: 600;
+  letter-spacing: -2px;
+  color: var(--navy);
+}
+
+.hero h1 em {
+  color: #a78049;
+  font-weight: 600;
+}
+
+.hero-content p {
+  max-width: 540px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-top: 35px;
+  color: #242424;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 57px;
+  padding: 0 32px;
+  border-radius: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  transition: all .3s ease;
+}
+
+.primary-button {
+  background: var(--navy);
+  color: white;
+}
+
+.primary-button:hover {
+  background: var(--gold);
+  transform: translateY(-3px);
+}
+
+.secondary-button {
+  border: 1.5px solid var(--navy);
+  color: var(--navy);
+}
+
+.secondary-button:hover {
+  background: var(--navy);
+  color: white;
+}
+
+.slider-dots {
+  display: flex;
+  gap: 14px;
+  margin-top: 58px;
+}
+
+.slider-dots span {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #c9c6c0;
+}
+
+.slider-dots .selected {
+  background: var(--navy);
+}
+
+/* Hero image */
+
+.hero-image {
+  background-image:
+    linear-gradient(90deg, rgba(248,241,232,.08), transparent 20%),
+    url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1800&q=90');
+  background-size: cover;
+  background-position: center;
+  min-width: 0;
+}
+

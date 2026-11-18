@@ -1,0 +1,193 @@
+/* =========================================
+   SILVERAURA - PREMIUM FLOATING SPARKLES
+========================================= */
+
+.sparkle-background {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 15;
+}
+
+/* Product cards మీద sparkles కనిపించకూడదు */
+.product-card {
+  position: relative;
+  z-index: 20;
+}
+
+/* Falling particle wrapper */
+.silver-sparkle {
+  position: absolute;
+  top: -12%;
+  width: var(--sparkle-size);
+  height: var(--sparkle-size);
+
+  /* Slow and smooth silver falling animation */
+  animation: silverFall calc(var(--fall-duration) * 4.2) linear infinite;
+
+  animation-delay: var(--fall-delay);
+  will-change: transform;
+}
+
+/* Common silver particle */
+.silver-sparkle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: block;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #a5aebc 35%,
+    #ffffff 55%,
+    #737d8b 100%
+  );
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 3px rgba(255, 255, 255, 0.7),
+    0 0 7px rgba(220, 232, 255, 0.35);
+
+  animation: silverTwinkle 3.2s ease-in-out infinite;
+  animation-delay: var(--twinkle-delay);
+}
+
+/* Tiny silver dust */
+.silver-dust::before {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Oval metallic flakes */
+.silver-flake::before {
+  width: 150%;
+  height: 75%;
+  border-radius: 50%;
+
+  background: linear-gradient(
+    145deg,
+    #fefefe 0%,
+    #8c96a3 35%,
+    #ffffff 60%,
+    #68717e 100%
+  );
+
+  box-shadow:
+    0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Bright silver flashes */
+.silver-flash::before {
+  width: 180%;
+  height: 180%;
+  inset: -40%;
+
+  background: #ffffff;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 5px 2px rgba(255, 255, 255, 0.9),
+    0 0 13px 4px rgba(225, 237, 255, 0.6),
+    0 0 24px 7px rgba(255, 255, 255, 0.25);
+
+  animation: silverFlash 4s ease-in-out infinite;
+  animation-delay: var(--twinkle-delay);
+}
+
+/* Falling from top to bottom */
+@keyframes silverFall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  100% {
+    transform:
+      translate3d(var(--drift), 125vh, 0)
+      rotate(var(--spin));
+  }
+}
+
+/* Glitter twinkle */
+@keyframes silverTwinkle {
+  0%, 100% {
+    opacity: 0.15;
+    filter: brightness(0.7);
+  }
+
+  20% {
+    opacity: 0.85;
+    filter: brightness(1.6);
+  }
+
+  35% {
+    opacity: 1;
+    filter: brightness(2.3);
+  }
+
+  55% {
+    opacity: 0.3;
+    filter: brightness(0.8);
+  }
+
+  75% {
+    opacity: 0.7;
+    filter: brightness(1.5);
+  }
+}
+
+/* Occasional bright sparkle */
+@keyframes silverFlash {
+  0%, 65%, 100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  72% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+
+  80% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+  .sparkle-background {
+    opacity: 0.75;
+  }
+
+  .silver-sparkle:nth-child(2n) {
+    display: none;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .silver-sparkle {
+    display: none;
+  }
+}
+
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-powered {
+  color: #c69a55;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+
