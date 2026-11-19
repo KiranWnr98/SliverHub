@@ -1,5 +1,7 @@
 
+import { useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   Minus,
@@ -11,17 +13,53 @@ import {
 } from 'lucide-react';
 
 import { useCart } from '../../context/useCart';
+import {
+  isProductPurchasable,
+  useProductCatalog,
+} from '../../hooks/useProducts';
 
 export default function Cart() {
   const {
     cart,
     removeFromCart,
     updateQuantity,
-    cartTotal,
+    payableSubtotal,
+    hasAvailableItems,
   } = useCart();
+  const navigate = useNavigate();
+  const { products } = useProductCatalog();
+  const productById = useMemo(
+    () => new Map(products.map((product) => [product.id, product])),
+    [products],
+  );
+  const cartItems = useMemo(
+    () =>
+      cart.flatMap((item) => {
+        const currentProduct = productById.get(item.product.id);
+        return currentProduct &&
+          !currentProduct.isDeleted &&
+          !currentProduct.isHidden &&
+          !currentProduct.scheduledDeletionAt
+          ? [{ ...item, currentProduct }]
+          : [];
+      }),
+    [cart, productById],
+  );
 
   const formatPrice = (price: number) =>
     `₹${price.toLocaleString('en-IN')}`;
+  const outOfStockProductNames = cartItems
+    .filter(
+      ({ currentProduct }) => (currentProduct.stockQuantity ?? 0) <= 0,
+    )
+    .map(({ product }) => product.name);
+  const overStockProductNames = cartItems
+    .filter(
+      ({ currentProduct, quantity }) =>
+        (currentProduct.stockQuantity ?? 0) > 0 &&
+        quantity > (currentProduct.stockQuantity ?? 0),
+    )
+    .map(({ product }) => product.name);
 
   return (
     <main className="cart-page">
@@ -32,7 +70,7 @@ export default function Cart() {
         animate={{ opacity: 1, y: 0 }}
       >
         <span className="cart-eyebrow">
-          SILVERAURA COLLECTION
+          SILVERHUB COLLECTION
         </span>
 
         <h1>Your Jewellery Box</h1>
@@ -42,7 +80,7 @@ export default function Cart() {
         </p>
       </motion.div>
 
-      {cart.length === 0 ? (
+      {cartItems.length === 0 ? (
         <motion.div
           className="empty-cart"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -74,7 +112,7 @@ export default function Cart() {
               <h2>Your Selection</h2>
 
               <span>
-                {cart.reduce(
+                {cartItems.reduce(
                   (total, item) => total + item.quantity,
                   0
                 )} items
@@ -82,7 +120,7 @@ export default function Cart() {
             </div>
 
             <AnimatePresence mode="popLayout">
-              {cart.map(({ product, quantity }) => (
+              {cartItems.map(({ product, currentProduct, quantity }) => (
                 <motion.article
                   key={product.id}
                   className="cart-item"
@@ -112,9 +150,26 @@ export default function Cart() {
 
                     <h3>{product.name}</h3>
 
+                    {(currentProduct.stockQuantity ?? 0) <= 0 && (
+                      <span className="cart-stock-badge" role="status">
+                        Out of Stock
+                      </span>
+                    )}
+
                     <p className="cart-product-price">
                       {formatPrice(product.price)}
                     </p>
+
+                    {(!isProductPurchasable(currentProduct) ||
+                      quantity > (currentProduct.stockQuantity ?? 0)) && (
+                      <p className="cart-availability-warning" role="alert">
+                        {(currentProduct.stockQuantity ?? 0) <= 0
+                          ? 'This item is currently out of stock. Remove it or wait until it is back in stock.'
+                          : !isProductPurchasable(currentProduct)
+                            ? 'This item is no longer available. Remove it to continue.'
+                            : `Only ${currentProduct.stockQuantity} available. Reduce the quantity to continue.`}
+                      </p>
+                    )}
 
                     <div className="cart-quantity-control">
 
@@ -136,6 +191,10 @@ export default function Cart() {
                       <button
                         type="button"
                         aria-label="Increase quantity"
+                        disabled={
+                          !isProductPurchasable(currentProduct) ||
+                          quantity >= (currentProduct.stockQuantity ?? 0)
+                        }
                         onClick={() =>
                           updateQuantity(
                             product.id,
@@ -189,7 +248,7 @@ export default function Cart() {
 
             <div className="summary-row">
               <span>Subtotal</span>
-              <strong>{formatPrice(cartTotal)}</strong>
+              <strong>{formatPrice(payableSubtotal)}</strong>
             </div>
 
             <div className="summary-row">
@@ -203,15 +262,32 @@ export default function Cart() {
 
             <div className="summary-total">
               <span>Total</span>
-              <strong>{formatPrice(cartTotal)}</strong>
+              <strong>{formatPrice(payableSubtotal)}</strong>
             </div>
+
+            {outOfStockProductNames.length > 0 && hasAvailableItems && (
+              <p className="cart-availability-warning" role="alert">
+                Out of Stock items are saved in your Jewellery Box but are excluded from your order total.
+              </p>
+            )}
+            {outOfStockProductNames.length > 0 && !hasAvailableItems && (
+              <p className="cart-availability-warning" role="alert">
+                No available products to purchase. Your Out of Stock items are still saved in your Jewellery Box.
+              </p>
+            )}
+            {overStockProductNames.length > 0 && (
+              <p className="cart-availability-warning" role="alert">
+                {overStockProductNames.join(', ')} exceed the available stock and are excluded from your order total. Reduce their quantities to purchase them.
+              </p>
+            )}
 
             <button
               type="button"
-              className="checkout-button"
-              onClick={() => alert('Checkout integration coming soon!')}
+              className={`checkout-button${!hasAvailableItems ? ' disabled' : ''}`}
+              disabled={!hasAvailableItems}
+              onClick={() => navigate('/checkout')}
             >
-              Proceed to Checkout
+              {hasAvailableItems ? 'Proceed to Checkout' : 'No available items to purchase'}
               <ArrowLeft
                 size={18}
                 className="checkout-arrow"

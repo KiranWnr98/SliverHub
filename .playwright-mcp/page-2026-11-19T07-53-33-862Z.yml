@@ -1,0 +1,192 @@
+- generic [ref=f3e2]:
+  - generic [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - generic [ref=f3e5]: ✦
+      - generic [ref=f3e11]: Free Shipping Across India
+      - generic [ref=f3e13]: 100% Pure Silver
+      - generic [ref=f3e15]: Easy Returns within 7 Days
+      - generic [ref=f3e16]: ✦
+    - banner [ref=f3e17]:
+      - link "Silver Hub Home" [ref=f3e18] [cursor=pointer]:
+        - /url: /
+        - img "Silver Hub SH Logo" [ref=f3e19]
+        - generic [ref=f3e20]:
+          - strong [ref=f3e21]: SILVER HUB
+          - generic [ref=f3e22]: HOUSE OF 925
+      - navigation [ref=f3e23]:
+        - link "Home" [ref=f3e24] [cursor=pointer]:
+          - /url: /
+        - link "Shop" [ref=f3e25] [cursor=pointer]:
+          - /url: /shop
+        - link "Collections" [ref=f3e26] [cursor=pointer]:
+          - /url: /collections
+        - link "New Arrivals" [ref=f3e27] [cursor=pointer]:
+          - /url: /new-arrivals
+        - link "About Us" [ref=f3e28] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=f3e29]:
+        - searchbox "Search silver ornaments" [ref=f3e34]
+        - link "Wishlist (0)" [ref=f3e35] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=f3e38]: "0"
+        - link "Jewellery Box (0)" [ref=f3e39] [cursor=pointer]:
+          - /url: /cart
+          - img "Open jewellery box" [ref=f3e40]
+          - generic [ref=f3e48]: "0"
+        - link "Account" [ref=f3e49] [cursor=pointer]:
+          - /url: /login
+    - main [ref=f3e53]:
+      - generic [ref=f3e54]:
+        - generic [ref=f3e55]:
+          - heading "Shop All Jewellery" [level=2] [ref=f3e56]
+          - paragraph [ref=f3e57]: Explore our complete silver jewellery collection.
+        - generic [ref=f3e58]:
+          - article [ref=f3e59]:
+            - generic [ref=f3e60]:
+              - img "Traditional Silver Jhumkas" [ref=f3e61]
+              - generic [ref=f3e62]: SPECIAL PRICE
+              - button "Add to wishlist" [ref=f3e63] [cursor=pointer]
+            - generic [ref=f3e67]:
+              - generic [ref=f3e68]: Earrings
+              - heading "Traditional Silver Jhumkas" [level=3] [ref=f3e69]
+              - generic [ref=f3e70]: ★ 4.8 / 5
+              - generic [ref=f3e71]:
+                - strong [ref=f3e72]: ₹1,499
+                - deletion [ref=f3e73]: ₹1,899
+              - button [ref=f3e74] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e76]
+                - text: Add to Box
+          - article [ref=f3e84]:
+            - generic [ref=f3e85]:
+              - img "Elegant Silver Ring" [ref=f3e86]
+              - generic [ref=f3e87]: SPECIAL PRICE
+              - button "Add to wishlist" [ref=f3e88] [cursor=pointer]
+            - generic [ref=f3e92]:
+              - generic [ref=f3e93]: Rings
+              - heading "Elegant Silver Ring" [level=3] [ref=f3e94]
+              - generic [ref=f3e95]: ★ 4.7 / 5
+              - generic [ref=f3e96]:
+                - strong [ref=f3e97]: ₹999
+                - deletion [ref=f3e98]: ₹1,299
+              - button [ref=f3e99] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e101]
+                - text: Add to Box
+          - article [ref=f3e109]:
+            - generic [ref=f3e110]:
+              - img "Designer Silver Bangles" [ref=f3e111]
+              - generic [ref=f3e112]: SPECIAL PRICE
+              - button "Add to wishlist" [ref=f3e113] [cursor=pointer]
+            - generic [ref=f3e117]:
+              - generic [ref=f3e118]: Bangles
+              - heading "Designer Silver Bangles" [level=3] [ref=f3e119]
+              - generic [ref=f3e120]: ★ 4.9 / 5
+              - generic [ref=f3e121]:
+                - strong [ref=f3e122]: ₹1,999
+                - deletion [ref=f3e123]: ₹2,499
+              - button [ref=f3e124] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e126]
+                - text: Add to Box
+          - article [ref=f3e134]:
+            - generic [ref=f3e135]:
+              - img "Pearl Silver Earrings" [ref=f3e136]
+              - generic [ref=f3e137]: NEW ARRIVAL
+              - button "Add to wishlist" [ref=f3e138] [cursor=pointer]
+            - generic [ref=f3e142]:
+              - generic [ref=f3e143]: Earrings
+              - heading "Pearl Silver Earrings" [level=3] [ref=f3e144]
+              - generic [ref=f3e145]: ★ 4.9 / 5
+              - generic [ref=f3e146]:
+                - strong [ref=f3e147]: ₹1,299
+                - deletion [ref=f3e148]: ₹1,599
+              - button [ref=f3e149] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e151]
+                - text: Add to Box
+          - article [ref=f3e159]:
+            - generic [ref=f3e160]:
+              - img "Minimal Silver Necklace" [ref=f3e161]
+              - generic [ref=f3e162]: NEW ARRIVAL
+              - button "Add to wishlist" [ref=f3e163] [cursor=pointer]
+            - generic [ref=f3e167]:
+              - generic [ref=f3e168]: Necklaces
+              - heading "Minimal Silver Necklace" [level=3] [ref=f3e169]
+              - generic [ref=f3e170]: ★ 4.8 / 5
+              - generic [ref=f3e171]:
+                - strong [ref=f3e172]: ₹1,899
+                - deletion [ref=f3e173]: ₹2,299
+              - button [ref=f3e174] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e176]
+                - text: Add to Box
+          - article [ref=f3e184]:
+            - generic [ref=f3e185]:
+              - img "Classic Silver Ring" [ref=f3e186]
+              - generic [ref=f3e187]: NEW ARRIVAL
+              - button "Add to wishlist" [ref=f3e188] [cursor=pointer]
+            - generic [ref=f3e192]:
+              - generic [ref=f3e193]: Rings
+              - heading "Classic Silver Ring" [level=3] [ref=f3e194]
+              - generic [ref=f3e195]: ★ 4.7 / 5
+              - generic [ref=f3e196]:
+                - strong [ref=f3e197]: ₹899
+                - deletion [ref=f3e198]: ₹1,199
+              - button [ref=f3e199] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e201]
+                - text: Add to Box
+          - article [ref=f3e209]:
+            - generic [ref=f3e210]:
+              - img "Traditional Silver Kada" [ref=f3e211]
+              - generic [ref=f3e212]: NEW ARRIVAL
+              - button "Add to wishlist" [ref=f3e213] [cursor=pointer]
+            - generic [ref=f3e217]:
+              - generic [ref=f3e218]: Bangles
+              - heading "Traditional Silver Kada" [level=3] [ref=f3e219]
+              - generic [ref=f3e220]: ★ 4.9 / 5
+              - generic [ref=f3e221]:
+                - strong [ref=f3e222]: ₹2,199
+                - deletion [ref=f3e223]: ₹2,599
+              - button [ref=f3e224] [cursor=pointer]:
+                - img "Open jewellery box" [ref=f3e226]
+                - text: Add to Box
+    - contentinfo [ref=f3e234]:
+      - generic [ref=f3e235]:
+        - generic [ref=f3e236]:
+          - heading "SILVERHUB" [level=2] [ref=f3e237]
+          - generic [ref=f3e238]: HOUSE OF 925
+          - paragraph [ref=f3e239]: Discover timeless elegance through beautifully crafted silver jewellery.
+        - generic [ref=f3e240]:
+          - heading "Quick Links" [level=3] [ref=f3e241]
+          - link "Home" [ref=f3e242] [cursor=pointer]:
+            - /url: /
+          - link "Shop" [ref=f3e243] [cursor=pointer]:
+            - /url: /shop
+          - link "Collections" [ref=f3e244] [cursor=pointer]:
+            - /url: /collections
+          - link "New Arrivals" [ref=f3e245] [cursor=pointer]:
+            - /url: /new-arrivals
+          - link "About Us" [ref=f3e246] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=f3e247]:
+          - heading "Customer Care" [level=3] [ref=f3e248]
+          - link "Contact Us" [ref=f3e249] [cursor=pointer]:
+            - /url: /contact
+          - link "Shipping Policy" [ref=f3e250] [cursor=pointer]:
+            - /url: /shipping
+          - link "Returns & Refunds" [ref=f3e251] [cursor=pointer]:
+            - /url: /returns
+          - link "FAQs" [ref=f3e252] [cursor=pointer]:
+            - /url: /faq
+        - generic [ref=f3e253]:
+          - heading "Get in Touch" [level=3] [ref=f3e254]
+          - paragraph [ref=f3e255]: We would love to hear from you.
+          - paragraph [ref=f3e256]: "Email: support@silverhub.in"
+          - paragraph [ref=f3e257]: India
+      - generic [ref=f3e258]:
+        - generic [ref=f3e259]:
+          - paragraph [ref=f3e260]: © 2026 SILVERHUB. All Rights Reserved.
+          - paragraph [ref=f3e261]:
+            - text: Powered by
+            - link "WINR Technologies Pvt. Ltd." [ref=f3e262] [cursor=pointer]:
+              - /url: https://wa.me/918074543183?text=Hello%20WINR%20Technologies!%20I%20would%20like%20to%20know%20more%20about%20your%20services.
+        - paragraph [ref=f3e263]: Crafted with elegance ♡
+  - link "Chat with Silver Hub customer support" [ref=f3e264] [cursor=pointer]:
+    - /url: https://wa.me/918074543183?text=Hello%20Silver%20Hub%20Team!%20I%20need%20assistance%20with%20your%20jewellery%20products.%20Could%20you%20please%20help%20me%3F
+    - generic [ref=f3e267]: Chat with us

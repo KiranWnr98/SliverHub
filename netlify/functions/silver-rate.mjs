@@ -1,7 +1,7 @@
-
 const API_KEY = process.env.METALCHARTS_API_KEY;
 
-const CACHE_DURATION = 4 * 60 * 60 * 1000;
+const CACHE_DURATION = 10 * 60 * 1000;
+const RETAIL_ADJUSTMENT = 1.35736;
 
 let cachedRate = null;
 let lastFetched = 0;
@@ -9,92 +9,79 @@ let lastFetched = 0;
 export const handler = async () => {
   try {
     if (!API_KEY) {
-      console.error("MetalCharts API key missing");
-
-      return {
-        statusCode: 500,
-        body: JSON.stringify({
-          error: "Silver rate configuration missing",
-        }),
-      };
+      throw new Error("METALCHARTS_API_KEY is missing");
     }
 
     const now = Date.now();
 
-    // Return cached rate if it is still valid
     if (cachedRate && now - lastFetched < CACHE_DURATION) {
       return {
         statusCode: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cachedRate),
       };
     }
 
-    // Fetch live silver rate
-    const response = await fetch(
-      "https://api.metalcharts.org/v1/prices?symbols=XAG&currency=INR&unit=kg",
-      {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        signal: AbortSignal.timeout(15000),
-      }
-    );
+    // Fetch 999 silver spot price in INR per gram
+    const url =
+      "https://api.metalcharts.org/v1/prices/?symbols=XAG&currency=INR&unit=g";
 
-    if (!response.ok) {
-      const details = await response.text();
-
-      console.error("MetalCharts API:", response.status, details);
-
-      if (cachedRate) {
-        return {
-          statusCode: 200,
-          body: JSON.stringify({
-            ...cachedRate,
-            stale: true,
-          }),
-        };
-      }
-
-      return {
-        statusCode: 503,
-        body: JSON.stringify({
-          error: "MetalCharts API request failed",
-        }),
-      };
-    }
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        Accept: "application/json",
+      },
+      signal: AbortSignal.timeout(20000),
+    });
 
     const result = await response.json();
-    const silver = result?.data?.XAG;
 
-    if (!silver || !Number.isFinite(silver.price)) {
-      throw new Error("Invalid MetalCharts response");
+    if (!response.ok || result.success !== true) {
+      throw new Error(
+        result.message ||
+        result.error ||
+        `MetalCharts API error: ${response.status}`
+      );
     }
 
+    const silver = result.data?.XAG;
+    const price999 = Number(silver?.price);
+
+    if (!Number.isFinite(price999) || price999 <= 0) {
+      throw new Error("Invalid silver price from MetalCharts");
+    }
+
+    // 999 silver estimated retail rate
+    const price999Retail = price999 * RETAIL_ADJUSTMENT;
+
     cachedRate = {
-      price: silver.price,
+      price: price999Retail * 1000,
+      pricePerGram: price999Retail,
+      price999PerGram: price999,
+      purity: 999,
+      currency: "INR",
+      unit: "kg",
       timestamp: silver.timestamp || result.timestamp,
       stale: Boolean(silver.stale || result.isStale),
     };
 
     lastFetched = Date.now();
 
+    console.log("Silver 999 rate updated:", price999Retail);
+
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(cachedRate),
     };
 
   } catch (error) {
-    console.error("Silver rate error:", error);
+    console.error("MetalCharts silver rate error:", error.message);
 
     if (cachedRate) {
       return {
         statusCode: 200,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...cachedRate,
           stale: true,
@@ -104,8 +91,10 @@ export const handler = async () => {
 
     return {
       statusCode: 503,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         error: "Silver rate currently unavailable",
+        details: error.message,
       }),
     };
   }

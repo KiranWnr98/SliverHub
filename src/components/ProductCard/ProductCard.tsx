@@ -6,6 +6,7 @@ import { Heart, Minus, Plus, Check } from 'lucide-react';
 import type { Product } from '../../types';
 import { useCart } from '../../context/useCart';
 import { useWishlist } from '../../context/useWishlist';
+import { isProductPurchasable } from '../../hooks/useProducts';
 import JewelryBoxIcon from '../JewelryBoxIcon/JewelryBoxIcon';
 
 interface Props {
@@ -22,14 +23,18 @@ export default function ProductCard({
 
   const [showHeart, setShowHeart] = useState(false);
   const [showAdded, setShowAdded] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
 
   const saved = isWishlisted(product.id);
+  const purchasable = isProductPurchasable(product);
+  const stockQuantity = product.stockQuantity ?? 0;
 
   const cartItem = cart.find(
     (item) => item.product.id === product.id
   );
 
   const quantity = cartItem?.quantity ?? 0;
+  const canIncrease = purchasable && quantity < stockQuantity;
 
   const handleWishlist = () => {
     toggleWishlist(product.id);
@@ -39,9 +44,10 @@ export default function ProductCard({
 
   const handleIncrease = () => {
     if (quantity === 0) {
-      addToCart(product);
-      setShowAdded(true);
-      setTimeout(() => setShowAdded(false), 1400);
+      if (addToCart(product)) {
+        setShowAdded(true);
+        setTimeout(() => setShowAdded(false), 1400);
+      }
     } else {
       updateQuantity(product.id, quantity + 1);
     }
@@ -67,17 +73,33 @@ export default function ProductCard({
       {/* PRODUCT IMAGE */}
       <div className="product-image">
 
-        <motion.img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          whileHover={{ scale: 1.06 }}
-          transition={{ duration: 0.5 }}
-        />
+        {!imageFailed ? (
+          <motion.img
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+            onError={() => setImageFailed(true)}
+            whileHover={{ scale: 1.06 }}
+            transition={{ duration: 0.5 }}
+          />
+        ) : (
+          <div
+            className="product-image-fallback"
+            role="img"
+            aria-label={`${product.name} image unavailable`}
+          >
+            {product.name}
+          </div>
+        )}
 
         <span className="sale-label">
           {product.isNew ? 'NEW ARRIVAL' : 'SPECIAL PRICE'}
         </span>
+        {!purchasable && (
+          <span className="product-stock-badge" role="status">
+            Out of Stock
+          </span>
+        )}
 
         {/* WISHLIST HEART */}
         <motion.button
@@ -138,7 +160,7 @@ export default function ProductCard({
             ₹{product.price.toLocaleString('en-IN')}
           </strong>
 
-          {product.oldPrice && (
+          {product.oldPrice != null && product.oldPrice > product.price && (
             <del>
               ₹{product.oldPrice.toLocaleString('en-IN')}
             </del>
@@ -152,28 +174,43 @@ export default function ProductCard({
 
               {quantity === 0 ? (
 
-                <motion.button
-                  key="add-button"
-                  type="button"
-                  className="add-cart-button"
-                  onClick={handleIncrease}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  whileHover={{ backgroundColor: '#BD9456' }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <motion.span
-                    animate={showAdded ? {
-                      rotate: [0, -12, 12, 0],
-                      scale: [1, 1.2, 1]
-                    } : {}}
+                purchasable ? (
+                  <motion.button
+                    key="add-button"
+                    type="button"
+                    className="add-cart-button"
+                    onClick={handleIncrease}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    whileHover={{ backgroundColor: '#BD9456' }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <JewelryBoxIcon />
-                  </motion.span>
+                    <motion.span
+                      animate={showAdded ? {
+                        rotate: [0, -12, 12, 0],
+                        scale: [1, 1.2, 1]
+                      } : {}}
+                    >
+                      <JewelryBoxIcon />
+                    </motion.span>
 
-                  Add to Box
-                </motion.button>
+                    Add to Box
+                  </motion.button>
+                ) : (
+                  <motion.button
+                    key="out-of-stock"
+                    type="button"
+                    className="add-cart-button out-of-stock-button"
+                    disabled
+                    aria-label={`${product.name} is out of stock`}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                  >
+                    Out of Stock
+                  </motion.button>
+                )
 
               ) : (
 
@@ -218,7 +255,12 @@ export default function ProductCard({
                     className="quantity-btn"
                     onClick={handleIncrease}
                     whileTap={{ scale: 0.8 }}
-                    aria-label="Increase quantity"
+                    disabled={!canIncrease}
+                    aria-label={
+                      canIncrease
+                        ? 'Increase quantity'
+                        : 'Maximum available quantity reached'
+                    }
                   >
                     <Plus size={16} />
                   </motion.button>

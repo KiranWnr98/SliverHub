@@ -1,0 +1,64 @@
+- generic [ref=e28]:
+  - banner [ref=e29]:
+    - link "SILVER HUB HOUSE OF 925" [ref=e30] [cursor=pointer]:
+      - /url: /
+      - text: SILVER HUB
+      - generic [ref=e31]: HOUSE OF 925
+    - navigation "Customer navigation" [ref=e32]:
+      - link "Overview" [ref=e33] [cursor=pointer]:
+        - /url: /account
+      - link "Profile" [ref=e37] [cursor=pointer]:
+        - /url: /account/profile
+      - link "Orders" [ref=e41] [cursor=pointer]:
+        - /url: /account/orders
+      - link "Addresses" [ref=e46] [cursor=pointer]:
+        - /url: /account/addresses
+    - generic [ref=e50]:
+      - link "Wishlist (0)" [ref=e51] [cursor=pointer]:
+        - /url: /wishlist
+        - text: "0"
+      - link "Cart (0)" [ref=e54] [cursor=pointer]:
+        - /url: /cart
+        - text: "0"
+      - link "Continue shopping" [ref=e59] [cursor=pointer]:
+        - /url: /shop
+  - main [ref=e60]:
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - text: YOUR ACCOUNT
+          - heading "Welcome, demo@silverhub.test" [level=1] [ref=e64]
+          - paragraph [ref=e65]: Your Silver Hub account at a glance.
+        - generic [ref=e66]: DEMO ACCOUNT
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - text: THE HOUSE OF 925
+          - heading "A considered collection. A personal experience." [level=2] [ref=e69]: A considered collection.A personal experience.
+          - paragraph [ref=e70]: Your account pages are ready for the next milestone.
+        - generic [ref=e71]:
+          - text: SH
+          - generic [ref=e72]: "925"
+      - generic [ref=e73]:
+        - link "Personal details Keep your contact details up to date." [ref=e74] [cursor=pointer]:
+          - /url: /account/profile
+          - generic [ref=e78]:
+            - strong [ref=e79]: Personal details
+            - generic [ref=e80]: Keep your contact details up to date.
+        - link "My orders Follow your Silver Hub purchases." [ref=e84] [cursor=pointer]:
+          - /url: /account/orders
+          - generic [ref=e89]:
+            - strong [ref=e90]: My orders
+            - generic [ref=e91]: Follow your Silver Hub purchases.
+        - link "Saved addresses Manage your delivery destinations." [ref=e95] [cursor=pointer]:
+          - /url: /account/addresses
+          - generic [ref=e99]:
+            - strong [ref=e100]: Saved addresses
+            - generic [ref=e101]: Manage your delivery destinations.
+        - link "Wishlist Return to the pieces you love." [ref=e105] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=e108]:
+            - strong [ref=e109]: Wishlist
+            - generic [ref=e110]: Return to the pieces you love.
+  - contentinfo [ref=e114]:
+    - generic [ref=e115]: Silver Hub · House of 925
+    - button "Sign out of demo" [ref=e116] [cursor=pointer]

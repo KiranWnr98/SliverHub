@@ -1,0 +1,135 @@
+- generic [ref=f4e2]:
+  - generic [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - generic [ref=f4e5]: ✦
+      - generic [ref=f4e11]: Free Shipping Across India
+      - generic [ref=f4e13]: 100% Pure Silver
+      - generic [ref=f4e15]: Easy Returns within 7 Days
+      - generic [ref=f4e16]: ✦
+    - banner [ref=f4e17]:
+      - link "Silver Hub Home" [ref=f4e18] [cursor=pointer]:
+        - /url: /
+        - img "Silver Hub SH Logo" [ref=f4e19]
+        - generic [ref=f4e20]:
+          - strong [ref=f4e21]: SILVER HUB
+          - generic [ref=f4e22]: HOUSE OF 925
+      - navigation [ref=f4e23]:
+        - link "Home" [ref=f4e24] [cursor=pointer]:
+          - /url: /
+        - link "Shop" [ref=f4e25] [cursor=pointer]:
+          - /url: /shop
+        - link "Collections" [ref=f4e26] [cursor=pointer]:
+          - /url: /collections
+        - link "New Arrivals" [ref=f4e27] [cursor=pointer]:
+          - /url: /new-arrivals
+        - link "About Us" [ref=f4e28] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=f4e29]:
+        - searchbox "Search silver ornaments" [ref=f4e34]
+        - link "Wishlist (4)" [ref=f4e35] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=f4e38]: "4"
+        - link "Jewellery Box (0)" [ref=f4e39] [cursor=pointer]:
+          - /url: /cart
+          - img "Open jewellery box" [ref=f4e40]
+          - generic [ref=f4e48]: "0"
+        - link "Account" [ref=f4e49] [cursor=pointer]:
+          - /url: /login
+    - main [ref=f4e53]:
+      - generic [ref=f4e54]:
+        - generic [ref=f4e55]:
+          - heading "Your Wishlist" [level=2] [ref=f4e56]
+          - paragraph [ref=f4e57]: Your favourite silver jewellery in one place.
+        - generic [ref=f4e58]:
+          - article [ref=f4e59]:
+            - generic [ref=f4e60]:
+              - img "Traditional Silver Jhumkas" [ref=f4e61]
+              - generic [ref=f4e62]: SPECIAL PRICE
+              - button "Remove from wishlist" [ref=f4e63] [cursor=pointer]
+            - generic [ref=f4e67]:
+              - generic [ref=f4e68]: Earrings
+              - heading "Traditional Silver Jhumkas" [level=3] [ref=f4e69]
+              - generic [ref=f4e70]: ★ 4.8 / 5
+              - generic [ref=f4e71]:
+                - strong [ref=f4e72]: ₹1,499
+                - deletion [ref=f4e73]: ₹1,899
+          - article [ref=f4e74]:
+            - generic [ref=f4e75]:
+              - img "Elegant Silver Ring" [ref=f4e76]
+              - generic [ref=f4e77]: SPECIAL PRICE
+              - button "Remove from wishlist" [ref=f4e78] [cursor=pointer]
+            - generic [ref=f4e82]:
+              - generic [ref=f4e83]: Rings
+              - heading "Elegant Silver Ring" [level=3] [ref=f4e84]
+              - generic [ref=f4e85]: ★ 4.7 / 5
+              - generic [ref=f4e86]:
+                - strong [ref=f4e87]: ₹999
+                - deletion [ref=f4e88]: ₹1,299
+          - article [ref=f4e89]:
+            - generic [ref=f4e90]:
+              - img "Designer Silver Bangles" [ref=f4e91]
+              - generic [ref=f4e92]: SPECIAL PRICE
+              - button "Remove from wishlist" [ref=f4e93] [cursor=pointer]
+            - generic [ref=f4e97]:
+              - generic [ref=f4e98]: Bangles
+              - heading "Designer Silver Bangles" [level=3] [ref=f4e99]
+              - generic [ref=f4e100]: ★ 4.9 / 5
+              - generic [ref=f4e101]:
+                - strong [ref=f4e102]: ₹1,999
+                - deletion [ref=f4e103]: ₹2,499
+          - article [ref=f4e104]:
+            - generic [ref=f4e105]:
+              - img "Pearl Silver Earrings" [ref=f4e106]
+              - generic [ref=f4e107]: NEW ARRIVAL
+              - button "Remove from wishlist" [ref=f4e108] [cursor=pointer]
+            - generic [ref=f4e112]:
+              - generic [ref=f4e113]: Earrings
+              - heading "Pearl Silver Earrings" [level=3] [ref=f4e114]
+              - generic [ref=f4e115]: ★ 4.9 / 5
+              - generic [ref=f4e116]:
+                - strong [ref=f4e117]: ₹1,299
+                - deletion [ref=f4e118]: ₹1,599
+    - contentinfo [ref=f4e119]:
+      - generic [ref=f4e120]:
+        - generic [ref=f4e121]:
+          - heading "SILVERHUB" [level=2] [ref=f4e122]
+          - generic [ref=f4e123]: HOUSE OF 925
+          - paragraph [ref=f4e124]: Discover timeless elegance through beautifully crafted silver jewellery.
+        - generic [ref=f4e125]:
+          - heading "Quick Links" [level=3] [ref=f4e126]
+          - link "Home" [ref=f4e127] [cursor=pointer]:
+            - /url: /
+          - link "Shop" [ref=f4e128] [cursor=pointer]:
+            - /url: /shop
+          - link "Collections" [ref=f4e129] [cursor=pointer]:
+            - /url: /collections
+          - link "New Arrivals" [ref=f4e130] [cursor=pointer]:
+            - /url: /new-arrivals
+          - link "About Us" [ref=f4e131] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=f4e132]:
+          - heading "Customer Care" [level=3] [ref=f4e133]
+          - link "Contact Us" [ref=f4e134] [cursor=pointer]:
+            - /url: /contact
+          - link "Shipping Policy" [ref=f4e135] [cursor=pointer]:
+            - /url: /shipping
+          - link "Returns & Refunds" [ref=f4e136] [cursor=pointer]:
+            - /url: /returns
+          - link "FAQs" [ref=f4e137] [cursor=pointer]:
+            - /url: /faq
+        - generic [ref=f4e138]:
+          - heading "Get in Touch" [level=3] [ref=f4e139]
+          - paragraph [ref=f4e140]: We would love to hear from you.
+          - paragraph [ref=f4e141]: "Email: support@silverhub.in"
+          - paragraph [ref=f4e142]: India
+      - generic [ref=f4e143]:
+        - generic [ref=f4e144]:
+          - paragraph [ref=f4e145]: © 2026 SILVERHUB. All Rights Reserved.
+          - paragraph [ref=f4e146]:
+            - text: Powered by
+            - link "WINR Technologies Pvt. Ltd." [ref=f4e147] [cursor=pointer]:
+              - /url: https://wa.me/918074543183?text=Hello%20WINR%20Technologies!%20I%20would%20like%20to%20know%20more%20about%20your%20services.
+        - paragraph [ref=f4e148]: Crafted with elegance ♡
+  - link "Chat with Silver Hub customer support" [ref=f4e149] [cursor=pointer]:
+    - /url: https://wa.me/918074543183?text=Hello%20Silver%20Hub%20Team!%20I%20need%20assistance%20with%20your%20jewellery%20products.%20Could%20you%20please%20help%20me%3F
+    - generic [ref=f4e152]: Chat with us

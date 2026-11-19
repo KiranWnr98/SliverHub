@@ -14,18 +14,13 @@
   color: white;
 }
 
-.new-arrivals-section .product-image {
-  height: 280px;
-}
 
 @media (max-width: 600px) {
   .new-arrivals-section {
     padding: 50px 17px;
   }
 
-  .new-arrivals-section .product-image {
-    height: 190px;
-  }
+
 }
 
 
@@ -63,3 +58,40 @@
 }
 
 
+/* NEW ARRIVALS - SAME SIZE AS FEATURED PRODUCTS */
+
+.new-arrivals-section .product-image {
+  height: 180px;
+}
+
+.new-arrivals-section .product-info {
+  padding: 12px;
+}
+
+.new-arrivals-section .product-info h3 {
+  font-size: 16px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .new-arrivals-section .product-image {
+    height: 110px !important;
+  }
+
+  .new-arrivals-section .product-info {
+    padding: 6px !important;
+  }
+
+  .new-arrivals-section .product-info h3 {
+    font-size: 13px !important;
+  }
+
+  .new-arrivals-section .product-prices strong {
+    font-size: 12px !important;
+  }
+
+  .new-arrivals-section .add-cart-button {
+    height: 28px !important;
+    font-size: 10px !important;
+  }
+}

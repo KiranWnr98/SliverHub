@@ -1,0 +1,78 @@
+- generic [ref=f4e2]:
+  - generic [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - generic [ref=f4e5]: ✦
+      - generic [ref=f4e11]: Free Shipping Across India
+      - generic [ref=f4e14]: Easy Returns within 7 Days
+      - generic [ref=f4e15]: ✦
+    - banner [ref=f4e16]:
+      - link "Silver Hub Home" [ref=f4e17] [cursor=pointer]:
+        - /url: /
+        - img "Silver Hub SH Logo" [ref=f4e18]
+        - generic [ref=f4e19]:
+          - strong [ref=f4e20]: SILVER HUB
+          - generic [ref=f4e21]: HOUSE OF 925
+      - generic [ref=f4e22]:
+        - link "Wishlist (0)" [ref=f4e23] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=f4e26]: "0"
+        - link "Jewellery Box (0)" [ref=f4e27] [cursor=pointer]:
+          - /url: /cart
+          - img "Open jewellery box" [ref=f4e28]
+          - generic [ref=f4e36]: "0"
+        - button "Open menu" [ref=f4e37] [cursor=pointer]
+    - main [ref=f4e39]:
+      - main [ref=f4e40]:
+        - generic [ref=f4e41]:
+          - text: SILVERAURA COLLECTION
+          - heading "Your Jewellery Box" [level=1] [ref=f4e42]
+          - paragraph [ref=f4e43]: Every beautiful piece deserves a place in your collection.
+        - generic [ref=f4e44]:
+          - heading "Your jewellery box is empty" [level=2] [ref=f4e49]
+          - paragraph [ref=f4e50]: Discover something beautiful and add it to your collection.
+          - link "Explore Collection" [ref=f4e51] [cursor=pointer]:
+            - /url: /shop
+    - contentinfo [ref=f4e54]:
+      - generic [ref=f4e55]:
+        - generic [ref=f4e56]:
+          - heading "SILVERHUB" [level=2] [ref=f4e57]
+          - generic [ref=f4e58]: HOUSE OF 925
+          - paragraph [ref=f4e59]: Discover timeless elegance through beautifully crafted silver jewellery.
+        - generic [ref=f4e60]:
+          - heading "Quick Links" [level=3] [ref=f4e61]
+          - link "Home" [ref=f4e62] [cursor=pointer]:
+            - /url: /
+          - link "Shop" [ref=f4e63] [cursor=pointer]:
+            - /url: /shop
+          - link "Collections" [ref=f4e64] [cursor=pointer]:
+            - /url: /collections
+          - link "New Arrivals" [ref=f4e65] [cursor=pointer]:
+            - /url: /new-arrivals
+          - link "About Us" [ref=f4e66] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=f4e67]:
+          - heading "Customer Care" [level=3] [ref=f4e68]
+          - link "Contact Us" [ref=f4e69] [cursor=pointer]:
+            - /url: /contact
+          - link "Shipping Policy" [ref=f4e70] [cursor=pointer]:
+            - /url: /shipping
+          - link "Returns & Refunds" [ref=f4e71] [cursor=pointer]:
+            - /url: /returns
+          - link "FAQs" [ref=f4e72] [cursor=pointer]:
+            - /url: /faq
+        - generic [ref=f4e73]:
+          - heading "Get in Touch" [level=3] [ref=f4e74]
+          - paragraph [ref=f4e75]: We would love to hear from you.
+          - paragraph [ref=f4e76]: "Email: support@silverhub.in"
+          - paragraph [ref=f4e77]: India
+      - generic [ref=f4e78]:
+        - generic [ref=f4e79]:
+          - paragraph [ref=f4e80]: © 2026 SILVERHUB. All Rights Reserved.
+          - paragraph [ref=f4e81]:
+            - text: Powered by
+            - link "WINR Technologies Pvt. Ltd." [ref=f4e82] [cursor=pointer]:
+              - /url: https://wa.me/918074543183?text=Hello%20WINR%20Technologies!%20I%20would%20like%20to%20know%20more%20about%20your%20services.
+        - paragraph [ref=f4e83]: Crafted with elegance ♡
+  - link "Chat with Silver Hub customer support" [ref=f4e84] [cursor=pointer]:
+    - /url: https://wa.me/918074543183?text=Hello%20Silver%20Hub%20Team!%20I%20need%20assistance%20with%20your%20jewellery%20products.%20Could%20you%20please%20help%20me%3F
+    - generic [ref=f4e87]: Chat with us

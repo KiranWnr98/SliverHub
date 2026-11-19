@@ -9,6 +9,7 @@ import Collections from './pages/Collections/Collections';
 import NewArrivals from './pages/NewArrivals/NewArrivals';
 import About from './pages/About/About';
 import Cart from './pages/Cart/Cart';
+import Checkout from './pages/Checkout/Checkout';
 import Wishlist from './pages/Wishlist/Wishlist';
 import CustomerLayout from './layouts/CustomerLayout/CustomerLayout';
 import AdminLayout from './layouts/AdminLayout/AdminLayout';
@@ -16,10 +17,12 @@ import CustomerLogin from './pages/Customer/Login/Login';
 import CustomerSignup from './pages/Customer/Signup/Signup';
 import CustomerAccount from './pages/Customer/Account/Account';
 import AdminDashboard from './pages/Admin/Dashboard/Dashboard';
+import AdminProducts from './pages/Admin/Products/Products';
 import PortalPlaceholder from './pages/PortalPlaceholder';
 
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
+import { ProductProvider } from './context/ProductContext';
 import WhatsAppButton from "./components/WhatsAppButton/WhatsAppButton";
 
 import SparkleBackground from './components/SparkleBackground/SparkleBackground';
@@ -39,9 +42,10 @@ function StoreLayout() {
 function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
-        <WishlistProvider>
-          <Routes>
+      <ProductProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <Routes>
             <Route element={<StoreLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop />} />
@@ -49,6 +53,7 @@ function App() {
               <Route path="/new-arrivals" element={<NewArrivals />} />
               <Route path="/about" element={<About />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/wishlist" element={<Wishlist />} />
             </Route>
             <Route path="/login" element={<CustomerLogin />} />
@@ -70,10 +75,7 @@ function App() {
             </Route>
             <Route element={<AdminLayout />}>
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route
-                path="/admin/products"
-                element={<PortalPlaceholder title="Products" admin />}
-              />
+              <Route path="/admin/products" element={<AdminProducts />} />
               <Route
                 path="/admin/categories"
                 element={<PortalPlaceholder title="Categories" admin />}
@@ -95,9 +97,10 @@ function App() {
                 element={<PortalPlaceholder title="Settings" admin />}
               />
             </Route>
-          </Routes>
-        </WishlistProvider>
-      </CartProvider>
+            </Routes>
+          </WishlistProvider>
+        </CartProvider>
+      </ProductProvider>
     </BrowserRouter>
   );
 }

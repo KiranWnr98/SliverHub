@@ -1,0 +1,20 @@
+- main [ref=f1e3]:
+  - link "Return to storefront" [ref=f1e4] [cursor=pointer]:
+    - /url: /
+  - generic [ref=f1e7]:
+    - generic [ref=f1e8]: SH
+    - generic [ref=f1e9]: SILVER HUB · ADMIN STUDIO
+    - heading "Admin sign in" [level=1] [ref=f1e10]
+    - paragraph [ref=f1e11]: A private workspace for the House of 925 team.
+    - generic [ref=f1e15]:
+      - strong [ref=f1e16]: Demo only — not secured
+      - text: Any email and password will enter the frontend demo. Do not use real credentials.
+    - generic [ref=f1e17]:
+      - generic [ref=f1e18]: Email address
+      - textbox "Email address" [ref=f1e19]:
+        - /placeholder: admin@example.com
+      - generic [ref=f1e20]: Password
+      - textbox "Password" [ref=f1e21]:
+        - /placeholder: Any demo password
+      - button "Enter demo workspace" [ref=f1e22] [cursor=pointer]
+    - paragraph [ref=f1e25]: This client-side gate is not role-based access control. Production admin access must be authenticated and authorized by a backend.

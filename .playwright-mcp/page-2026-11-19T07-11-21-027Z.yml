@@ -1,0 +1,236 @@
+- generic [ref=f18e3]:
+  - complementary [ref=f18e4]:
+    - link "SH SILVERHUB ADMIN STUDIO" [ref=f18e5] [cursor=pointer]:
+      - /url: /admin/dashboard
+      - generic [ref=f18e6]: SH
+      - generic [ref=f18e7]:
+        - text: SILVERHUB
+        - generic [ref=f18e8]: ADMIN STUDIO
+    - generic [ref=f18e9]: WORKSPACE
+    - navigation "Admin navigation" [ref=f18e10]:
+      - link "Dashboard" [ref=f18e11] [cursor=pointer]:
+        - /url: /admin/dashboard
+      - link "Products" [ref=f18e14] [cursor=pointer]:
+        - /url: /admin/products
+      - link "Categories" [ref=f18e25] [cursor=pointer]:
+        - /url: /admin/categories
+      - link "Orders" [ref=f18e30] [cursor=pointer]:
+        - /url: /admin/orders
+      - link "Inventory" [ref=f18e34] [cursor=pointer]:
+        - /url: /admin/inventory
+      - link "Customers" [ref=f18e41] [cursor=pointer]:
+        - /url: /admin/customers
+      - link "Settings" [ref=f18e46] [cursor=pointer]:
+        - /url: /admin/settings
+    - generic [ref=f18e50]:
+      - generic [ref=f18e51]: Demo environment
+      - link "View storefront" [ref=f18e53] [cursor=pointer]:
+        - /url: /
+  - generic [ref=f18e58]:
+    - generic [ref=f18e59]:
+      - generic [ref=f18e60]: Admin portal · Demo
+      - generic [ref=f18e61]:
+        - generic [ref=f18e62]: SH
+        - strong [ref=f18e63]: Store admin
+    - main [ref=f18e64]:
+      - generic [ref=f18e65]:
+        - generic [ref=f18e66]:
+          - generic [ref=f18e67]:
+            - text: ADMIN STUDIO
+            - heading "Products" [level=1] [ref=f18e68]
+            - paragraph [ref=f18e69]: Manage your Silver Hub product catalog.
+          - generic [ref=f18e70]:
+            - generic [ref=f18e71]: 7 products
+            - button "Add Product" [ref=f18e72] [cursor=pointer]
+        - tablist "Product status" [ref=f18e74]:
+          - tab "All Products 7" [selected] [ref=f18e75] [cursor=pointer]:
+            - text: All Products
+            - generic [ref=f18e76]: "7"
+          - tab "Active 7" [ref=f18e370] [cursor=pointer]:
+            - text: Active
+            - generic [ref=f18e78]: "7"
+          - tab "Out of Stock 0" [ref=f18e371] [cursor=pointer]:
+            - text: Out of Stock
+            - generic [ref=f18e80]: "0"
+          - tab "Hidden 0" [ref=f18e81] [cursor=pointer]:
+            - text: Hidden
+            - generic [ref=f18e82]: "0"
+          - tab "Scheduled Deletion 0" [ref=f18e83] [cursor=pointer]:
+            - text: Scheduled Deletion
+            - generic [ref=f18e84]: "0"
+        - generic [ref=f18e85]:
+          - searchbox "Search products by name, SKU or category" [ref=f18e90]
+          - generic [ref=f18e91]:
+            - generic [ref=f18e92]: Category
+            - combobox "Category" [ref=f18e93]:
+              - option "All categories" [selected]
+              - option "Earrings"
+              - option "Necklaces"
+              - option "Bangles"
+              - option "Anklets"
+              - option "Rings"
+          - generic [ref=f18e94]:
+            - generic [ref=f18e95]: Status
+            - combobox "Status" [ref=f18e96]:
+              - option "All statuses" [selected]
+              - option "Active"
+              - option "Out of Stock"
+              - option "Hidden"
+              - option "Scheduled Deletion"
+          - generic [ref=f18e97]:
+            - generic [ref=f18e98]: Sort by
+            - combobox "Sort by" [ref=f18e99]:
+              - option "Newest" [selected]
+              - option "Oldest"
+              - option "Lowest price"
+              - option "Highest price"
+              - option "Alphabetical"
+          - generic "Product layout" [ref=f18e100]:
+            - button "Table view" [pressed] [ref=f18e101] [cursor=pointer]
+            - button "Grid view" [ref=f18e103] [cursor=pointer]
+        - table [ref=f18e110]:
+          - rowgroup [ref=f18e111]:
+            - row [ref=f18e112]:
+              - columnheader "Product" [ref=f18e113]
+              - columnheader "SKU" [ref=f18e114]
+              - columnheader "Category" [ref=f18e115]
+              - columnheader "Selling price" [ref=f18e116]
+              - columnheader "Stock quantity" [ref=f18e117]
+              - columnheader "Stock status" [ref=f18e118]
+              - columnheader "Visibility" [ref=f18e119]
+              - columnheader "Actions" [ref=f18e120]
+          - rowgroup [ref=f18e121]:
+            - row [ref=f18e122]:
+              - cell "Traditional Silver Kada Traditional Silver Kada New arrival" [ref=f18e123]:
+                - generic [ref=f18e124]:
+                  - img "Traditional Silver Kada" [ref=f18e125]
+                  - generic [ref=f18e126]:
+                    - strong [ref=f18e127]: Traditional Silver Kada
+                    - generic [ref=f18e128]: New arrival
+              - cell "SH-0008" [ref=f18e129]
+              - cell "Bangles" [ref=f18e130]
+              - cell "₹2,199" [ref=f18e131]
+              - cell [ref=f18e132]:
+                - spinbutton "Stock quantity for Traditional Silver Kada" [ref=f18e133]: "10"
+              - cell "10 in stock" [ref=f18e134]
+              - cell "Visible" [ref=f18e136]
+              - cell [ref=f18e138]:
+                - generic [ref=f18e139]:
+                  - button "Edit Traditional Silver Kada" [ref=f18e140] [cursor=pointer]
+                  - 'button "Mark out of stock: Traditional Silver Kada" [ref=f18e144] [cursor=pointer]'
+                  - button "Hide Traditional Silver Kada" [ref=f18e148] [cursor=pointer]
+                  - button "Delete Traditional Silver Kada" [ref=f18e154] [cursor=pointer]
+            - row [ref=f18e158]:
+              - cell "Classic Silver Ring Classic Silver Ring New arrival" [ref=f18e159]:
+                - generic [ref=f18e160]:
+                  - img "Classic Silver Ring" [ref=f18e161]
+                  - generic [ref=f18e162]:
+                    - strong [ref=f18e163]: Classic Silver Ring
+                    - generic [ref=f18e164]: New arrival
+              - cell "SH-0007" [ref=f18e165]
+              - cell "Rings" [ref=f18e166]
+              - cell "₹899" [ref=f18e167]
+              - cell [ref=f18e168]:
+                - spinbutton "Stock quantity for Classic Silver Ring" [ref=f18e169]: "10"
+              - cell "10 in stock" [ref=f18e170]
+              - cell "Visible" [ref=f18e172]
+              - cell [ref=f18e174]:
+                - generic [ref=f18e175]:
+                  - button "Edit Classic Silver Ring" [ref=f18e176] [cursor=pointer]
+                  - 'button "Mark out of stock: Classic Silver Ring" [ref=f18e180] [cursor=pointer]'
+                  - button "Hide Classic Silver Ring" [ref=f18e184] [cursor=pointer]
+                  - button "Delete Classic Silver Ring" [ref=f18e190] [cursor=pointer]
+            - row [ref=f18e194]:
+              - cell "Minimal Silver Necklace Minimal Silver Necklace New arrival" [ref=f18e195]:
+                - generic [ref=f18e196]:
+                  - img "Minimal Silver Necklace" [ref=f18e197]
+                  - generic [ref=f18e198]:
+                    - strong [ref=f18e199]: Minimal Silver Necklace
+                    - generic [ref=f18e200]: New arrival
+              - cell "SH-0006" [ref=f18e201]
+              - cell "Necklaces" [ref=f18e202]
+              - cell "₹1,899" [ref=f18e203]
+              - cell [ref=f18e204]:
+                - spinbutton "Stock quantity for Minimal Silver Necklace" [ref=f18e205]: "10"
+              - cell "10 in stock" [ref=f18e206]
+              - cell "Visible" [ref=f18e208]
+              - cell [ref=f18e210]:
+                - generic [ref=f18e211]:
+                  - button "Edit Minimal Silver Necklace" [ref=f18e212] [cursor=pointer]
+                  - 'button "Mark out of stock: Minimal Silver Necklace" [ref=f18e216] [cursor=pointer]'
+                  - button "Hide Minimal Silver Necklace" [ref=f18e220] [cursor=pointer]
+                  - button "Delete Minimal Silver Necklace" [ref=f18e226] [cursor=pointer]
+            - row [ref=f18e230]:
+              - cell "Pearl Silver Earrings Pearl Silver Earrings New arrival" [ref=f18e231]:
+                - generic [ref=f18e232]:
+                  - img "Pearl Silver Earrings" [ref=f18e233]
+                  - generic [ref=f18e234]:
+                    - strong [ref=f18e235]: Pearl Silver Earrings
+                    - generic [ref=f18e236]: New arrival
+              - cell "SH-0005" [ref=f18e237]
+              - cell "Earrings" [ref=f18e238]
+              - cell "₹1,299" [ref=f18e239]
+              - cell [ref=f18e240]:
+                - spinbutton "Stock quantity for Pearl Silver Earrings" [ref=f18e241]: "10"
+              - cell "10 in stock" [ref=f18e242]
+              - cell "Visible" [ref=f18e244]
+              - cell [ref=f18e246]:
+                - generic [ref=f18e247]:
+                  - button "Edit Pearl Silver Earrings" [ref=f18e248] [cursor=pointer]
+                  - 'button "Mark out of stock: Pearl Silver Earrings" [ref=f18e252] [cursor=pointer]'
+                  - button "Hide Pearl Silver Earrings" [ref=f18e256] [cursor=pointer]
+                  - button "Delete Pearl Silver Earrings" [ref=f18e262] [cursor=pointer]
+            - row [ref=f18e266]:
+              - cell [ref=f18e267]:
+                - generic [ref=f18e268]:
+                  - img "Designer Silver Bangles" [ref=f18e269]
+                  - strong [ref=f18e271]: Designer Silver Bangles
+              - cell "SH-0004" [ref=f18e272]
+              - cell "Bangles" [ref=f18e273]
+              - cell "₹1,999" [ref=f18e274]
+              - cell [ref=f18e275]:
+                - spinbutton "Stock quantity for Designer Silver Bangles" [ref=f18e276]: "10"
+              - cell "10 in stock" [ref=f18e277]
+              - cell "Visible" [ref=f18e279]
+              - cell [ref=f18e281]:
+                - generic [ref=f18e282]:
+                  - button "Edit Designer Silver Bangles" [ref=f18e283] [cursor=pointer]
+                  - 'button "Mark out of stock: Designer Silver Bangles" [ref=f18e287] [cursor=pointer]'
+                  - button "Hide Designer Silver Bangles" [ref=f18e291] [cursor=pointer]
+                  - button "Delete Designer Silver Bangles" [ref=f18e297] [cursor=pointer]
+            - row [ref=f18e301]:
+              - cell [ref=f18e302]:
+                - generic [ref=f18e303]:
+                  - img "Elegant Silver Ring" [ref=f18e304]
+                  - strong [ref=f18e306]: Elegant Silver Ring
+              - cell "SH-0003" [ref=f18e307]
+              - cell "Rings" [ref=f18e308]
+              - cell "₹999" [ref=f18e309]
+              - cell [ref=f18e310]:
+                - spinbutton "Stock quantity for Elegant Silver Ring" [ref=f18e311]: "10"
+              - cell "10 in stock" [ref=f18e312]
+              - cell "Visible" [ref=f18e314]
+              - cell [ref=f18e316]:
+                - generic [ref=f18e317]:
+                  - button "Edit Elegant Silver Ring" [ref=f18e318] [cursor=pointer]
+                  - 'button "Mark out of stock: Elegant Silver Ring" [ref=f18e322] [cursor=pointer]'
+                  - button "Hide Elegant Silver Ring" [ref=f18e326] [cursor=pointer]
+                  - button "Delete Elegant Silver Ring" [ref=f18e332] [cursor=pointer]
+            - row [ref=f18e372]:
+              - cell [ref=f18e337]:
+                - generic [ref=f18e338]:
+                  - img "Royal Silver Necklace" [ref=f18e339]
+                  - strong [ref=f18e341]: Royal Silver Necklace
+              - cell "SH-0001" [ref=f18e342]
+              - cell "Necklaces" [ref=f18e343]
+              - cell "₹2,499" [ref=f18e344]
+              - cell [ref=f18e373]:
+                - spinbutton "Stock quantity for Royal Silver Necklace" [ref=f18e374]: "2"
+              - cell "2 in stock" [ref=f18e375]
+              - cell "Visible" [ref=f18e349]
+              - cell [ref=f18e376]:
+                - generic [ref=f18e352]:
+                  - button "Edit Royal Silver Necklace" [ref=f18e353] [cursor=pointer]
+                  - 'button "Mark out of stock: Royal Silver Necklace" [ref=f18e377] [cursor=pointer]'
+                  - button "Hide Royal Silver Necklace" [ref=f18e360] [cursor=pointer]
+                  - button "Delete Royal Silver Necklace" [ref=f18e366] [cursor=pointer]

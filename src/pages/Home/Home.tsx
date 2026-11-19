@@ -5,12 +5,11 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import PromoBanner from '../../components/PromoBanner/PromoBanner';
 import Newsletter from '../../components/Newsletter/Newsletter';
 
-import { products } from '../../data/products';
-import { newArrivals } from '../../data/collections';
-
 import { useSilverRate } from '../../hooks/useSilverRate';
+import { useProducts } from '../../hooks/useProducts';
 
 export default function Home() {
+  const { products, newArrivals } = useProducts();
   // Fetch live silver rate from MetalCharts
   const { rate, loading, error } = useSilverRate();
 
@@ -62,7 +61,7 @@ export default function Home() {
             <span />
           </div>
 
-          <p>Discover our latest additions to SilverAura</p>
+          <p>Discover our latest additions to SilverHub</p>
         </div>
 
         <div className="product-grid">

@@ -1,16 +1,14 @@
 
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { products } from '../../data/products';
-import { newArrivals } from '../../data/collections';
 import { useWishlist } from '../../context/useWishlist';
+import { useProducts } from '../../hooks/useProducts';
 
 export default function Wishlist() {
   const { wishlist } = useWishlist();
+  const { visibleProducts } = useProducts();
 
-  const allProducts = [...products, ...newArrivals];
-
-  const savedProducts = allProducts.filter((product) =>
-    wishlist.includes(product.id)
+  const savedProducts = visibleProducts.filter((product) =>
+    wishlist.includes(product.id),
   );
 
   return (

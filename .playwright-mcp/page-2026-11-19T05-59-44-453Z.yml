@@ -1,0 +1,120 @@
+- generic [ref=f7e3]:
+  - complementary [ref=f7e4]:
+    - link "SH SILVERHUB ADMIN STUDIO" [ref=f7e5] [cursor=pointer]:
+      - /url: /admin/dashboard
+      - generic [ref=f7e6]: SH
+      - generic [ref=f7e7]:
+        - text: SILVERHUB
+        - generic [ref=f7e8]: ADMIN STUDIO
+    - generic [ref=f7e9]: WORKSPACE
+    - navigation "Admin navigation" [ref=f7e10]:
+      - link "Dashboard" [ref=f7e11] [cursor=pointer]:
+        - /url: /admin/dashboard
+      - link "Products" [ref=f7e14] [cursor=pointer]:
+        - /url: /admin/products
+      - link "Categories" [ref=f7e25] [cursor=pointer]:
+        - /url: /admin/categories
+      - link "Orders" [ref=f7e30] [cursor=pointer]:
+        - /url: /admin/orders
+      - link "Inventory" [ref=f7e34] [cursor=pointer]:
+        - /url: /admin/inventory
+      - link "Customers" [ref=f7e41] [cursor=pointer]:
+        - /url: /admin/customers
+      - link "Settings" [ref=f7e46] [cursor=pointer]:
+        - /url: /admin/settings
+    - generic [ref=f7e50]:
+      - generic [ref=f7e51]: Demo environment
+      - link "View storefront" [ref=f7e53] [cursor=pointer]:
+        - /url: /
+  - generic [ref=f7e58]:
+    - generic [ref=f7e59]:
+      - generic [ref=f7e60]: Admin portal · Demo
+      - generic [ref=f7e61]:
+        - generic [ref=f7e62]: SH
+        - strong [ref=f7e63]: Store admin
+    - main [ref=f7e64]:
+      - generic [ref=f7e65]:
+        - generic [ref=f7e66]:
+          - generic [ref=f7e67]:
+            - text: ADMIN STUDIO
+            - heading "Products" [level=1] [ref=f7e68]
+            - paragraph [ref=f7e69]: Manage your Silver Hub product catalog.
+          - generic [ref=f7e70]:
+            - generic [ref=f7e71]: 8 products
+            - button "Add Product" [ref=f7e72] [cursor=pointer]
+        - tablist "Product status" [ref=f7e74]:
+          - tab "All Products 8" [ref=f7e75] [cursor=pointer]:
+            - text: All Products
+            - generic [ref=f7e76]: "8"
+          - tab "Active 7" [ref=f7e77] [cursor=pointer]:
+            - text: Active
+            - generic [ref=f7e78]: "7"
+          - tab "Out of Stock 1" [active] [selected] [ref=f7e428] [cursor=pointer]:
+            - text: Out of Stock
+            - generic [ref=f7e80]: "1"
+          - tab "Hidden 0" [ref=f7e81] [cursor=pointer]:
+            - text: Hidden
+            - generic [ref=f7e82]: "0"
+          - tab "Scheduled Deletion 0" [ref=f7e429] [cursor=pointer]:
+            - text: Scheduled Deletion
+            - generic [ref=f7e84]: "0"
+        - generic [ref=f7e85]:
+          - searchbox "Search products by name, SKU or category" [ref=f7e90]
+          - generic [ref=f7e91]:
+            - generic [ref=f7e92]: Category
+            - combobox "Category" [ref=f7e93]:
+              - option "All categories" [selected]
+              - option "Earrings"
+              - option "Necklaces"
+              - option "Bangles"
+              - option "Anklets"
+              - option "Rings"
+          - generic [ref=f7e94]:
+            - generic [ref=f7e95]: Status
+            - combobox "Status" [ref=f7e96]:
+              - option "All statuses" [selected]
+              - option "Active"
+              - option "Out of Stock"
+              - option "Hidden"
+              - option "Scheduled Deletion"
+          - generic [ref=f7e97]:
+            - generic [ref=f7e98]: Sort by
+            - combobox "Sort by" [ref=f7e99]:
+              - option "Newest" [selected]
+              - option "Oldest"
+              - option "Lowest price"
+              - option "Highest price"
+              - option "Alphabetical"
+          - generic "Product layout" [ref=f7e100]:
+            - button "Table view" [pressed] [ref=f7e101] [cursor=pointer]
+            - button "Grid view" [ref=f7e103] [cursor=pointer]
+        - table [ref=f7e436]:
+          - rowgroup [ref=f7e437]:
+            - row [ref=f7e438]:
+              - columnheader "Product" [ref=f7e439]
+              - columnheader "SKU" [ref=f7e440]
+              - columnheader "Category" [ref=f7e441]
+              - columnheader "Selling price" [ref=f7e442]
+              - columnheader "Stock quantity" [ref=f7e443]
+              - columnheader "Stock status" [ref=f7e444]
+              - columnheader "Visibility" [ref=f7e445]
+              - columnheader "Actions" [ref=f7e446]
+          - rowgroup [ref=f7e447]:
+            - row [ref=f7e448]:
+              - cell [ref=f7e449]:
+                - generic [ref=f7e450]:
+                  - img "Royal Silver Necklace" [ref=f7e451]
+                  - strong [ref=f7e453]: Royal Silver Necklace
+              - cell "SH-0001" [ref=f7e454]
+              - cell "Necklaces" [ref=f7e455]
+              - cell "₹2,499" [ref=f7e456]
+              - cell [ref=f7e457]:
+                - spinbutton "Stock quantity for Royal Silver Necklace" [ref=f7e458]: "0"
+              - cell "Out of stock" [ref=f7e459]
+              - cell "Visible" [ref=f7e461]
+              - cell [ref=f7e463]:
+                - generic [ref=f7e464]:
+                  - button "Edit Royal Silver Necklace" [ref=f7e465] [cursor=pointer]
+                  - 'button "Mark in stock: Royal Silver Necklace" [ref=f7e469] [cursor=pointer]'
+                  - button "Hide Royal Silver Necklace" [ref=f7e472] [cursor=pointer]
+                  - button "Delete Royal Silver Necklace" [ref=f7e478] [cursor=pointer]

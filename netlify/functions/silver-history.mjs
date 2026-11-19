@@ -1,7 +1,7 @@
-
 const API_KEY = process.env.METALCHARTS_API_KEY;
 
 const CACHE_DURATION = 6 * 60 * 60 * 1000;
+const RETAIL_ADJUSTMENT = 1.35736;
 
 let cachedHistory = null;
 let lastFetched = 0;
@@ -10,46 +10,47 @@ function formatDate(date) {
   return date.toISOString().slice(0, 10);
 }
 
+// Supports ISO dates, Unix seconds and Unix milliseconds
+function parseTimestamp(value) {
+  if (typeof value === "number") {
+    return value < 1e12 ? value * 1000 : value;
+  }
+
+  if (typeof value === "string" && /^\d+$/.test(value)) {
+    const number = Number(value);
+    return number < 1e12 ? number * 1000 : number;
+  }
+
+  return Date.parse(value);
+}
+
 export const handler = async () => {
   try {
     if (!API_KEY) {
-      console.error("MetalCharts API key missing");
-
-      return {
-        statusCode: 500,
-        body: JSON.stringify({
-          error: "Historical silver API configuration missing",
-        }),
-      };
+      throw new Error("METALCHARTS_API_KEY is missing");
     }
 
     const now = Date.now();
 
-    // Reuse historical data for six hours
     if (
       cachedHistory &&
       now - lastFetched < CACHE_DURATION
     ) {
       return {
         statusCode: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cachedHistory),
       };
     }
 
-    // Exclude today's potentially incomplete daily candle
-    const yesterday = new Date();
-    yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+    const today = new Date();
+    const startDate = new Date(today);
 
-    // Fetch 14 days to account for weekends and market holidays
-    const startDate = new Date(yesterday);
-    startDate.setUTCDate(startDate.getUTCDate() - 13);
+    startDate.setUTCDate(startDate.getUTCDate() - 14);
 
     const params = new URLSearchParams({
       start: formatDate(startDate),
-      end: formatDate(yesterday),
+      end: formatDate(today),
       interval: "1d",
       currency: "INR",
       unit: "kg",
@@ -61,69 +62,66 @@ export const handler = async () => {
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${API_KEY}`,
+        Accept: "application/json",
       },
-      signal: AbortSignal.timeout(15000),
+      signal: AbortSignal.timeout(20000),
     });
 
     if (!response.ok) {
       const details = await response.text();
 
       console.error(
-        "MetalCharts history error:",
+        "MetalCharts history API:",
         response.status,
         details
       );
 
-      if (cachedHistory) {
-        return {
-          statusCode: 200,
-          body: JSON.stringify({
-            ...cachedHistory,
-            stale: true,
-          }),
-        };
-      }
-
-      return {
-        statusCode: 503,
-        body: JSON.stringify({
-          error: "Historical silver prices unavailable",
-        }),
-      };
+      throw new Error(
+        `MetalCharts API error ${response.status}: ${details}`
+      );
     }
 
     const result = await response.json();
 
     if (!Array.isArray(result.data)) {
-      throw new Error("Invalid historical API response");
+      throw new Error(
+        "Invalid history response: data array missing"
+      );
     }
 
-    // Use actual daily closing prices
     const history = result.data
-      .map((item) => ({
-        date: formatDate(new Date(item.timestamp)),
-        timestamp: item.timestamp,
-        price: Number(item.close ?? item.price),
-      }))
+      .map((item) => {
+        const timestamp = parseTimestamp(item.timestamp);
+        const closePrice = Number(item.close ?? item.price);
+
+        const date = new Date(timestamp);
+
+        return {
+          date: formatDate(date),
+          timestamp: date.toISOString(),
+          price: closePrice * RETAIL_ADJUSTMENT,
+        };
+      })
       .filter(
         (item) =>
-          item.timestamp &&
+          !Number.isNaN(Date.parse(item.timestamp)) &&
           Number.isFinite(item.price) &&
-          !Number.isNaN(Date.parse(item.timestamp))
+          item.price > 0
       )
       .sort(
         (a, b) =>
-          new Date(a.timestamp) - new Date(b.timestamp)
+          Date.parse(a.timestamp) - Date.parse(b.timestamp)
       )
       .slice(-5);
 
     if (history.length === 0) {
-      throw new Error("No historical silver prices returned");
+      throw new Error("No valid historical silver prices found");
     }
 
     cachedHistory = {
       currency: "INR",
       unit: "kg",
+      purity: 999,
       data: history,
       count: history.length,
       stale: false,
@@ -131,20 +129,21 @@ export const handler = async () => {
 
     lastFetched = Date.now();
 
+    console.log("Silver 999 historical data updated:", history);
+
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(cachedHistory),
     };
 
   } catch (error) {
-    console.error("Silver history error:", error);
+    console.error("Silver history error:", error.message);
 
     if (cachedHistory) {
       return {
         statusCode: 200,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...cachedHistory,
           stale: true,
@@ -154,8 +153,10 @@ export const handler = async () => {
 
     return {
       statusCode: 503,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        error: "Unable to fetch historical silver prices",
+        error: "Historical silver prices unavailable",
+        details: error.message,
       }),
     };
   }

@@ -13,6 +13,7 @@ import {
   Store,
 } from 'lucide-react';
 import '../portal.css';
+import './AdminLayout.css';
 
 const navigation = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: ChartNoAxesCombined },

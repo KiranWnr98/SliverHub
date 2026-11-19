@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import {
   Search,
@@ -8,7 +7,7 @@ import {
   X
 } from 'lucide-react';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { useCart } from '../../context/useCart';
 import { useWishlist } from '../../context/useWishlist';
@@ -43,35 +42,35 @@ export default function Navbar() {
         />
 
         <span className="brand-text">
-          <strong>SILVER HUB</strong>
-          <small>HOUSE OF 925</small>
+          <strong>SILVERHUB</strong>
+          
         </span>
       </Link>
 
       {/* NAVIGATION */}
-      <nav className={menuOpen ? 'nav-links open' : 'nav-links'}>
+<nav className={menuOpen ? 'nav-links open' : 'nav-links'}>
 
-        <Link to="/" onClick={closeMenu}>
-          Home
-        </Link>
+  <NavLink to="/" onClick={closeMenu}>
+    Home
+  </NavLink>
 
-        <Link to="/shop" onClick={closeMenu}>
-          Shop
-        </Link>
+  <NavLink to="/shop" onClick={closeMenu}>
+    Shop
+  </NavLink>
 
-        <Link to="/collections" onClick={closeMenu}>
-          Collections
-        </Link>
+  <NavLink to="/collections" onClick={closeMenu}>
+    Collections
+  </NavLink>
 
-        <Link to="/new-arrivals" onClick={closeMenu}>
-          New Arrivals
-        </Link>
+  <NavLink to="/new-arrivals" onClick={closeMenu}>
+    New Arrivals
+  </NavLink>
 
-        <Link to="/about" onClick={closeMenu}>
-          About Us
-        </Link>
+  <NavLink to="/about" onClick={closeMenu}>
+    About Us
+  </NavLink>
 
-      </nav>
+</nav>
 
       {/* NAVBAR ACTIONS */}
       <div className="nav-actions">

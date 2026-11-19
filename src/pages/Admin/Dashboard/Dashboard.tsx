@@ -9,6 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import { mockBestSellers, mockOrders } from '../../../data/mockPortal';
 import '../../../layouts/portal.css';
+import './Dashboard.css';
 
 const metrics = [
   { label: 'Total products', value: '128', change: '+8 this month', icon: Boxes, tone: 'silver' },
@@ -35,9 +36,9 @@ export default function AdminDashboard() {
     <div className="dashboard-page">
       <section className="dashboard-hero">
         <div className="dashboard-hero-content">
-          <span className="dashboard-hero-eyebrow">SILVER HUB ADMIN</span>
+          <span className="dashboard-hero-eyebrow">SILVERHUB ADMIN</span>
           <h1>Good morning, Admin</h1>
-          <p>Here’s what’s happening at Silver Hub today.</p>
+          <p>Here’s what’s happening at SilverHub today.</p>
         </div>
       </section>
 

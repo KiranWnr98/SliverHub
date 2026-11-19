@@ -1,0 +1,23 @@
+- main [ref=e3]:
+  - link "Back to Silver Hub" [ref=e4] [cursor=pointer]:
+    - /url: /
+  - generic [ref=e7]:
+    - generic [ref=e8]: YOUR SILVER HUB
+    - heading "Welcome back" [level=1] [ref=e9]
+    - paragraph [ref=e10]: Sign in to explore your account, orders and saved details.
+    - generic [ref=e15]:
+      - strong [ref=e16]: Frontend demo sign-in
+      - text: Use any email and password. This is not production authentication.
+    - generic [ref=e17]:
+      - generic [ref=e18]: Email address
+      - textbox "Email address" [ref=e19]:
+        - /placeholder: you@example.com
+      - generic [ref=e20]: Password
+      - textbox "Password" [ref=e21]:
+        - /placeholder: Enter any demo password
+      - button "Sign in to your account" [ref=e22] [cursor=pointer]
+    - paragraph [ref=e25]:
+      - text: New to Silver Hub?
+      - link "Create an account" [ref=e26] [cursor=pointer]:
+        - /url: /signup
+    - paragraph [ref=e27]: Demo account details are kept only for this browser session. Passwords are never stored.

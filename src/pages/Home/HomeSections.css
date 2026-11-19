@@ -6,12 +6,15 @@
 }
 
 .why-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  max-width: 1300px;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  max-width: 850px;
+  margin: 0 auto;
 }
+
+
 
 .why-grid > div {
   text-align: center;
@@ -19,6 +22,18 @@
   background: #fffaf4;
   border-radius: 12px;
   transition: transform .3s;
+}
+@media (max-width: 768px) {
+  .why-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .why-grid > div {
+    width: 100%;
+    max-width: 400px;
+  }
 }
 
 .why-grid > div:hover {
@@ -89,4 +104,3 @@
   color: #847969;
   font-size: 11px;
 }
-

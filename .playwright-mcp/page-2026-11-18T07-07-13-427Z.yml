@@ -1,0 +1,132 @@
+- generic [ref=f1e26]:
+  - complementary [ref=f1e27]:
+    - link "SH SILVER HUB ADMIN STUDIO" [ref=f1e28] [cursor=pointer]:
+      - /url: /admin/dashboard
+      - generic [ref=f1e29]: SH
+      - generic [ref=f1e30]:
+        - text: SILVER HUB
+        - generic [ref=f1e31]: ADMIN STUDIO
+    - generic [ref=f1e32]: WORKSPACE
+    - navigation "Admin navigation" [ref=f1e33]:
+      - link "Dashboard" [ref=f1e34] [cursor=pointer]:
+        - /url: /admin/dashboard
+      - link "Products" [ref=f1e37] [cursor=pointer]:
+        - /url: /admin/products
+      - link "Categories" [ref=f1e48] [cursor=pointer]:
+        - /url: /admin/categories
+      - link "Orders" [ref=f1e53] [cursor=pointer]:
+        - /url: /admin/orders
+      - link "Inventory" [ref=f1e57] [cursor=pointer]:
+        - /url: /admin/inventory
+      - link "Customers" [ref=f1e64] [cursor=pointer]:
+        - /url: /admin/customers
+      - link "Settings" [ref=f1e69] [cursor=pointer]:
+        - /url: /admin/settings
+    - generic [ref=f1e73]:
+      - generic [ref=f1e74]: Demo environment
+      - link "View storefront" [ref=f1e76] [cursor=pointer]:
+        - /url: /
+  - button "Close admin navigation" [ref=f1e366] [cursor=pointer]
+  - generic [ref=f1e81]:
+    - generic [ref=f1e82]:
+      - button "Close navigation" [active] [ref=f1e367] [cursor=pointer]
+      - generic [ref=f1e83]: Admin portal · Demo
+      - generic [ref=f1e84]:
+        - generic [ref=f1e85]: SH
+        - strong [ref=f1e86]: Store admin
+    - main [ref=f1e87]:
+      - generic [ref=f1e228]:
+        - generic [ref=f1e229]:
+          - generic [ref=f1e230]:
+            - text: TUESDAY, 18 NOVEMBER 2026
+            - heading "Good morning, Admin" [level=1] [ref=f1e231]
+            - paragraph [ref=f1e232]: Here’s what’s happening at Silver Hub today.
+          - generic [ref=f1e233]: SAMPLE DATA
+        - region "Store summary" [ref=f1e234]:
+          - article [ref=f1e235]:
+            - paragraph [ref=f1e247]: Total products
+            - strong [ref=f1e248]: "128"
+            - generic [ref=f1e249]: +8 this month
+          - article [ref=f1e253]:
+            - paragraph [ref=f1e258]: Total orders
+            - strong [ref=f1e259]: 1,284
+            - generic [ref=f1e260]: +12.8% this month
+          - article [ref=f1e264]:
+            - paragraph [ref=f1e270]: Total customers
+            - strong [ref=f1e271]: "946"
+            - generic [ref=f1e272]: +6.4% this month
+          - article [ref=f1e276]:
+            - paragraph [ref=f1e281]: Revenue
+            - strong [ref=f1e282]: ₹8,42,650
+            - generic [ref=f1e283]: +9.2% this month
+        - generic [ref=f1e287]:
+          - generic [ref=f1e288]:
+            - generic [ref=f1e289]:
+              - generic [ref=f1e290]:
+                - heading "Recent orders" [level=2] [ref=f1e291]
+                - paragraph [ref=f1e292]: Your latest customer purchases.
+              - link "All orders" [ref=f1e293] [cursor=pointer]:
+                - /url: /admin/orders
+            - table [ref=f1e298]:
+              - rowgroup [ref=f1e299]:
+                - row [ref=f1e300]:
+                  - columnheader "Order" [ref=f1e301]
+                  - columnheader "Customer" [ref=f1e302]
+                  - columnheader "Date" [ref=f1e303]
+                  - columnheader "Total" [ref=f1e304]
+                  - columnheader "Status" [ref=f1e305]
+              - rowgroup [ref=f1e306]:
+                - row [ref=f1e307]:
+                  - cell "SH-1048" [ref=f1e308]
+                  - cell "Ananya Mehta" [ref=f1e309]
+                  - cell "18 Nov 2026" [ref=f1e310]
+                  - cell "₹4,299" [ref=f1e311]
+                  - cell "Processing" [ref=f1e312]
+                - row [ref=f1e314]:
+                  - cell "SH-1047" [ref=f1e315]
+                  - cell "Riya Kapoor" [ref=f1e316]
+                  - cell "17 Nov 2026" [ref=f1e317]
+                  - cell "₹2,899" [ref=f1e318]
+                  - cell "Shipped" [ref=f1e319]
+                - row [ref=f1e321]:
+                  - cell "SH-1046" [ref=f1e322]
+                  - cell "Meera Iyer" [ref=f1e323]
+                  - cell "16 Nov 2026" [ref=f1e324]
+                  - cell "₹5,199" [ref=f1e325]
+                  - cell "Delivered" [ref=f1e326]
+                - row [ref=f1e328]:
+                  - cell "SH-1045" [ref=f1e329]
+                  - cell "Ishita Rao" [ref=f1e330]
+                  - cell "15 Nov 2026" [ref=f1e331]
+                  - cell "₹1,799" [ref=f1e332]
+                  - cell "Delivered" [ref=f1e333]
+          - generic [ref=f1e335]:
+            - generic [ref=f1e337]:
+              - heading "Best-selling pieces" [level=2] [ref=f1e338]
+              - paragraph [ref=f1e339]: Popular across the collection.
+            - generic [ref=f1e343]:
+              - generic [ref=f1e344]:
+                - generic [ref=f1e345]: "01"
+                - generic [ref=f1e346]:
+                  - strong [ref=f1e347]: Royal Silver Necklace
+                  - generic [ref=f1e348]: Necklaces
+                - generic [ref=f1e349]:
+                  - text: "38"
+                  - generic [ref=f1e350]: sold
+              - generic [ref=f1e351]:
+                - generic [ref=f1e352]: "02"
+                - generic [ref=f1e353]:
+                  - strong [ref=f1e354]: Traditional Silver Jhumkas
+                  - generic [ref=f1e355]: Earrings
+                - generic [ref=f1e356]:
+                  - text: "31"
+                  - generic [ref=f1e357]: sold
+              - generic [ref=f1e358]:
+                - generic [ref=f1e359]: "03"
+                - generic [ref=f1e360]:
+                  - strong [ref=f1e361]: Elegant Silver Ring
+                  - generic [ref=f1e362]: Rings
+                - generic [ref=f1e363]:
+                  - text: "24"
+                  - generic [ref=f1e364]: sold
+        - paragraph [ref=f1e365]: Dashboard figures are illustrative mock data for this frontend prototype.

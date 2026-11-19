@@ -1,0 +1,106 @@
+- generic [ref=f7e3]:
+  - complementary [ref=f7e4]:
+    - link "SH SILVERHUB ADMIN STUDIO" [ref=f7e5] [cursor=pointer]:
+      - /url: /admin/dashboard
+      - generic [ref=f7e6]: SH
+      - generic [ref=f7e7]:
+        - text: SILVERHUB
+        - generic [ref=f7e8]: ADMIN STUDIO
+    - generic [ref=f7e9]: WORKSPACE
+    - navigation "Admin navigation" [ref=f7e10]:
+      - link "Dashboard" [ref=f7e11] [cursor=pointer]:
+        - /url: /admin/dashboard
+      - link "Products" [ref=f7e14] [cursor=pointer]:
+        - /url: /admin/products
+      - link "Categories" [ref=f7e25] [cursor=pointer]:
+        - /url: /admin/categories
+      - link "Orders" [ref=f7e30] [cursor=pointer]:
+        - /url: /admin/orders
+      - link "Inventory" [ref=f7e34] [cursor=pointer]:
+        - /url: /admin/inventory
+      - link "Customers" [ref=f7e41] [cursor=pointer]:
+        - /url: /admin/customers
+      - link "Settings" [ref=f7e46] [cursor=pointer]:
+        - /url: /admin/settings
+    - generic [ref=f7e50]:
+      - generic [ref=f7e51]: Demo environment
+      - link "View storefront" [ref=f7e53] [cursor=pointer]:
+        - /url: /
+  - generic [ref=f7e58]:
+    - generic [ref=f7e59]:
+      - button "Open navigation" [ref=f7e798] [cursor=pointer]
+      - generic [ref=f7e60]: Admin portal · Demo
+      - generic [ref=f7e61]:
+        - generic [ref=f7e62]: SH
+        - strong [ref=f7e63]: Store admin
+    - main [ref=f7e64]:
+      - generic [ref=f7e65]:
+        - generic [ref=f7e66]:
+          - generic [ref=f7e67]:
+            - text: ADMIN STUDIO
+            - heading "Products" [level=1] [ref=f7e68]
+            - paragraph [ref=f7e69]: Manage your Silver Hub product catalog.
+          - generic [ref=f7e70]:
+            - generic [ref=f7e71]: 9 products
+            - button "Add Product" [ref=f7e72] [cursor=pointer]
+        - tablist "Product status" [ref=f7e74]:
+          - tab "All Products 9" [selected] [ref=f7e838] [cursor=pointer]:
+            - text: All Products
+            - generic [ref=f7e76]: "9"
+          - tab "Active 8" [ref=f7e839] [cursor=pointer]:
+            - text: Active
+            - generic [ref=f7e78]: "8"
+          - tab "Out of Stock 1" [ref=f7e428] [cursor=pointer]:
+            - text: Out of Stock
+            - generic [ref=f7e80]: "1"
+          - tab "Hidden 0" [ref=f7e81] [cursor=pointer]:
+            - text: Hidden
+            - generic [ref=f7e82]: "0"
+          - tab "Scheduled Deletion 0" [ref=f7e429] [cursor=pointer]:
+            - text: Scheduled Deletion
+            - generic [ref=f7e84]: "0"
+        - generic [ref=f7e85]:
+          - searchbox "Search products by name, SKU or category" [ref=f7e90]: Royal
+          - generic [ref=f7e91]:
+            - generic [ref=f7e92]: Category
+            - combobox "Category" [ref=f7e93]:
+              - option "All categories" [selected]
+              - option "Earrings"
+              - option "Necklaces"
+              - option "Bangles"
+              - option "Anklets"
+              - option "Rings"
+          - generic [ref=f7e94]:
+            - generic [ref=f7e95]: Status
+            - combobox "Status" [ref=f7e96]:
+              - option "All statuses" [selected]
+              - option "Active"
+              - option "Out of Stock"
+              - option "Hidden"
+              - option "Scheduled Deletion"
+          - generic [ref=f7e97]:
+            - generic [ref=f7e98]: Sort by
+            - combobox "Sort by" [ref=f7e99]:
+              - option "Newest" [selected]
+              - option "Oldest"
+              - option "Lowest price"
+              - option "Highest price"
+              - option "Alphabetical"
+          - generic "Product layout" [ref=f7e100]:
+            - button "Table view" [ref=f7e101] [cursor=pointer]
+            - button "Grid view" [pressed] [ref=f7e103] [cursor=pointer]
+        - article [ref=f7e770]:
+          - generic [ref=f7e771]:
+            - img "Royal Silver Necklace" [ref=f7e772]
+            - generic [ref=f7e773]: Out of stock
+          - generic [ref=f7e774]:
+            - generic [ref=f7e775]: Necklaces · SH-0001
+            - heading "Royal Silver Necklace" [level=2] [ref=f7e776]
+            - generic [ref=f7e777]:
+              - strong [ref=f7e778]: ₹2,500
+              - generic [ref=f7e779]: 0 in stock
+            - generic [ref=f7e780]:
+              - button "Edit Royal Silver Necklace" [ref=f7e781] [cursor=pointer]
+              - 'button "Mark in stock: Royal Silver Necklace" [ref=f7e785] [cursor=pointer]'
+              - button "Hide Royal Silver Necklace" [ref=f7e788] [cursor=pointer]
+              - button "Delete Royal Silver Necklace" [ref=f7e794] [cursor=pointer]

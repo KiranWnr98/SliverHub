@@ -7,7 +7,6 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <h2>SILVERHUB</h2>
-          <span>HOUSE OF 925</span>
           <p>
             Discover timeless elegance through beautifully
             crafted silver jewellery.
