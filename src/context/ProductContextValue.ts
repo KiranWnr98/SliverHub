@@ -1,6 +1,5 @@
 import { createContext } from 'react';
-
-import type { Product } from '../types';
+import type { Category, Product } from '../types';
 
 export type NewProductInput = Pick<
   Product,
@@ -39,10 +38,23 @@ export interface ProductImportBatch {
   updates: Array<{ id: number; updates: ProductUpdate }>;
 }
 
+export type NewCategoryInput = Pick<Category, 'name' | 'subtitle' | 'image'> &
+  Partial<Pick<Category, 'isActive' | 'isFeatured' | 'sortOrder'>>;
+
+export type CategoryUpdate = Partial<Omit<Category, 'id' | 'createdAt'>>;
+
 export interface ProductContextType {
   products: Product[];
   deletedProductIds: number[];
+  categories: Category[];
   storageError: string | null;
+
+  addCategory: (input: NewCategoryInput) => Category;
+  updateCategory: (id: number, updates: CategoryUpdate) => void;
+  setCategoryActive: (id: number, isActive: boolean) => void;
+  reorderCategories: (ids: number[]) => void;
+  deleteCategory: (id: number) => void;
+
   addProduct: (input: NewProductInput) => Product;
   importProducts: (batch: ProductImportBatch) => void;
   updateProduct: (id: number, updates: ProductUpdate) => void;
@@ -58,5 +70,6 @@ export interface ProductContextType {
   processScheduledDeletions: () => void;
 }
 
-export const ProductContext =
-  createContext<ProductContextType | undefined>(undefined);
+export const ProductContext = createContext<ProductContextType | undefined>(
+  undefined,
+);

@@ -17,14 +17,17 @@ import AdminLayout from './layouts/AdminLayout/AdminLayout';
 import CustomerLogin from './pages/Customer/Login/Login';
 import CustomerSignup from './pages/Customer/Signup/Signup';
 import CustomerAccount from './pages/Customer/Account/Account';
+import EditProfile from './pages/Customer/EditProfile/EditProfile'; 
 import AdminDashboard from './pages/Admin/Dashboard/Dashboard';
 import AdminProducts from './pages/Admin/Products/Products';
+import AdminCategories from './pages/Admin/Categories/Categories';
 import PortalPlaceholder from './pages/PortalPlaceholder';
 
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ProductProvider } from './context/ProductContext';
 import WhatsAppButton from "./components/WhatsAppButton/WhatsAppButton";
+import ScrollToTop from './pages/Shop/ScrollToTop';
 
 import SparkleBackground from './components/SparkleBackground/SparkleBackground';
 
@@ -36,6 +39,7 @@ function StoreLayout() {
       </MainLayout>
       <SparkleBackground />
       <WhatsAppButton />
+      <ScrollToTop />
     </>
   );
 }
@@ -60,12 +64,12 @@ function App() {
             </Route>
             <Route path="/login" element={<CustomerLogin />} />
             <Route path="/signup" element={<CustomerSignup />} />
+            <Route element={<StoreLayout />}>
+            <Route path="/account/profile" element={<EditProfile />} />
+            </Route>
+
             <Route element={<CustomerLayout />}>
               <Route path="/account" element={<CustomerAccount />} />
-              <Route
-                path="/account/profile"
-                element={<PortalPlaceholder title="My profile" />}
-              />
               <Route
                 path="/account/orders"
                 element={<PortalPlaceholder title="My orders" />}
@@ -80,8 +84,7 @@ function App() {
               <Route path="/admin/products" element={<AdminProducts />} />
               <Route
                 path="/admin/categories"
-                element={<PortalPlaceholder title="Categories" admin />}
-              />
+                element={<AdminCategories />} />
               <Route
                 path="/admin/orders"
                 element={<PortalPlaceholder title="Orders" admin />}

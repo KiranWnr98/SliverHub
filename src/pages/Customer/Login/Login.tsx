@@ -1,4 +1,3 @@
-
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -23,6 +22,7 @@ const ADMIN_PASSWORD = 'ChangeThisPassword';
 export default function CustomerLogin() {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  
   const navigate = useNavigate();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -58,14 +58,16 @@ export default function CustomerLogin() {
     }
 
     // CUSTOMER DEMO LOGIN
-    sessionStorage.setItem(
-      'silverhub-demo-customer',
-      JSON.stringify({ email })
-    );
+sessionStorage.setItem(
+  'silverhub-demo-customer',
+  JSON.stringify({ email })
+);
 
-    setMessage('Customer demo sign-in successful.');
+localStorage.setItem('isLoggedIn', 'true');
 
-    navigate('/account');
+sessionStorage.setItem('silverhub-login-success', 'true');
+
+navigate('/');
   }
 
   return (

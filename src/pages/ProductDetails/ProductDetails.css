@@ -33,17 +33,43 @@
 .product-detail-image {
   display: grid;
   place-items: center;
-  min-height: 390px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   overflow: hidden;
   border-radius: 7px;
-  background: #f1e9dd;
+  background: #f8f5ef;
 }
 
 .product-detail-image img {
+  display: block;
   width: 100%;
   height: 100%;
-  min-height: 390px;
-  object-fit: cover;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+.product-detail-image > div {
+  padding: 24px;
+  color: #6f6253;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .product-detail-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .product-detail-image img {
+    min-height: 0;
+    max-height: none;
+  }
 }
 
 .product-detail-image > div {
@@ -182,5 +208,54 @@
   .product-detail-image img {
     min-height: 280px;
     max-height: 55vh;
+  }
+}
+
+
+.product-detail-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.product-detail-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-detail-thumbnail {
+  width: 76px;
+  height: 76px;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid #e8e0d4;
+  border-radius: 7px;
+  background: #fffefa;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-detail-thumbnail:hover {
+  border-color: #b38a50;
+}
+
+.product-detail-thumbnail.is-active {
+  border: 2px solid #b38a50;
+  box-shadow: 0 0 0 2px rgba(179, 138, 80, 0.15);
+}
+
+.product-detail-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+@media (max-width: 760px) {
+  .product-detail-thumbnail {
+    width: 64px;
+    height: 64px;
   }
 }

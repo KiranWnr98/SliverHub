@@ -8,17 +8,21 @@ import {
 } from 'react';
 
 import { newArrivals } from '../data/collections';
+import { categories as defaultCategories } from '../data/categories';
 import { products as featuredProducts } from '../data/products';
-import type { Product, ProductMediaReference } from '../types';
+import type { Category, Product, ProductMediaReference } from '../types';
 import { pruneUnusedProductMedia } from '../services/productMediaStore';
 import { ProductContext } from './ProductContextValue';
 import type {
   NewProductInput,
   ProductImportBatch,
   ProductUpdate,
+  NewCategoryInput,
+  CategoryUpdate,
 } from './ProductContextValue';
 
 const STORAGE_KEY = 'silverhub-products';
+const CATEGORY_STORAGE_KEY = 'silverhub-categories';
 const STORAGE_VERSION = 1;
 const DEFAULT_STOCK = 10;
 const dateKeyPattern = /^\d{4}-\d{2}-\d{2}$/;
@@ -46,6 +50,64 @@ type ProductAction =
   | { type: 'restore'; id: number; updatedAt: string }
   | { type: 'permanently-delete'; id: number }
   | { type: 'process-expired'; today: string; deletedAt: string };
+
+function isCategoryRecord(value: unknown): value is Category {
+  return (
+    isRecord(value) &&
+    Number.isInteger(value.id) &&
+    typeof value.name === 'string' &&
+    typeof value.subtitle === 'string' &&
+    typeof value.image === 'string'
+  );
+}
+
+function readInitialCategories(): Category[] {
+  const defaults: Category[] = defaultCategories.map((category, index) => ({
+    ...category,
+    isActive: true,
+    isFeatured: false,
+    sortOrder: index,
+  }));
+
+  try {
+    const serialized = localStorage.getItem(CATEGORY_STORAGE_KEY);
+    if (!serialized) return defaults;
+
+    const saved: unknown = JSON.parse(serialized);
+    if (!Array.isArray(saved)) return defaults;
+
+    const validSaved = saved.filter(isCategoryRecord);
+    const savedById = new Map(validSaved.map((category) => [category.id, category]));
+
+    // Keep saved edits, while adding any categories introduced in the seed data.
+    const merged = defaults.map((category) => ({
+      ...category,
+      ...(savedById.get(category.id) ?? {}),
+    }));
+    const defaultIds = new Set(defaults.map((category) => category.id));
+
+    for (const category of validSaved) {
+      if (!defaultIds.has(category.id)) merged.push(category);
+    }
+
+    return merged.sort(
+      (a, b) => (a.sortOrder ?? a.id) - (b.sortOrder ?? b.id),
+    );
+  } catch (error) {
+    console.warn('Unable to read saved Silver Hub categories.', error);
+    return defaults;
+  }
+}
+
+function validateCategoryFields(input: {
+  name?: string;
+  subtitle?: string;
+  image?: string;
+}): void {
+  if (!input.name?.trim()) throw new Error('Category name is required.');
+  if (!input.subtitle?.trim()) throw new Error('Category subtitle is required.');
+  if (!input.image?.trim()) throw new Error('Category image URL is required.');
+}
 
 const seedCatalog: Product[] = [
   ...featuredProducts.map((product) => ({ ...product, isFeatured: true })),
@@ -474,6 +536,18 @@ function reducer(state: ProductState, action: ProductAction): ProductState {
 export function ProductProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, readInitialState);
   const [storageError, setStorageError] = useState<string | null>(null);
+  const [categories, setCategories] = useState<Category[]>(readInitialCategories);
+  const [categoryStorageError, setCategoryStorageError] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CATEGORY_STORAGE_KEY, JSON.stringify(categories));
+      setCategoryStorageError(null);
+    } catch (error) {
+      console.error('Unable to save Silver Hub categories.', error);
+      setCategoryStorageError('Category changes could not be saved in this browser.');
+    }
+  }, [categories]);
 
   useEffect(() => {
     try {
@@ -775,11 +849,142 @@ export function ProductProvider({ children }: { children: ReactNode }) {
     [state.products],
   );
 
+  const addCategory = useCallback(
+    (input: NewCategoryInput) => {
+      validateCategoryFields(input);
+      const name = input.name.trim();
+      if (categories.some((category) => category.name.trim().toLowerCase() === name.toLowerCase())) {
+        throw new Error('A category with this name already exists.');
+      }
+
+      const now = new Date().toISOString();
+      const id = Math.max(0, ...categories.map((category) => category.id)) + 1;
+      const category: Category = {
+        id,
+        name,
+        subtitle: input.subtitle.trim(),
+        image: input.image.trim(),
+        isActive: input.isActive ?? true,
+        isFeatured: input.isFeatured ?? false,
+        sortOrder: input.sortOrder ?? categories.length,
+        createdAt: now,
+        updatedAt: now,
+      };
+      setCategories((current) => [...current, category]);
+      return category;
+    },
+    [categories],
+  );
+
+  const updateCategory = useCallback(
+    (id: number, updates: CategoryUpdate) => {
+      const existing = categories.find((category) => category.id === id);
+      if (!existing) throw new Error('This category could not be found.');
+
+      const nextName = updates.name?.trim() ?? existing.name;
+      const nextSubtitle = updates.subtitle?.trim() ?? existing.subtitle;
+      const nextImage = updates.image?.trim() ?? existing.image;
+      validateCategoryFields({ name: nextName, subtitle: nextSubtitle, image: nextImage });
+
+      if (
+        categories.some(
+          (category) =>
+            category.id !== id &&
+            category.name.trim().toLowerCase() === nextName.toLowerCase(),
+        )
+      ) {
+        throw new Error('A category with this name already exists.');
+      }
+
+      const now = new Date().toISOString();
+      setCategories((current) =>
+        current.map((category) =>
+          category.id === id
+            ? {
+                ...category,
+                ...updates,
+                name: nextName,
+                subtitle: nextSubtitle,
+                image: nextImage,
+                id: category.id,
+                updatedAt: now,
+              }
+            : category,
+        ),
+      );
+
+      // Keep product-category links intact when an admin renames a category.
+      if (nextName !== existing.name) {
+        dispatch({
+          type: 'replace-products',
+          products: state.products.map((product) =>
+            product.category.trim().toLowerCase() === existing.name.trim().toLowerCase()
+              ? { ...product, category: nextName, updatedAt: now }
+              : product,
+          ),
+        });
+      }
+    },
+    [categories, state.products],
+  );
+
+  const setCategoryActive = useCallback((id: number, isActive: boolean) => {
+    setCategories((current) =>
+      current.map((category) =>
+        category.id === id
+          ? { ...category, isActive, updatedAt: new Date().toISOString() }
+          : category,
+      ),
+    );
+  }, []);
+
+  const reorderCategories = useCallback((ids: number[]) => {
+    setCategories((current) => {
+      const order = new Map(ids.map((id, index) => [id, index]));
+      return [...current]
+        .sort((a, b) => {
+          const aOrder = order.get(a.id) ?? Number.MAX_SAFE_INTEGER;
+          const bOrder = order.get(b.id) ?? Number.MAX_SAFE_INTEGER;
+          return aOrder - bOrder || (a.sortOrder ?? a.id) - (b.sortOrder ?? b.id);
+        })
+        .map((category, index) => ({
+          ...category,
+          sortOrder: index,
+          updatedAt: new Date().toISOString(),
+        }));
+    });
+  }, []);
+
+  const deleteCategory = useCallback(
+    (id: number) => {
+      const category = categories.find((item) => item.id === id);
+      if (!category) throw new Error('This category could not be found.');
+
+      const assignedProducts = state.products.filter(
+        (product) =>
+          product.category.trim().toLowerCase() === category.name.trim().toLowerCase(),
+      );
+      if (assignedProducts.length > 0) {
+        throw new Error(
+          `Cannot delete "${category.name}" because ${assignedProducts.length} product(s) are assigned to it. Reassign those products first.`,
+        );
+      }
+      setCategories((current) => current.filter((item) => item.id !== id));
+    },
+    [categories, state.products],
+  );
+
   const value = useMemo(
     () => ({
       products: state.products,
       deletedProductIds: state.deletedProductIds,
-      storageError,
+      categories,
+      storageError: storageError ?? categoryStorageError,
+      addCategory,
+      updateCategory,
+      setCategoryActive,
+      reorderCategories,
+      deleteCategory,
       addProduct,
       importProducts,
       updateProduct,
@@ -796,7 +1001,14 @@ export function ProductProvider({ children }: { children: ReactNode }) {
     }),
     [
       state,
+      categories,
       storageError,
+      categoryStorageError,
+      addCategory,
+      updateCategory,
+      setCategoryActive,
+      reorderCategories,
+      deleteCategory,
       addProduct,
       importProducts,
       updateProduct,

@@ -230,3 +230,292 @@
     font-weight: bold;
   }
 }
+
+/* =====================================
+   PREMIUM ACCOUNT DROPDOWN
+===================================== */
+
+.account-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.account-wrapper .account {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #29251f;
+  transition: all 0.3s ease;
+}
+
+.account-wrapper .account:hover {
+  color: #b18a45;
+  transform: translateY(-2px);
+}
+
+/* DROPDOWN BOX */
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 16px);
+  right: 0;
+  width: 300px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e9dfcc;
+  border-radius: 14px;
+  box-shadow: 0 15px 45px rgba(55, 43, 23, 0.16);
+  z-index: 9999;
+  animation: accountDropIn 0.25s ease;
+}
+
+@keyframes accountDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HEADING */
+.account-dropdown h3 {
+  color: #29251f;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 7px;
+  letter-spacing: 0.2px;
+}
+
+.account-dropdown p {
+  color: #999080;
+  font-size: 12px;
+  margin: 0 0 20px;
+}
+
+
+/* LOGIN BUTTON */
+.account-dropdown .account-login-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 13px;
+  background: #29251f !important;
+  color: #ffffff !important;
+  border: 1px solid #29251f !important;
+  border-radius: 8px;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.account-dropdown .account-login-option:hover {
+  background: #a98546 !important;
+  border-color: #a98546 !important;
+}
+
+/* SIGNUP BUTTON */
+.account-dropdown .account-signup-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 12px;
+  padding: 13px;
+  background: #f1e5cd !important;
+  color: #72501f !important;
+  border: 1px solid #c5a66e !important;
+  border-radius: 8px;
+  text-decoration: none !important;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.account-dropdown .account-signup-option:hover {
+  background: #d9bd8b !important;
+  color: #29251f !important;
+}
+
+
+/* MOBILE VIEW */
+@media (max-width: 600px) {
+  .account-dropdown {
+    width: min(290px, calc(100vw - 24px));
+    right: -5px;
+    padding: 20px;
+  }
+}
+
+
+
+/* =====================================
+   ACCOUNT - FINAL VISIBILITY FIX
+===================================== */
+
+.nav-actions .account-wrapper {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  z-index: 100000 !important;
+}
+
+/* PROFILE ICON */
+.nav-actions .account-wrapper button.account {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  background: #f1e5cd !important;
+  color: #72501f !important;
+  border: 1px solid #b18a45 !important;
+  border-radius: 50% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.nav-actions .account-wrapper button.account svg {
+  display: block !important;
+  width: 23px !important;
+  height: 23px !important;
+  stroke: #72501f !important;
+  stroke-width: 2.2 !important;
+}
+
+/* DROPDOWN */
+.nav-actions .account-wrapper .account-dropdown {
+  position: absolute !important;
+  top: calc(100% + 12px) !important;
+  right: 0 !important;
+  display: block !important;
+  width: 290px !important;
+  padding: 24px !important;
+  background: #ffffff !important;
+  border: 1px solid #c5a66e !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 100001 !important;
+}
+
+/* DROPDOWN TEXT */
+.nav-actions .account-dropdown h3 {
+  color: #29251f !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.nav-actions .account-dropdown p {
+  color: #756b5d !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* LOGIN AND SIGNUP LINKS */
+.nav-actions .account-dropdown a.account-login-option,
+.nav-actions .account-dropdown a.account-signup-option {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 12px !important;
+  margin-top: 12px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 100002 !important;
+}
+
+.nav-actions .account-dropdown a.account-login-option {
+  background: #29251f !important;
+  color: #ffffff !important;
+  border: 1px solid #29251f !important;
+}
+
+.nav-actions .account-dropdown a.account-signup-option {
+  background: #e9d5ae !important;
+  color: #493416 !important;
+  border: 1px solid #b18a45 !important;
+}
+
+
+
+/* =====================================
+   SILVERHUB LOGIN & SIGNUP BUTTONS
+===================================== */
+
+.navbar .account-dropdown a.account-login-option,
+.navbar .account-dropdown a.account-signup-option {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  margin-top: 12px !important;
+  padding: 12px !important;
+
+  background: #222222 !important;
+  color: #ffffff !important;
+
+  border: 2px solid #222222 !important;
+  border-radius: 8px !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+/* CURSOR HOVER - GOLD */
+.navbar .account-dropdown a.account-login-option:hover,
+.navbar .account-dropdown a.account-signup-option:hover {
+  background: #b8860b !important;
+  color: #ffffff !important;
+  border-color: #b8860b !important;
+}
+
+/* BUTTON CLICK - GOLD */
+.navbar .account-dropdown a.account-login-option:active,
+.navbar .account-dropdown a.account-signup-option:active {
+  background: #b8860b !important;
+  color: #ffffff !important;
+  border-color: #b8860b !important;
+}
+
+/* MOBILE TOUCH - GOLD BUTTON EFFECT */
+
+.navbar .account-dropdown a.account-login-option:focus,
+.navbar .account-dropdown a.account-signup-option:focus,
+.navbar .account-dropdown a.account-login-option:focus-visible,
+.navbar .account-dropdown a.account-signup-option:focus-visible {
+  background: #b8860b !important;
+  color: #ffffff !important;
+  border-color: #b8860b !important;
+  outline: none !important;
+}
+
+/* MOBILE DEVICES */
+@media (hover: none) and (pointer: coarse) {
+  .navbar .account-dropdown a.account-login-option:active,
+  .navbar .account-dropdown a.account-signup-option:active {
+    background: #b8860b !important;
+    color: #ffffff !important;
+    border-color: #b8860b !important;
+  }
+}

@@ -1,9 +1,15 @@
 
+
 export interface Category {
   id: number;
   name: string;
   subtitle: string;
   image: string;
+  isActive?: boolean;
+  isFeatured?: boolean;
+  sortOrder?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export type ProductMediaKind = 'image' | 'pdf';
