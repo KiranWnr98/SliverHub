@@ -15,6 +15,9 @@ export type NewProductInput = Pick<
       | 'description'
       | 'sku'
       | 'stockQuantity'
+      | 'media'
+      | 'primaryMediaId'
+      | 'isHidden'
     >
   >;
 
@@ -31,14 +34,22 @@ export type ProductUpdate = Partial<
   >
 >;
 
+export interface ProductImportBatch {
+  additions: NewProductInput[];
+  updates: Array<{ id: number; updates: ProductUpdate }>;
+}
+
 export interface ProductContextType {
   products: Product[];
   deletedProductIds: number[];
   storageError: string | null;
   addProduct: (input: NewProductInput) => Product;
+  importProducts: (batch: ProductImportBatch) => void;
   updateProduct: (id: number, updates: ProductUpdate) => void;
   setProductHidden: (id: number, isHidden: boolean) => void;
+  setProductsHidden: (ids: number[], isHidden: boolean) => void;
   setStockQuantity: (id: number, quantity: number) => void;
+  setProductsStockQuantity: (ids: number[], quantity: number) => void;
   scheduleDeletion: (id: number, date: string) => void;
   cancelScheduledDeletion: (id: number) => void;
   softDeleteProduct: (id: number) => void;

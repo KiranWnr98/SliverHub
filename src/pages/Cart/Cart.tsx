@@ -17,6 +17,12 @@ import {
   isProductPurchasable,
   useProductCatalog,
 } from '../../hooks/useProducts';
+import { useProductImage } from '../../hooks/useProductMedia';
+
+function CartProductImage({ image, name }: { image: string; name: string }) {
+  const imageUrl = useProductImage(image);
+  return imageUrl ? <img src={imageUrl} alt={name} /> : null;
+}
 
 export default function Cart() {
   const {
@@ -136,10 +142,7 @@ export default function Cart() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="cart-product-image">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                    />
+                    <CartProductImage image={currentProduct.image} name={product.name} />
                   </div>
 
                   <div className="cart-product-details">

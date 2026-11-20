@@ -6,6 +6,18 @@ export interface Category {
   image: string;
 }
 
+export type ProductMediaKind = 'image' | 'pdf';
+
+export interface ProductMediaReference {
+  id: string;
+  kind: ProductMediaKind;
+  name: string;
+  mimeType: string;
+  size: number;
+  storage: 'indexeddb' | 'url';
+  url?: string;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -14,6 +26,8 @@ export interface Product {
   oldPrice?: number | null;
   rating: string;
   image: string;
+  media?: ProductMediaReference[];
+  primaryMediaId?: string;
   isNew?: boolean;
   isFeatured?: boolean;
   description?: string;

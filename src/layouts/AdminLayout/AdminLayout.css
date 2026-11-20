@@ -36,8 +36,6 @@
 
 .admin-user { display: flex; align-items: center; gap: 9px; color: #37475c; font-size: 11px; }
 
-.admin-user > span { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #e8dece; border-radius: 50%; color: #997c51; background: #faf7f1; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; }
-
 .admin-main { max-width: 1500px; margin: 0 auto; padding: 34px; }
 
 .sidebar-toggle, .sidebar-backdrop { display: none; }
@@ -67,7 +65,7 @@
 
   .admin-user { gap: 6px; font-size: 10px; }
 
-  .admin-user > span { width: 27px; height: 27px; }
+  .admin-user-logo { width: 27px; height: 27px; }
 
   .admin-main { padding: 23px 15px; }
 
@@ -103,13 +101,15 @@
   font-size: 18px;
 }
 
-.admin-brand-mark {
+.admin-brand-logo {
+  display: block;
   width: 48px;
   height: 48px;
   border: 1px solid #d6ad70;
-  color: #d6ad70;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 19px;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .admin-brand small {
@@ -158,13 +158,16 @@
   font-size: 12px;
 }
 
-.admin-user > span {
+.admin-user-logo {
+  display: block;
   width: 40px;
   height: 40px;
-  border-color: #ead9bd;
-  color: #a47a40;
-  background: #faf4e9;
-  font-size: 17px;
+  border: 1px solid #ead9bd;
+  border-radius: 8px;
+  padding: 3px;
+  background: #fff;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .admin-main {

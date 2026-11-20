@@ -7,7 +7,7 @@ import {
   X
 } from 'lucide-react';
 
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { useCart } from '../../context/useCart';
 import { useWishlist } from '../../context/useWishlist';
@@ -19,6 +19,8 @@ import './Navbar.css';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const { cartCount } = useCart();
   const { wishlist } = useWishlist();
@@ -77,13 +79,23 @@ export default function Navbar() {
 
         {/* SEARCH */}
         <form
+          key={location.search}
           className="search-box"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const queryValue = formData.get('search');
+            const query = typeof queryValue === 'string' ? queryValue.trim() : '';
+            navigate(query ? `/shop?search=${encodeURIComponent(query)}` : '/shop');
+            closeMenu();
+          }}
         >
           <Search size={20} />
 
           <input
             type="search"
+            name="search"
+            defaultValue={new URLSearchParams(location.search).get('search') ?? ''}
             placeholder="Search for silver ornaments..."
             aria-label="Search silver ornaments"
           />

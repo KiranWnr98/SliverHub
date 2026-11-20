@@ -1,12 +1,14 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Minus, Plus, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import type { Product } from '../../types';
 import { useCart } from '../../context/useCart';
 import { useWishlist } from '../../context/useWishlist';
 import { isProductPurchasable } from '../../hooks/useProducts';
+import { useProductImage } from '../../hooks/useProductMedia';
 import JewelryBoxIcon from '../JewelryBoxIcon/JewelryBoxIcon';
 
 interface Props {
@@ -26,8 +28,13 @@ export default function ProductCard({
   const [imageFailed, setImageFailed] = useState(false);
 
   const saved = isWishlisted(product.id);
+  const imageUrl = useProductImage(product.image);
   const purchasable = isProductPurchasable(product);
   const stockQuantity = product.stockQuantity ?? 0;
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [product.image]);
 
   const cartItem = cart.find(
     (item) => item.product.id === product.id
@@ -73,23 +80,29 @@ export default function ProductCard({
       {/* PRODUCT IMAGE */}
       <div className="product-image">
 
-        {!imageFailed ? (
-          <motion.img
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            onError={() => setImageFailed(true)}
-            whileHover={{ scale: 1.06 }}
-            transition={{ duration: 0.5 }}
-          />
+        {!imageFailed && imageUrl ? (
+          <Link
+            to={`/products/${product.id}`}
+            className="product-card-detail-link"
+            aria-label={`View ${product.name} details`}
+          >
+            <motion.img
+              src={imageUrl}
+              alt={product.name}
+              loading="lazy"
+              onError={() => setImageFailed(true)}
+              whileHover={{ scale: 1.06 }}
+              transition={{ duration: 0.5 }}
+            />
+          </Link>
         ) : (
-          <div
-            className="product-image-fallback"
-            role="img"
-            aria-label={`${product.name} image unavailable`}
+          <Link
+            to={`/products/${product.id}`}
+            className="product-card-detail-link product-image-fallback"
+            aria-label={`View ${product.name} details; image unavailable`}
           >
             {product.name}
-          </div>
+          </Link>
         )}
 
         <span className="sale-label">
@@ -149,7 +162,11 @@ export default function ProductCard({
           {product.category}
         </span>
 
-        <h3>{product.name}</h3>
+        <h3>
+          <Link to={`/products/${product.id}`} className="product-name-link">
+            {product.name}
+          </Link>
+        </h3>
 
         <div className="product-rating">
           ★ {product.rating} / 5

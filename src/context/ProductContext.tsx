@@ -9,10 +9,12 @@ import {
 
 import { newArrivals } from '../data/collections';
 import { products as featuredProducts } from '../data/products';
-import type { Product } from '../types';
+import type { Product, ProductMediaReference } from '../types';
+import { pruneUnusedProductMedia } from '../services/productMediaStore';
 import { ProductContext } from './ProductContextValue';
 import type {
   NewProductInput,
+  ProductImportBatch,
   ProductUpdate,
 } from './ProductContextValue';
 
@@ -32,9 +34,12 @@ interface PersistedProductState extends ProductState {
 
 type ProductAction =
   | { type: 'add'; product: Product }
+  | { type: 'replace-products'; products: Product[] }
   | { type: 'update'; id: number; updates: ProductUpdate; updatedAt: string }
   | { type: 'hide'; id: number; isHidden: boolean; updatedAt: string }
+  | { type: 'hide-many'; ids: number[]; isHidden: boolean; updatedAt: string }
   | { type: 'stock'; id: number; quantity: number; updatedAt: string }
+  | { type: 'stock-many'; ids: number[]; quantity: number; updatedAt: string }
   | { type: 'schedule'; id: number; date: string; updatedAt: string }
   | { type: 'cancel-schedule'; id: number; updatedAt: string }
   | { type: 'delete'; id: number; deletedAt: string }
@@ -62,6 +67,30 @@ function isProductRecord(value: unknown): value is Product {
     typeof value.rating === 'string' &&
     typeof value.image === 'string'
   );
+}
+
+function normalizeMediaReferences(value: unknown): ProductMediaReference[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is ProductMediaReference => {
+    if (
+      !isRecord(item) ||
+      typeof item.id !== 'string' ||
+      !item.id ||
+      typeof item.name !== 'string' ||
+      typeof item.mimeType !== 'string' ||
+      !Number.isInteger(item.size) ||
+      (item.size as number) < 0 ||
+      (item.storage !== 'indexeddb' && item.storage !== 'url')
+    ) {
+      return false;
+    }
+
+    const isImage = item.kind === 'image' &&
+      (item.mimeType === 'image/jpeg' || item.mimeType === 'image/png');
+    const isPdf = item.kind === 'pdf' && item.mimeType === 'application/pdf';
+    return (isImage || isPdf) &&
+      (item.storage === 'indexeddb' || typeof item.url === 'string');
+  });
 }
 
 function localDateKey(date: Date): string {
@@ -111,6 +140,12 @@ function normalizeProduct(
     !Number.isNaN(Date.parse(product.deletedAt))
       ? product.deletedAt
       : null;
+  const media = normalizeMediaReferences(product.media);
+  const primaryMediaId =
+    typeof product.primaryMediaId === 'string' &&
+    media.some((reference) => reference.id === product.primaryMediaId)
+      ? product.primaryMediaId
+      : undefined;
 
   return {
     ...fallback,
@@ -139,6 +174,8 @@ function normalizeProduct(
       typeof product.description === 'string'
         ? product.description
         : fallback?.description ?? '',
+    media,
+    primaryMediaId,
     scheduledDeletionAt,
     scheduledDeletionPreviousState:
       scheduledDeletionAt &&
@@ -196,6 +233,14 @@ function createSeedState(now: string): ProductState {
     ),
     deletedProductIds: [],
   };
+}
+
+function persistProductState(state: ProductState): void {
+  const saved: PersistedProductState = {
+    version: STORAGE_VERSION,
+    ...state,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
 }
 
 function readInitialState(): ProductState {
@@ -282,6 +327,8 @@ function reducer(state: ProductState, action: ProductAction): ProductState {
   switch (action.type) {
     case 'add':
       return { ...state, products: [...state.products, action.product] };
+    case 'replace-products':
+      return { ...state, products: action.products };
     case 'update':
       return {
         ...state,
@@ -306,6 +353,21 @@ function reducer(state: ProductState, action: ProductAction): ProductState {
           updatedAt: action.updatedAt,
         })),
       };
+    case 'hide-many': {
+      const ids = new Set(action.ids);
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          ids.has(product.id) && !product.isDeleted && !product.scheduledDeletionAt
+            ? {
+                ...product,
+                isHidden: action.isHidden,
+                updatedAt: action.updatedAt,
+              }
+            : product,
+        ),
+      };
+    }
     case 'stock':
       return {
         ...state,
@@ -315,6 +377,21 @@ function reducer(state: ProductState, action: ProductAction): ProductState {
           updatedAt: action.updatedAt,
         })),
       };
+    case 'stock-many': {
+      const ids = new Set(action.ids);
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          ids.has(product.id) && !product.isDeleted && !product.scheduledDeletionAt
+            ? {
+                ...product,
+                stockQuantity: action.quantity,
+                updatedAt: action.updatedAt,
+              }
+            : product,
+        ),
+      };
+    }
     case 'schedule':
       return {
         ...state,
@@ -400,16 +477,18 @@ export function ProductProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved: PersistedProductState = {
-        version: STORAGE_VERSION,
-        ...state,
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      persistProductState(state);
       setStorageError(null);
     } catch (error) {
       console.error('Unable to save the Silver Hub product catalog.', error);
       setStorageError('Product changes could not be saved in this browser.');
     }
+    const mediaReferences = state.products.flatMap(
+      (product) => product.media ?? [],
+    );
+    void pruneUnusedProductMedia(mediaReferences).catch((error: unknown) => {
+      console.error('Unable to clean up unused local product media.', error);
+    });
   }, [state]);
 
   const processScheduledDeletions = useCallback(() => {
@@ -473,7 +552,7 @@ export function ProductProvider({ children }: { children: ReactNode }) {
           id,
           sku: sku || `SH-${String(id).padStart(4, '0')}`,
           stockQuantity: input.stockQuantity ?? DEFAULT_STOCK,
-          isHidden: false,
+          isHidden: input.isHidden ?? false,
           isDeleted: false,
           deletedAt: null,
           scheduledDeletionAt: null,
@@ -486,6 +565,108 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       );
       dispatch({ type: 'add', product });
       return product;
+    },
+    [state.products, state.deletedProductIds],
+  );
+
+  const importProducts = useCallback(
+    (batch: ProductImportBatch) => {
+      const updatesById = new Map<number, ProductUpdate>();
+      for (const entry of batch.updates) {
+        if (updatesById.has(entry.id)) {
+          throw new Error(`Product ${entry.id} appears more than once in the update batch.`);
+        }
+        const existing = state.products.find((product) => product.id === entry.id);
+        if (!existing || existing.isDeleted) {
+          throw new Error(`Product ${entry.id} is no longer available to update.`);
+        }
+        updatesById.set(entry.id, entry.updates);
+      }
+
+      const now = new Date().toISOString();
+      const updatedProducts = state.products.map((product) => {
+        const updates = updatesById.get(product.id);
+        if (!updates || product.isDeleted) return product;
+        return normalizeProduct(
+          {
+            ...product,
+            ...updates,
+            id: product.id,
+            createdAt: product.createdAt,
+            updatedAt: now,
+          },
+          product,
+          now,
+        );
+      });
+
+      let nextId = Math.max(
+        0,
+        ...updatedProducts.map((product) => product.id),
+        ...state.deletedProductIds,
+        ...seedCatalog.map((product) => product.id),
+      );
+      const importedSkus = new Set<string>();
+      const additions = batch.additions.map((input) => {
+        const sku = input.sku?.trim();
+        if (!sku) throw new Error('Every imported product must have a SKU.');
+        if (importedSkus.has(sku.toLowerCase())) {
+          throw new Error(`SKU "${sku}" appears more than once in the import batch.`);
+        }
+        importedSkus.add(sku.toLowerCase());
+        if (!Number.isFinite(input.price) || input.price <= 0) {
+          throw new Error(`Product "${sku}" has an invalid selling price.`);
+        }
+        if (
+          !Number.isInteger(input.stockQuantity) ||
+          (input.stockQuantity ?? -1) < 0
+        ) {
+          throw new Error(`Product "${sku}" has an invalid stock quantity.`);
+        }
+
+        nextId += 1;
+        return normalizeProduct(
+          {
+            ...input,
+            id: nextId,
+            sku,
+            stockQuantity: input.stockQuantity,
+            isHidden: input.isHidden ?? false,
+            isDeleted: false,
+            deletedAt: null,
+            scheduledDeletionAt: null,
+            scheduledDeletionPreviousState: null,
+            createdAt: now,
+            updatedAt: now,
+          },
+          undefined,
+          now,
+        );
+      });
+
+      const nextProducts = [...updatedProducts, ...additions];
+      const skuOwners = new Map<string, number>();
+      for (const product of nextProducts) {
+        const sku = product.sku?.trim().toLowerCase();
+        if (!sku) continue;
+        const owner = skuOwners.get(sku);
+        if (owner !== undefined && owner !== product.id) {
+          throw new Error(`SKU "${product.sku}" already belongs to another product.`);
+        }
+        skuOwners.set(sku, product.id);
+      }
+      try {
+        persistProductState({
+          products: nextProducts,
+          deletedProductIds: state.deletedProductIds,
+        });
+      } catch (error) {
+        console.error('Unable to save the imported Silver Hub product catalog.', error);
+        setStorageError('Product changes could not be saved in this browser.');
+        throw new Error('Product changes could not be saved in this browser.');
+      }
+      setStorageError(null);
+      dispatch({ type: 'replace-products', products: nextProducts });
     },
     [state.products, state.deletedProductIds],
   );
@@ -522,11 +703,32 @@ export function ProductProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'hide', id, isHidden, updatedAt: new Date().toISOString() });
   }, []);
 
+  const setProductsHidden = useCallback((ids: number[], isHidden: boolean) => {
+    dispatch({
+      type: 'hide-many',
+      ids: Array.from(new Set(ids)),
+      isHidden,
+      updatedAt: new Date().toISOString(),
+    });
+  }, []);
+
   const setStockQuantity = useCallback((id: number, quantity: number) => {
     if (!Number.isInteger(quantity) || quantity < 0) {
       throw new Error('Stock quantity must be a non-negative whole number.');
     }
     dispatch({ type: 'stock', id, quantity, updatedAt: new Date().toISOString() });
+  }, []);
+
+  const setProductsStockQuantity = useCallback((ids: number[], quantity: number) => {
+    if (!Number.isInteger(quantity) || quantity < 0) {
+      throw new Error('Stock quantity must be a non-negative whole number.');
+    }
+    dispatch({
+      type: 'stock-many',
+      ids: Array.from(new Set(ids)),
+      quantity,
+      updatedAt: new Date().toISOString(),
+    });
   }, []);
 
   const scheduleDeletion = useCallback((id: number, date: string) => {
@@ -579,9 +781,12 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       deletedProductIds: state.deletedProductIds,
       storageError,
       addProduct,
+      importProducts,
       updateProduct,
       setProductHidden,
+      setProductsHidden,
       setStockQuantity,
+      setProductsStockQuantity,
       scheduleDeletion,
       cancelScheduledDeletion,
       softDeleteProduct,
@@ -593,9 +798,12 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       state,
       storageError,
       addProduct,
+      importProducts,
       updateProduct,
       setProductHidden,
+      setProductsHidden,
       setStockQuantity,
+      setProductsStockQuantity,
       scheduleDeletion,
       cancelScheduledDeletion,
       softDeleteProduct,

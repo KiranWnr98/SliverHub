@@ -12,6 +12,7 @@ import {
   X,
   Store,
 } from 'lucide-react';
+import logo from '../../assets/logo.png';
 import '../portal.css';
 import './AdminLayout.css';
 
@@ -39,7 +40,7 @@ export default function AdminLayout() {
     <div className="admin-portal portal">
       <aside className={`admin-sidebar${sidebarOpen ? ' is-open' : ''}`}>
         <Link to="/admin/dashboard" className="admin-brand">
-          <span className="admin-brand-mark">SH</span>
+          <img src={logo} alt="" className="admin-brand-logo" />
           <span>SILVERHUB<small>ADMIN STUDIO</small></span>
         </Link>
         <div className="sidebar-label">WORKSPACE</div>
@@ -76,7 +77,10 @@ export default function AdminLayout() {
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <div className="admin-topbar-title">Admin portal <span>·</span> Demo</div>
-          <div className="admin-user"><span>SH</span><strong>Store admin</strong></div>
+          <div className="admin-user">
+            <img src={logo} alt="" className="admin-user-logo" />
+            <strong>Store admin</strong>
+          </div>
         </header>
         <main className="portal-main admin-main"><Outlet /></main>
       </section>

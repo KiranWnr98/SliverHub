@@ -5,6 +5,7 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home/Home';
 
 import Shop from './pages/Shop/Shop';
+import ProductDetails from './pages/ProductDetails/ProductDetails';
 import Collections from './pages/Collections/Collections';
 import NewArrivals from './pages/NewArrivals/NewArrivals';
 import About from './pages/About/About';
@@ -49,6 +50,7 @@ function App() {
             <Route element={<StoreLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/products/:productId" element={<ProductDetails />} />
               <Route path="/collections" element={<Collections />} />
               <Route path="/new-arrivals" element={<NewArrivals />} />
               <Route path="/about" element={<About />} />

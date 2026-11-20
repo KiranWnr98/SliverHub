@@ -7,6 +7,12 @@ import {
   isProductPurchasable,
   useProductCatalog,
 } from '../../hooks/useProducts';
+import { useProductImage } from '../../hooks/useProductMedia';
+
+function CheckoutProductImage({ image, name }: { image: string; name: string }) {
+  const imageUrl = useProductImage(image);
+  return imageUrl ? <img src={imageUrl} alt={name} /> : null;
+}
 
 export default function Checkout() {
   const { cart } = useCart();
@@ -78,7 +84,7 @@ export default function Checkout() {
           {checkoutItems.map(({ product, quantity }) => (
             <article className="cart-item" key={product.id}>
               <div className="cart-product-image">
-                <img src={product.image} alt={product.name} />
+                <CheckoutProductImage image={product.image} name={product.name} />
               </div>
               <div className="cart-product-details">
                 <span className="cart-product-category">
