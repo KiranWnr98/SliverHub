@@ -1,4 +1,3 @@
-
 /* =========================================
    SILVERHUB COLLECTIONS PAGE
 ========================================= */
@@ -949,4 +948,75 @@
   .collections-featured-image img {
     min-height: 205px;
   }
+}
+
+
+/* COLLECTIONS PAGE - CONTENT ABOVE SPARKLES */
+
+
+/* =========================================
+   SPARKLES BEHIND COLLECTIONS CONTENT
+========================================= */
+
+/* Main page container */
+.collections-page {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  background: transparent;
+}
+
+/* Sections stay transparent */
+.collections-page .collections-hero,
+.collections-page .collections-categories,
+.collections-page .curated-collections {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero cream background must not cover sparkles */
+.collections-page .collections-hero {
+  background: transparent;
+}
+
+/* Featured banner and jewellery cards */
+.collections-page .collections-featured,
+.collections-page .collections-category-grid .category-card,
+.collections-page .curated-collection-card,
+.collections-page .collections-benefits,
+.collections-page .collections-final-cta {
+  position: relative;
+  z-index: 2;
+}
+
+/* Images remain above the sparkle layer */
+.collections-page .collections-featured-image,
+.collections-page .collections-category-grid .category-image,
+.collections-page .curated-collection-image {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.collections-page .collections-featured-image img,
+.collections-page .collections-category-grid .category-image img,
+.collections-page .curated-collection-image img {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* COLLECTIONS PREMIUM CREAM BACKGROUND */
+
+body {
+  background-color: #f1e9dd;
+}
+
+.collections-page {
+  background: transparent;
+}
+
+/* Maintain cream theme behind sparkles */
+.collections-hero {
+  background: transparent;
 }

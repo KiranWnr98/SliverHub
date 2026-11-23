@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -49,9 +48,7 @@ export default function Collections() {
       {/* PAGE INTRODUCTION */}
       <section className="collections-hero">
         <span className="collections-eyebrow">
-          <span />
-          COLLECTIONS
-          <span />
+
         </span>
 
         <h1>Our Collections</h1>

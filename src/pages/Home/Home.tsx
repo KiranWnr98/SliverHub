@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { ArrowRight, Star } from 'lucide-react';
 
 import Hero from '../../components/Hero/Hero';
 import Benefits from '../../components/Benefits/Benefits';
@@ -5,12 +7,38 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import PromoBanner from '../../components/PromoBanner/PromoBanner';
 import Newsletter from '../../components/Newsletter/Newsletter';
 
+import { ProductContext } from '../../context/ProductContextValue';
 import { useSilverRate } from '../../hooks/useSilverRate';
 import { useProducts } from '../../hooks/useProducts';
 
 export default function Home() {
   const { products, newArrivals } = useProducts();
-  // Fetch live silver rate from MetalCharts
+  const productContext = useContext(ProductContext);
+
+  // Only categories that are active, visible, and marked as featured
+  // in Admin > Categories are displayed in this section.
+  const featuredCategories = (productContext?.categories ?? [])
+    .filter(
+      (category) =>
+        category.isActive !== false &&
+        category.isDeleted !== true &&
+        category.isFeatured === true,
+    )
+    .sort(
+      (a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0),
+    );
+
+  // Count active products assigned to each category.
+  // ProductContext.products is used so this count is not limited
+  // to only the featured products returned by useProducts().
+  const getCategoryProductCount = (categoryName: string) =>
+    (productContext?.products ?? []).filter(
+      (product) =>
+        product.category === categoryName &&
+        product.isDeleted !== true,
+    ).length;
+
+  // Fetch live silver rate from MetalCharts.
   const { rate, loading, error } = useSilverRate();
 
   return (
@@ -27,7 +55,80 @@ export default function Home() {
       {/* BENEFITS SECTION */}
       <Benefits />
 
-      {/* FEATURED COLLECTION */}
+      {/* FEATURED CATEGORIES — MANAGED FROM ADMIN */}
+      {featuredCategories.length > 0 && (
+        <section
+          className="featured-categories-section"
+          id="featured-categories"
+          aria-labelledby="featured-categories-title"
+        >
+          <div className="featured-categories-heading">
+            <div className="featured-eyebrow">
+              <span aria-hidden="true" />
+              <span>CURATED FOR YOU</span>
+              <span aria-hidden="true" />
+            </div>
+
+            <h2 id="featured-categories-title">Featured Categories</h2>
+
+            <p>
+              Explore our handpicked silver jewellery collections.
+            </p>
+          </div>
+
+          <div className="featured-category-grid">
+            {featuredCategories.map((category) => (
+              <article
+                className="featured-category-card"
+                key={category.id}
+              >
+                <a
+                  className="featured-category-link"
+                  href={`/shop?category=${encodeURIComponent(category.name)}`}
+                  aria-label={`Explore ${category.name}`}
+                >
+                  <div className="featured-category-image">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      loading="lazy"
+                    />
+
+                    <span className="featured-category-badge">
+                      <Star size={13} fill="currentColor" aria-hidden="true" />
+                      Featured
+                    </span>
+
+                    <div className="featured-category-overlay">
+                      <span>Explore Collection</span>
+                      <ArrowRight size={18} aria-hidden="true" />
+                    </div>
+                  </div>
+
+                  <div className="featured-category-info">
+                    <div>
+                      <h3>{category.name}</h3>
+                      <p>{category.subtitle}</p>
+                      <span>
+                        {getCategoryProductCount(category.name)} Products
+                      </span>
+                    </div>
+
+                    <div
+                      className="featured-category-arrow"
+                      aria-hidden="true"
+                    >
+                      <ArrowRight size={19} />
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* FEATURED PRODUCTS */}
       <section className="featured-section" id="collections">
         <div className="section-heading">
           <div className="heading-title">
@@ -77,7 +178,7 @@ export default function Home() {
       {/* PROMOTIONAL BANNER */}
       <PromoBanner />
 
-      {/* WHY SILVERAURA */}
+      {/* WHY SILVERHUB */}
       <section className="why-section" id="about">
         <div className="section-heading">
           <div className="heading-title">
@@ -141,8 +242,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-
-
       </section>
 
       {/* NEWSLETTER */}

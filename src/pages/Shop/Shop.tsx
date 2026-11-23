@@ -1,5 +1,4 @@
-
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Layers3,
@@ -18,7 +17,7 @@ import {
 } from 'lucide-react';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { categories as catalogCategories } from '../../data/categories';
+import { ProductContext } from '../../context/ProductContextValue';
 import { useProducts } from '../../hooks/useProducts';
 import './Shop.css';
 
@@ -44,6 +43,10 @@ const categoryIcons: Record<string, typeof Gem> = {
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { visibleProducts } = useProducts();
+  const productContext = useContext(ProductContext);
+  const activeCategories = (productContext?.categories ?? []).filter(
+    (item) => item.isActive !== false && item.isDeleted !== true,
+  );
 
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [categoriesExpanded, setCategoriesExpanded] = useState(true);
@@ -52,16 +55,17 @@ export default function Shop() {
   const search = searchParams.get('search')?.trim() ?? '';
   const sort = searchParams.get('sort') ?? 'recommended';
 
-  // Collect all available categories dynamically.
+  // Use the same category records managed by the Admin Categories page.
+  // Newly added and duplicated categories appear even when they have zero products.
   const categoryOptions = useMemo(
     () =>
-      Array.from(
-        new Set([
-          ...catalogCategories.map((item) => item.name),
-          ...visibleProducts.map((product) => product.category),
-        ]),
-      ).sort((left, right) => left.localeCompare(right)),
-    [visibleProducts],
+      [...activeCategories]
+        .sort(
+          (left, right) =>
+            (left.sortOrder ?? left.id) - (right.sortOrder ?? right.id),
+        )
+        .map((item) => item.name),
+    [activeCategories],
   );
 
   // Calculate live product counts for each category.

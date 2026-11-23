@@ -35,6 +35,8 @@ export default function Categories() {
     setCategoryActive,
     reorderCategories,
     deleteCategory,
+    restoreCategory,
+    permanentlyDeleteCategory,
     storageError,
   } = context;
 
@@ -49,6 +51,11 @@ export default function Categories() {
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [error, setError] = useState('');
+  const [showRecentlyDeleted, setShowRecentlyDeleted] = useState(false);
+  const [categoryPendingDelete, setCategoryPendingDelete] = useState<Category | null>(null);
+  const [reassignmentTargetId, setReassignmentTargetId] = useState<number | ''>('');
+  const [deleteError, setDeleteError] = useState('');
+  const [permanentDeleteTarget, setPermanentDeleteTarget] = useState<Category | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [draggedId, setDraggedId] = useState<number | null>(null);
@@ -56,8 +63,18 @@ export default function Categories() {
   const [page, setPage] = useState(1);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const activeCategories = useMemo(
+    () => categories.filter((category) => category.isDeleted !== true),
+    [categories],
+  );
+
+  const recentlyDeletedCategories = useMemo(
+    () => categories.filter((category) => category.isDeleted === true),
+    [categories],
+  );
+
   const sortedCategories = useMemo(() => {
-    const result = [...categories];
+    const result = [...activeCategories];
 
     if (sortBy === 'name') {
       result.sort((a, b) => a.name.localeCompare(b.name));
@@ -74,7 +91,7 @@ export default function Categories() {
     }
 
     return result;
-  }, [categories, products, sortBy]);
+  }, [activeCategories, products, sortBy]);
 
   const filteredCategories = useMemo(() => {
     return sortedCategories.filter((category) => {
@@ -93,11 +110,11 @@ export default function Categories() {
   }, [sortedCategories, search, status]);
 
   const totalProducts = products.filter((p) => !p.isDeleted).length;
-  const visibleCount = categories.filter((c) => c.isActive !== false).length;
-  const hiddenCount = categories.length - visibleCount;
+  const visibleCount = activeCategories.filter((c) => c.isActive !== false).length;
+  const hiddenCount = activeCategories.length - visibleCount;
 
   const selectedCategory =
-    categories.find((c) => c.id === selectedCategoryId) ?? categories[0];
+    activeCategories.find((c) => c.id === selectedCategoryId) ?? activeCategories[0];
 
   const getProductCount = (name: string) =>
     products.filter(
@@ -164,7 +181,7 @@ export default function Categories() {
       return;
     }
 
-    const duplicate = categories.some(
+    const duplicate = activeCategories.some(
       (category) =>
         category.name.toLowerCase() === name.toLowerCase() &&
         category.id !== editingCategory?.id
@@ -202,27 +219,71 @@ export default function Categories() {
     }
   };
 
-  const handleDelete = (category: Category) => {
-    const count = getProductCount(category.name);
-    const confirmed = window.confirm(
-      count > 0
-        ? `${category.name} has ${count} products assigned. Reassign those products before deleting this category.`
-        : `Are you sure you want to delete "${category.name}"?`
-    );
+  const openDeleteDialog = (category: Category) => {
+    setCategoryPendingDelete(category);
+    setReassignmentTargetId('');
+    setDeleteError('');
+  };
 
-    if (!confirmed || count > 0) return;
+  const handleDelete = () => {
+    if (!categoryPendingDelete) return;
+
+    const count = getProductCount(categoryPendingDelete.name);
+    if (count > 0 && reassignmentTargetId === '') {
+      setDeleteError('Choose a destination category for the assigned products.');
+      return;
+    }
 
     try {
-      deleteCategory(category.id);
-      setSelectedIds((ids) => ids.filter((id) => id !== category.id));
+      deleteCategory(
+        categoryPendingDelete.id,
+        reassignmentTargetId === '' ? undefined : reassignmentTargetId,
+      );
+      setSelectedIds((ids) =>
+        ids.filter((id) => id !== categoryPendingDelete.id),
+      );
 
-      if (selectedCategoryId === category.id) {
-        setSelectedCategoryId(
-          categories.find((item) => item.id !== category.id)?.id ?? null
+      if (selectedCategoryId === categoryPendingDelete.id) {
+        const nextCategory = activeCategories.find(
+          (item) => item.id !== categoryPendingDelete.id,
         );
+        setSelectedCategoryId(nextCategory?.id ?? null);
       }
+
+      setCategoryPendingDelete(null);
+      setReassignmentTargetId('');
+      setDeleteError('');
     } catch (err) {
-      window.alert(err instanceof Error ? err.message : 'Unable to delete category.');
+      setDeleteError(
+        err instanceof Error ? err.message : 'Unable to delete category.',
+      );
+    }
+  };
+
+  const handleRestoreCategory = (category: Category) => {
+    try {
+      restoreCategory(category.id);
+      setSelectedCategoryId(category.id);
+      setShowRecentlyDeleted(false);
+    } catch (err) {
+      window.alert(
+        err instanceof Error ? err.message : 'Unable to restore category.',
+      );
+    }
+  };
+
+  const handlePermanentDelete = () => {
+    if (!permanentDeleteTarget) return;
+
+    try {
+      permanentlyDeleteCategory(permanentDeleteTarget.id);
+      setPermanentDeleteTarget(null);
+    } catch (err) {
+      window.alert(
+        err instanceof Error
+          ? err.message
+          : 'Unable to permanently delete category.',
+      );
     }
   };
 
@@ -248,7 +309,7 @@ export default function Categories() {
   };
 
   const handleBulkDelete = () => {
-    const selected = categories.filter((c) => selectedIds.includes(c.id));
+    const selected = activeCategories.filter((c) => selectedIds.includes(c.id));
     const blocked = selected.filter((c) => getProductCount(c.name) > 0);
 
     if (blocked.length) {
@@ -273,7 +334,7 @@ export default function Categories() {
 
   const handleExport = () => {
     const headers = ['ID', 'Category', 'Subtitle', 'Image', 'Visible', 'Featured', 'Display Order'];
-    const rows = categories.map((c) => [
+    const rows = activeCategories.map((c) => [
       c.id,
       c.name,
       c.subtitle,
@@ -322,7 +383,7 @@ export default function Categories() {
 
         if (!name || !subtitle || !image) continue;
 
-        if (categories.some((c) => c.name.toLowerCase() === name.toLowerCase())) {
+        if (activeCategories.some((c) => c.name.toLowerCase() === name.toLowerCase())) {
           continue;
         }
 
@@ -368,50 +429,122 @@ export default function Categories() {
 
   return (
     <main className="categories-page">
-      <div className="categories-breadcrumb">
-        <span>Admin portal</span>
-        <ChevronRight size={15} />
-        <strong>Categories</strong>
-      </div>
+  <header className="categories-page-heading">
+  <div className="categories-heading-content">
+    <span className="products-eyebrow">ADMIN STUDIO</span>
+    <h1>Categories</h1>
+    <p>
+      Manage product categories, set display order, visibility, and
+      featured categories for your SilverHub store.
+    </p>
+  </div>
 
-      <div className="categories-heading">
-        <div>
-          <span className="categories-eyebrow">ADMIN STUDIO</span>
-          <h1>Categories</h1>
-          <p>
-            Manage product categories, set display order, visibility, and
-            featured categories for your SilverHub store.
-          </p>
-        </div>
+  <div className="categories-heading-actions">
+    <span className="categories-total">
+      {activeCategories.length} categories
+    </span>
 
-        <div className="categories-heading-actions">
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".csv,text/csv"
-            hidden
-            onChange={handleImport}
-          />
-          <button className="category-outline-btn" onClick={() => fileInputRef.current?.click()}>
-            <Upload size={17} /> Import
-          </button>
-          <button className="category-outline-btn" onClick={handleExport}>
-            <Download size={17} /> Export CSV
-          </button>
-          <button className="category-primary-btn" onClick={openAddModal}>
-            <Plus size={19} /> Add Category
-          </button>
-        </div>
-      </div>
+    <button
+      className="category-outline-btn"
+      onClick={() => setShowRecentlyDeleted((current) => !current)}
+      type="button"
+    >
+      <Trash2 size={17} /> Recently Deleted ({recentlyDeletedCategories.length})
+    </button>
 
+    <input
+      ref={fileInputRef}
+      type="file"
+      accept=".csv,text/csv"
+      hidden
+      onChange={handleImport}
+    />
+
+    <button
+      className="category-outline-btn"
+      onClick={handleExport}
+    >
+      <Download size={17} /> Export CSV
+    </button>
+
+    <button
+      className="category-outline-btn"
+      onClick={() => fileInputRef.current?.click()}
+    >
+      <Upload size={17} /> Import CSV
+    </button>
+
+    <button
+      className="category-primary-btn"
+      onClick={openAddModal}
+    >
+      <Plus size={19} /> Add Category
+    </button>
+  </div>
+</header>
       {storageError && (
         <div className="category-storage-warning">{storageError}</div>
+      )}
+
+      {showRecentlyDeleted && (
+        <section className="category-recycle-bin">
+          <div className="category-recycle-heading">
+            <div>
+              <h2>Recently Deleted Categories</h2>
+              <p>Restore a category or permanently remove it after checking its products.</p>
+            </div>
+            <button
+              type="button"
+              className="category-cancel-btn"
+              onClick={() => setShowRecentlyDeleted(false)}
+            >
+              Close
+            </button>
+          </div>
+
+          {recentlyDeletedCategories.length === 0 ? (
+            <p className="category-empty">No deleted categories.</p>
+          ) : (
+            <div className="category-recycle-list">
+              {recentlyDeletedCategories.map((category) => (
+                <div className="category-recycle-item" key={category.id}>
+                  <img src={category.image} alt={category.name} />
+                  <div className="category-recycle-info">
+                    <strong>{category.name}</strong>
+                    <span>
+                      Deleted {category.deletedAt
+                        ? new Date(category.deletedAt).toLocaleString()
+                        : '—'}
+                    </span>
+                    <small>{getProductCount(category.name)} active products assigned</small>
+                  </div>
+                  <div className="category-recycle-actions">
+                    <button
+                      type="button"
+                      className="category-restore-btn"
+                      onClick={() => handleRestoreCategory(category)}
+                    >
+                      <Check size={15} /> Restore
+                    </button>
+                    <button
+                      type="button"
+                      className="category-permanent-btn"
+                      onClick={() => setPermanentDeleteTarget(category)}
+                    >
+                      <Trash2 size={15} /> Delete permanently
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
       )}
 
       <section className="category-stat-grid">
         <div className="category-stat-card stat-gold">
           <span className="stat-icon"><Layers /></span>
-          <div><strong>{categories.length}</strong><span>Total Categories</span></div>
+          <div><strong>{activeCategories.length}</strong><span>Total Categories</span></div>
         </div>
         <div className="category-stat-card stat-green">
           <span className="stat-icon"><ShoppingBag /></span>
@@ -587,7 +720,7 @@ export default function Categories() {
                             <button title="Edit" onClick={(e) => { e.stopPropagation(); openEditModal(category); }}><Pencil /></button>
                             <button title="Duplicate" onClick={(e) => { e.stopPropagation(); handleDuplicate(category); }}><Copy /></button>
                             <button title={active ? 'Hide' : 'Show'} onClick={(e) => { e.stopPropagation(); setCategoryActive(category.id, !active); }}>{active ? <EyeOff /> : <Eye />}</button>
-                            <button title="Delete" className="delete-icon" onClick={(e) => { e.stopPropagation(); handleDelete(category); }}><Trash2 /></button>
+                            <button title="Delete" className="delete-icon" onClick={(e) => { e.stopPropagation(); openDeleteDialog(category); }}><Trash2 /></button>
                           </div>
                         </td>
                       </tr>
@@ -673,6 +806,104 @@ export default function Categories() {
           )}
         </aside>
       </section>
+
+      {categoryPendingDelete && (
+        <div
+          className="category-modal-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setCategoryPendingDelete(null);
+              setDeleteError('');
+            }
+          }}
+        >
+          <section className="category-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="category-delete-title">
+            <div className="category-modal-heading">
+              <div>
+                <span className="categories-eyebrow">SILVER HUB ADMIN</span>
+                <h2 id="category-delete-title">Delete Category</h2>
+              </div>
+              <button type="button" onClick={() => setCategoryPendingDelete(null)} aria-label="Close">
+                <X />
+              </button>
+            </div>
+
+            <p>
+              <strong>{categoryPendingDelete.name}</strong> will be moved to Recently Deleted.
+              You can restore it later.
+            </p>
+
+            {getProductCount(categoryPendingDelete.name) > 0 && (
+              <label className="category-reassign-field">
+                Reassign {getProductCount(categoryPendingDelete.name)} assigned product(s) to *
+                <select
+                  value={reassignmentTargetId}
+                  onChange={(event) =>
+                    setReassignmentTargetId(
+                      event.target.value ? Number(event.target.value) : '',
+                    )
+                  }
+                >
+                  <option value="">Choose destination category</option>
+                  {activeCategories
+                    .filter((category) => category.id !== categoryPendingDelete.id && category.isActive !== false)
+                    .map((category) => (
+                      <option value={category.id} key={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                </select>
+              </label>
+            )}
+
+            {deleteError && <p className="category-form-error">{deleteError}</p>}
+
+            <div className="category-modal-actions">
+              <button
+                type="button"
+                className="category-cancel-btn"
+                onClick={() => {
+                  setCategoryPendingDelete(null);
+                  setDeleteError('');
+                }}
+              >
+                Cancel
+              </button>
+              <button type="button" className="category-danger-btn" onClick={handleDelete}>
+                <Trash2 size={16} /> Move to Recently Deleted
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {permanentDeleteTarget && (
+        <div className="category-modal-backdrop">
+          <section className="category-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="category-permanent-title">
+            <div className="category-modal-heading">
+              <div>
+                <span className="categories-eyebrow">PERMANENT ACTION</span>
+                <h2 id="category-permanent-title">Delete Permanently?</h2>
+              </div>
+              <button type="button" onClick={() => setPermanentDeleteTarget(null)} aria-label="Close">
+                <X />
+              </button>
+            </div>
+            <p>
+              This will permanently remove <strong>{permanentDeleteTarget.name}</strong>.
+              This action cannot be undone.
+            </p>
+            <div className="category-modal-actions">
+              <button type="button" className="category-cancel-btn" onClick={() => setPermanentDeleteTarget(null)}>
+                Cancel
+              </button>
+              <button type="button" className="category-danger-btn" onClick={handlePermanentDelete}>
+                <Trash2 size={16} /> Delete Permanently
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
 
       {modalOpen && (
         <div className="category-modal-backdrop" onMouseDown={(e) => {

@@ -41,8 +41,7 @@ export interface ProductImportBatch {
 export type NewCategoryInput = Pick<Category, 'name' | 'subtitle' | 'image'> &
   Partial<Pick<Category, 'isActive' | 'isFeatured' | 'sortOrder'>>;
 
-export type CategoryUpdate = Partial<Omit<Category, 'id' | 'createdAt'>>;
-
+export type CategoryUpdate = Partial<Omit<Category, 'id' | 'createdAt' | 'isDeleted' | 'deletedAt'>>;
 export interface ProductContextType {
   products: Product[];
   deletedProductIds: number[];
@@ -53,7 +52,11 @@ export interface ProductContextType {
   updateCategory: (id: number, updates: CategoryUpdate) => void;
   setCategoryActive: (id: number, isActive: boolean) => void;
   reorderCategories: (ids: number[]) => void;
-  deleteCategory: (id: number) => void;
+
+  // Category deletion and recovery
+  deleteCategory: (id: number, reassignToCategoryId?: number) => void;
+  restoreCategory: (id: number) => void;
+  permanentlyDeleteCategory: (id: number) => void;
 
   addProduct: (input: NewProductInput) => Product;
   importProducts: (batch: ProductImportBatch) => void;

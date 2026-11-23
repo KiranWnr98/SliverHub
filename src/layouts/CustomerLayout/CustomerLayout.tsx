@@ -18,10 +18,16 @@ export default function CustomerLayout() {
         <NavLink to="/" className="portal-brand">SILVER HUB <span>HOUSE OF 925</span></NavLink>
         <nav aria-label="Customer navigation">
           <NavLink to="/account" end><House size={17} /> Overview</NavLink>
-          <NavLink to="/account/profile"><UserRound size={17} /> Profile</NavLink>
+
+          <NavLink to="/account/profile" end>
+              <UserRound size={17} /> Profile
+                 </NavLink>
+
+               <NavLink to="/account/address" end>
+                   <MapPin size={17} /> Address
+                     </NavLink>
           <NavLink to="/account/orders"><Package size={17} /> Orders</NavLink>
-          <NavLink to="/account/addresses"><MapPin size={17} /> Addresses</NavLink>
-        </nav>
+          <NavLink to="/address"><MapPin size={17} /> Address</NavLink>  </nav>
         <div className="customer-shortcuts">
           <NavLink to="/wishlist" aria-label={`Wishlist (${wishlist.length})`}><Heart size={18} /> {wishlist.length}</NavLink>
           <NavLink to="/cart" aria-label={`Cart (${cartCount})`}><Package size={18} /> {cartCount}</NavLink>

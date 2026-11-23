@@ -1,0 +1,266 @@
+/* =========================================
+   SILVERHUB AUTH POPUP - FULL SCREEN
+========================================= */
+
+.auth-popup-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: 999999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  background: rgba(8, 19, 33, 0.68);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  overflow-y: auto;
+}
+
+/* =========================================
+   PREMIUM POPUP CARD
+========================================= */
+
+.auth-popup {
+  position: relative;
+
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100dvh - 40px);
+
+  padding: 40px 30px;
+  margin: auto;
+
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  background: #fffaf4;
+  border: 1px solid #d8bd91;
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    0 8px 25px rgba(182, 138, 77, 0.12);
+}
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.auth-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #10243a;
+
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.auth-popup-close:hover {
+  background: #f2e5d2;
+  transform: rotate(90deg);
+}
+
+/* =========================================
+   HEART ICON
+========================================= */
+
+.auth-popup-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+  background: #f2e5d2;
+  color: #b68a4d;
+}
+
+/* =========================================
+   BRAND EYEBROW
+========================================= */
+
+.auth-popup-eyebrow {
+  display: block;
+
+  color: #b68a4d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+/* =========================================
+   POPUP HEADING
+========================================= */
+
+.auth-popup h2 {
+  margin: 12px 0;
+
+  color: #10243a;
+  font-size: 27px;
+  font-family: Georgia, serif;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.auth-popup p {
+  margin: 0 0 25px;
+
+  color: #657080;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   LOGIN / SIGNUP BUTTONS
+========================================= */
+
+.auth-popup-login,
+.auth-popup-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+
+  width: 100%;
+  min-height: 48px;
+  padding: 14px;
+
+  box-sizing: border-box;
+  border-radius: 9px;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background 0.25s,
+    color 0.25s,
+    transform 0.25s;
+}
+
+/* LOGIN BUTTON */
+
+.auth-popup-login {
+  background: #10243a;
+  color: #ffffff;
+}
+
+.auth-popup-login:hover {
+  background: #b68a4d;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* SIGNUP BUTTON */
+
+.auth-popup-signup {
+  margin-top: 12px;
+
+  border: 1px solid #b68a4d;
+  background: transparent;
+  color: #10243a;
+}
+
+.auth-popup-signup:hover {
+  background: #f2e5d2;
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.auth-popup-footer {
+  display: block;
+  margin-top: 23px;
+
+  color: #a18b6b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 480px) {
+  .auth-popup-overlay {
+    padding: 16px;
+  }
+
+  .auth-popup {
+    max-width: 100%;
+    max-height: calc(100dvh - 32px);
+    padding: 35px 22px;
+    border-radius: 16px;
+  }
+
+  .auth-popup-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 16px;
+  }
+
+  .auth-popup h2 {
+    font-size: 23px;
+  }
+
+  .auth-popup p {
+    font-size: 13px;
+  }
+
+  .auth-popup-login,
+  .auth-popup-signup {
+    min-height: 45px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 360px) {
+  .auth-popup {
+    padding: 30px 18px;
+  }
+
+  .auth-popup h2 {
+    font-size: 21px;
+  }
+
+  .auth-popup-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+}

@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   ArrowRight,
   ShieldCheck,
@@ -24,6 +24,10 @@ export default function CustomerLogin() {
   const [showPassword, setShowPassword] = useState(false);
   
   const navigate = useNavigate();
+  const location = useLocation();
+
+const from =
+  (location.state as { from?: string } | null)?.from;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -58,6 +62,7 @@ export default function CustomerLogin() {
     }
 
     // CUSTOMER DEMO LOGIN
+// CUSTOMER DEMO LOGIN
 sessionStorage.setItem(
   'silverhub-demo-customer',
   JSON.stringify({ email })
@@ -65,9 +70,18 @@ sessionStorage.setItem(
 
 localStorage.setItem('isLoggedIn', 'true');
 
-sessionStorage.setItem('silverhub-login-success', 'true');
+sessionStorage.setItem(
+  'silverhub-login-success',
+  'true'
+);
 
-navigate('/');
+// Notify wishlist that customer logged in
+window.dispatchEvent(
+  new Event('silverhub-auth-changed')
+);
+
+// Redirect to previous page
+navigate(from || '/');
   }
 
   return (

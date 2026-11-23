@@ -2,15 +2,29 @@
    SILVERAURA - PREMIUM FLOATING SPARKLES
 ========================================= */
 
+
+/* SPARKLES - BACKGROUND ONLY */
+
 .sparkle-background {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
   overflow: hidden;
-  z-index: 15;
+  pointer-events: none;
+  z-index: 0;
 }
+
+.silver-sparkle {
+  position: absolute;
+  top: -12%;
+  width: var(--sparkle-size);
+  height: var(--sparkle-size);
+  animation: silverFall calc(var(--fall-duration) * 4.2) linear infinite;
+  animation-delay: var(--fall-delay);
+  will-change: transform;
+}
+
 
 /* Product cards మీద sparkles కనిపించకూడదు */
 .product-card {
@@ -18,19 +32,6 @@
   z-index: 20;
 }
 
-/* Falling particle wrapper */
-.silver-sparkle {
-  position: absolute;
-  top: -12%;
-  width: var(--sparkle-size);
-  height: var(--sparkle-size);
-
-  /* Slow and smooth silver falling animation */
-  animation: silverFall calc(var(--fall-duration) * 4.2) linear infinite;
-
-  animation-delay: var(--fall-delay);
-  will-change: transform;
-}
 
 /* Common silver particle */
 .silver-sparkle::before {
@@ -191,3 +192,89 @@
 }
 
 
+/* =========================================
+   SILVERHUB - SPARKLE VISIBILITY BOOST
+========================================= */
+
+/* Background sparkle layer */
+.sparkle-background {
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Make particles slightly more visible */
+.silver-sparkle::before {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #8b98aa 30%,
+    #ffffff 55%,
+    #687789 100%
+  );
+
+  box-shadow:
+    0 0 4px rgba(105, 120, 145, 0.65),
+    0 0 9px rgba(145, 165, 190, 0.55);
+}
+
+/* Silver dust */
+.silver-dust::before {
+  box-shadow:
+    0 0 4px rgba(95, 110, 135, 0.65),
+    0 0 8px rgba(155, 170, 190, 0.5);
+}
+
+/* Silver flakes */
+.silver-flake::before {
+  background: linear-gradient(
+    145deg,
+    #ffffff 0%,
+    #7d8999 35%,
+    #ffffff 60%,
+    #647080 100%
+  );
+}
+
+/* Occasional bright flashes */
+.silver-flash::before {
+  background: #ffffff;
+
+  box-shadow:
+    0 0 5px 2px rgba(150, 170, 200, 0.9),
+    0 0 12px 4px rgba(180, 200, 225, 0.7);
+}
+
+/* Stronger twinkle animation */
+@keyframes silverTwinkle {
+  0%, 100% {
+    opacity: 0.35;
+    filter: brightness(1);
+  }
+
+  20% {
+    opacity: 0.85;
+    filter: brightness(1.6);
+  }
+
+  35% {
+    opacity: 1;
+    filter: brightness(2);
+  }
+
+  55% {
+    opacity: 0.5;
+    filter: brightness(1.1);
+  }
+
+  75% {
+    opacity: 0.9;
+    filter: brightness(1.7);
+  }
+}
+
+/* Mobile visibility */
+@media (max-width: 600px) {
+  .sparkle-background {
+    opacity: 0.95;
+  }
+}

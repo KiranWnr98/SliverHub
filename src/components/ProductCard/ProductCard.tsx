@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Minus, Plus, Check } from 'lucide-react';
@@ -10,6 +9,7 @@ import { useWishlist } from '../../context/useWishlist';
 import { isProductPurchasable } from '../../hooks/useProducts';
 import { useProductImage } from '../../hooks/useProductMedia';
 import JewelryBoxIcon from '../JewelryBoxIcon/JewelryBoxIcon';
+import AuthPopup from '../AuthPopup/AuthPopup';
 
 interface Props {
   product: Product;
@@ -30,6 +30,10 @@ export default function ProductCard({
   const saved = isWishlisted(product.id);
   const imageUrl = useProductImage(product.image);
   const purchasable = isProductPurchasable(product);
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
+  const [authPopupType, setAuthPopupType] = useState<
+  'wishlist' | 'cart'
+  >('wishlist');
   const stockQuantity = product.stockQuantity ?? 0;
 
   useEffect(() => {
@@ -43,22 +47,56 @@ export default function ProductCard({
   const quantity = cartItem?.quantity ?? 0;
   const canIncrease = purchasable && quantity < stockQuantity;
 
-  const handleWishlist = () => {
-    toggleWishlist(product.id);
-    setShowHeart(true);
-    setTimeout(() => setShowHeart(false), 700);
-  };
+ const handleWishlist = () => {
+  const customer = sessionStorage.getItem(
+    'silverhub-demo-customer'
+  );
 
-  const handleIncrease = () => {
-    if (quantity === 0) {
-      if (addToCart(product)) {
-        setShowAdded(true);
-        setTimeout(() => setShowAdded(false), 1400);
-      }
-    } else {
-      updateQuantity(product.id, quantity + 1);
+ if (!customer) {
+  sessionStorage.setItem(
+    'silverhub-pending-wishlist',
+    String(product.id)
+  );
+
+  setAuthPopupType('wishlist');
+  setShowAuthPopup(true);
+  return;
+}
+
+  toggleWishlist(product.id);
+  setShowHeart(true);
+  setTimeout(() => setShowHeart(false), 700);
+};
+
+
+const handleIncrease = () => {
+  const customer = sessionStorage.getItem(
+    'silverhub-demo-customer'
+  );
+
+  // Login avvakapothe popup open chey
+if (!customer) {
+  sessionStorage.setItem(
+    'silverhub-pending-cart',
+    String(product.id)
+  );
+
+  setAuthPopupType('cart');
+  setShowAuthPopup(true);
+  return;
+}
+
+  // Login ayithe normal cart functionality
+  if (quantity === 0) {
+    if (addToCart(product)) {
+      setShowAdded(true);
+      setTimeout(() => setShowAdded(false), 1400);
     }
-  };
+  } else {
+    updateQuantity(product.id, quantity + 1);
+  }
+};
+
 
   const handleDecrease = () => {
     if (quantity === 1) {
@@ -307,6 +345,11 @@ export default function ProductCard({
         )}
 
       </div>
+<AuthPopup
+  open={showAuthPopup}
+  type={authPopupType}
+  onClose={() => setShowAuthPopup(false)}
+/>
     </motion.article>
   );
 }

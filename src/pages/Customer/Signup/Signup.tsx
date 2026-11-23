@@ -1,6 +1,10 @@
-
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
+
 import {
   ArrowRight,
   ShieldCheck,
@@ -19,7 +23,21 @@ import './signup.css';
 export default function CustomerSignup() {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Preserve the page the customer came from
+  const routeState = location.state as {
+    from?: string;
+  } | null;
+
+  const from =
+    typeof routeState?.from === 'string' &&
+    routeState.from.startsWith('/') &&
+    !routeState.from.startsWith('//')
+      ? routeState.from
+      : '/account';
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,33 +45,75 @@ export default function CustomerSignup() {
     const formData = new FormData(event.currentTarget);
 
     const name = String(formData.get('name') ?? '').trim();
-    const email = String(formData.get('email') ?? '').trim();
+
+    const email = String(formData.get('email') ?? '')
+      .trim()
+      .toLowerCase();
+
     const password = String(formData.get('password') ?? '');
 
-    if (!name || !email || password.length < 6) return;
+    // Basic form validation
+    if (!name || !email) {
+      setMessage('Please enter your name and email.');
+      return;
+    }
 
-    // Frontend demo only. Never store the password.
-    sessionStorage.setItem(
-      'silverhub-demo-customer',
-      JSON.stringify({ name, email })
-    );
+    if (password.length < 6) {
+      setMessage('Password must contain at least 6 characters.');
+      return;
+    }
 
-    setMessage('Demo account created successfully.');
+    try {
+      // Frontend demo customer session
+      // Never store the password
+      sessionStorage.setItem(
+        'silverhub-demo-customer',
+        JSON.stringify({
+          name,
+          email,
+        })
+      );
 
-    navigate('/account');
+      localStorage.setItem('isLoggedIn', 'true');
+
+      sessionStorage.setItem(
+        'silverhub-login-success',
+        'true'
+      );
+
+      // Notify wishlist/cart listeners of login
+      window.dispatchEvent(
+        new Event('silverhub-auth-changed')
+      );
+
+      // Return to the previous page
+      navigate(from, { replace: true });
+
+    } catch {
+      setMessage(
+        'Unable to create your demo session. Please try again.'
+      );
+    }
   }
 
   return (
     <div className="customer-signup-page">
+
+      {/* ANNOUNCEMENT BAR */}
       <AnnouncementBar />
+
+      {/* NAVBAR */}
       <Navbar />
 
       <main className="customer-signup-main">
+
         <section className="customer-signup-card">
 
-          {/* Left jewellery image */}
+          {/* LEFT JEWELLERY IMAGE */}
           <div className="signup-visual">
+
             <div className="signup-visual-content">
+
               <span className="signup-visual-eyebrow">
                 A TOUCH OF TIMELESS BEAUTY
               </span>
@@ -68,11 +128,14 @@ export default function CustomerSignup() {
                 Discover jewellery that makes every
                 moment unforgettable.
               </p>
+
             </div>
+
           </div>
 
-          {/* Right signup form */}
+          {/* RIGHT SIGNUP FORM */}
           <div className="signup-form-panel">
+
             <div className="signup-form-content">
 
               <div className="signup-eyebrow">
@@ -82,25 +145,32 @@ export default function CustomerSignup() {
               <h1>Create your account</h1>
 
               <p className="signup-description">
-                A little more personal. Your Silver Hub, all in one place.
+                A little more personal. Your Silver Hub,
+                all in one place.
               </p>
 
+              {/* SIGNUP NOTICE */}
               <div className="signup-demo-notice">
+
                 <ShieldCheck size={23} />
 
                 <div>
                   <strong>Frontend demo account</strong>
+
                   <p>
-                    No backend account or production authentication
-                    is created.
+                    No backend account or production
+                    authentication is created.
                   </p>
                 </div>
+
               </div>
 
+              {/* SIGNUP FORM */}
               <form
                 onSubmit={handleSubmit}
                 className="customer-signup-form"
               >
+
                 <label htmlFor="signup-name">
                   <User size={17} />
                   Your name
@@ -135,6 +205,7 @@ export default function CustomerSignup() {
                 </label>
 
                 <div className="signup-password-wrapper">
+
                   <input
                     id="signup-password"
                     name="password"
@@ -149,9 +220,13 @@ export default function CustomerSignup() {
                     type="button"
                     className="signup-password-toggle"
                     aria-label={
-                      showPassword ? 'Hide password' : 'Show password'
+                      showPassword
+                        ? 'Hide password'
+                        : 'Show password'
                     }
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() =>
+                      setShowPassword(!showPassword)
+                    }
                   >
                     {showPassword ? (
                       <EyeOff size={19} />
@@ -159,8 +234,10 @@ export default function CustomerSignup() {
                       <Eye size={19} />
                     )}
                   </button>
+
                 </div>
 
+                {/* SUBMIT BUTTON */}
                 <button
                   className="customer-signup-button"
                   type="submit"
@@ -168,29 +245,49 @@ export default function CustomerSignup() {
                   Create demo account
                   <ArrowRight size={19} />
                 </button>
+
               </form>
 
+              {/* ERROR MESSAGE */}
               {message && (
-                <p className="signup-feedback" role="status">
+                <p
+                  className="signup-feedback"
+                  role="status"
+                >
                   {message}
                 </p>
               )}
 
+              {/* LOGIN LINK */}
               <div className="signup-login-link">
-                <span>Already have an account?</span>
-                <Link to="/login">Sign in</Link>
+
+                <span>
+                  Already have an account?
+                </span>
+
+                <Link
+                  to="/login"
+                  state={{ from }}
+                >
+                  Sign in
+                </Link>
+
               </div>
 
               <p className="signup-legal">
-                Your demo details are kept only for this browser session.
-                Passwords are never stored.
+                Your demo details are kept only for
+                this browser session. Passwords are
+                never stored.
               </p>
 
             </div>
+
           </div>
 
         </section>
+
       </main>
+
     </div>
   );
 }

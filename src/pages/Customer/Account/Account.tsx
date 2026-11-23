@@ -5,7 +5,7 @@ import '../../../layouts/portal.css';
 const accountLinks = [
   { to: '/account/profile', label: 'Personal details', detail: 'Keep your contact details up to date.', icon: UserRound },
   { to: '/account/orders', label: 'My orders', detail: 'Follow your Silver Hub purchases.', icon: Package },
-  { to: '/account/addresses', label: 'Saved addresses', detail: 'Manage your delivery destinations.', icon: MapPin },
+  { to: '/address', label: 'Saved addresses', detail: 'Manage your delivery destinations.', icon: MapPin },
   { to: '/wishlist', label: 'Wishlist', detail: 'Return to the pieces you love.', icon: Heart },
 ];
 

@@ -8,6 +8,8 @@ export interface Category {
   isActive?: boolean;
   isFeatured?: boolean;
   sortOrder?: number;
+  isDeleted?: boolean;
+  deletedAt?: string | null;
   createdAt?: string;
   updatedAt?: string;
 }

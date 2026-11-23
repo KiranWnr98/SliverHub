@@ -956,20 +956,135 @@ export function ProductProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const deleteCategory = useCallback(
-    (id: number) => {
-      const category = categories.find((item) => item.id === id);
+    (id: number, reassignToCategoryId?: number) => {
+      const category = categories.find(
+        (item) => item.id === id && item.isDeleted !== true,
+      );
       if (!category) throw new Error('This category could not be found.');
 
       const assignedProducts = state.products.filter(
         (product) =>
-          product.category.trim().toLowerCase() === category.name.trim().toLowerCase(),
+          !product.isDeleted &&
+          product.category.trim().toLowerCase() ===
+            category.name.trim().toLowerCase(),
+      );
+
+      let nextProducts = state.products;
+
+      if (assignedProducts.length > 0) {
+        if (reassignToCategoryId === undefined) {
+          throw new Error(
+            `${assignedProducts.length} product(s) are assigned to "${category.name}". Choose a destination category before deleting it.`,
+          );
+        }
+
+        const destination = categories.find(
+          (item) =>
+            item.id === reassignToCategoryId &&
+            item.id !== id &&
+            item.isDeleted !== true &&
+            item.isActive !== false,
+        );
+
+        if (!destination) {
+          throw new Error('Choose a valid active destination category.');
+        }
+
+        const now = new Date().toISOString();
+        nextProducts = state.products.map((product) =>
+          !product.isDeleted &&
+          product.category.trim().toLowerCase() ===
+            category.name.trim().toLowerCase()
+            ? { ...product, category: destination.name, updatedAt: now }
+            : product,
+        );
+
+        // Persist the reassignment through the existing product reducer.
+        dispatch({ type: 'replace-products', products: nextProducts });
+      }
+
+      const now = new Date().toISOString();
+      setCategories((current) =>
+        current.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                isDeleted: true,
+                deletedAt: now,
+                updatedAt: now,
+              }
+            : item,
+        ),
+      );
+    },
+    [categories, state.products],
+  );
+
+  const restoreCategory = useCallback(
+    (id: number) => {
+      const category = categories.find(
+        (item) => item.id === id && item.isDeleted === true,
+      );
+      if (!category) {
+        throw new Error('This category is not in Recently Deleted.');
+      }
+
+      const duplicateName = categories.some(
+        (item) =>
+          item.id !== id &&
+          item.isDeleted !== true &&
+          item.name.trim().toLowerCase() ===
+            category.name.trim().toLowerCase(),
+      );
+      if (duplicateName) {
+        throw new Error(
+          'An active category already uses this name. Rename it before restoring this category.',
+        );
+      }
+
+      const now = new Date().toISOString();
+      setCategories((current) =>
+        current.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                isDeleted: false,
+                deletedAt: null,
+                updatedAt: now,
+              }
+            : item,
+        ),
+      );
+    },
+    [categories],
+  );
+
+  const permanentlyDeleteCategory = useCallback(
+    (id: number) => {
+      const category = categories.find(
+        (item) => item.id === id && item.isDeleted === true,
+      );
+      if (!category) {
+        throw new Error(
+          'Only categories in Recently Deleted can be permanently deleted.',
+        );
+      }
+
+      const assignedProducts = state.products.filter(
+        (product) =>
+          !product.isDeleted &&
+          product.category.trim().toLowerCase() ===
+            category.name.trim().toLowerCase(),
       );
       if (assignedProducts.length > 0) {
         throw new Error(
-          `Cannot delete "${category.name}" because ${assignedProducts.length} product(s) are assigned to it. Reassign those products first.`,
+          'This category still has assigned products. Reassign them before permanently deleting it.',
         );
       }
-      setCategories((current) => current.filter((item) => item.id !== id));
+
+      setCategories((current) =>
+        current.filter((item) => item.id !== id),
+      );
     },
     [categories, state.products],
   );
@@ -985,6 +1100,8 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       setCategoryActive,
       reorderCategories,
       deleteCategory,
+      restoreCategory,
+      permanentlyDeleteCategory,
       addProduct,
       importProducts,
       updateProduct,
@@ -1009,6 +1126,8 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       setCategoryActive,
       reorderCategories,
       deleteCategory,
+      restoreCategory,
+      permanentlyDeleteCategory,
       addProduct,
       importProducts,
       updateProduct,
