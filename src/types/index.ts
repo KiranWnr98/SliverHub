@@ -1,5 +1,4 @@
 
-
 export interface Category {
   id: number;
   name: string;
@@ -14,7 +13,7 @@ export interface Category {
   updatedAt?: string;
 }
 
-export type ProductMediaKind = 'image' | 'pdf';
+export type ProductMediaKind = 'image' | 'pdf' | 'video';
 
 export interface ProductMediaReference {
   id: string;

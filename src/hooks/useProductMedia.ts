@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 import type { ProductMediaReference } from '../types';
@@ -7,12 +6,14 @@ import {
   productImageMediaId,
 } from '../services/productMediaStore';
 
-export interface ResolvedProductImage {
+export interface ResolvedProductMedia {
   id: string;
   name: string;
+  kind: 'image' | 'video';
   url: string;
 }
 
+/** Loads an IndexedDB-backed media file and exposes a temporary object URL. */
 export function useProductMediaUrl(mediaId: string | null): string | null {
   const [url, setUrl] = useState<string | null>(null);
 
@@ -39,7 +40,9 @@ export function useProductMediaUrl(mediaId: string | null): string | null {
         if (active) {
           setUrl(objectUrl);
         } else {
+          // The component or media ID changed while IndexedDB was loading.
           URL.revokeObjectURL(objectUrl);
+          objectUrl = null;
         }
       })
       .catch((error: unknown) => {
@@ -50,9 +53,9 @@ export function useProductMediaUrl(mediaId: string | null): string | null {
 
     return () => {
       active = false;
-
       if (objectUrl) {
         URL.revokeObjectURL(objectUrl);
+        objectUrl = null;
       }
     };
   }, [mediaId]);
@@ -60,80 +63,98 @@ export function useProductMediaUrl(mediaId: string | null): string | null {
   return url;
 }
 
+/** Resolves an image URL, including images stored in IndexedDB. */
 export function useProductImage(image: string): string | null {
-  const mediaUrl = useProductMediaUrl(productImageMediaId(image));
-
-  return productImageMediaId(image) ? mediaUrl : image;
+  const mediaId = productImageMediaId(image);
+  const mediaUrl = useProductMediaUrl(mediaId);
+  return mediaId ? mediaUrl : image;
 }
 
+/**
+ * Resolves product gallery images and MP4 videos while excluding supporting
+ * PDFs. IndexedDB object URLs are revoked when the gallery changes or unmounts.
+ */
 export function useProductGallery(
   media: ProductMediaReference[] | undefined,
-): ResolvedProductImage[] {
-  const [images, setImages] = useState<ResolvedProductImage[]>([]);
+): ResolvedProductMedia[] {
+  const [items, setItems] = useState<ResolvedProductMedia[]>([]);
 
   useEffect(() => {
     let active = true;
     const objectUrls: string[] = [];
 
-    const loadImages = async () => {
-      const imageReferences = (media ?? []).filter(
-        (reference) => reference.kind === 'image',
+    // Do not keep showing the previous product's gallery while the next loads.
+    setItems([]);
+
+    const loadMedia = async () => {
+      const galleryReferences = (media ?? []).filter(
+        (reference): reference is ProductMediaReference & { kind: 'image' | 'video' } =>
+          reference.kind === 'image' || reference.kind === 'video',
       );
 
       const resolved = await Promise.all(
-        imageReferences.map(async (reference) => {
-          try {
-            if (reference.storage === 'url') {
-              return reference.url
-                ? {
-                    id: reference.id,
-                    name: reference.name,
-                    url: reference.url,
-                  }
-                : null;
-            }
+        galleryReferences.map(
+          async (reference): Promise<ResolvedProductMedia | null> => {
+            try {
+              if (reference.storage === 'url') {
+                return reference.url
+                  ? {
+                      id: reference.id,
+                      name: reference.name,
+                      kind: reference.kind,
+                      url: reference.url,
+                    }
+                  : null;
+              }
 
-            const file = await getProductMediaFile(reference.id);
+              const file = await getProductMediaFile(reference.id);
+              if (!file) {
+                console.error(`Missing product ${reference.kind}: ${reference.name}`);
+                return null;
+              }
 
-            if (!file) {
-              console.error(`Missing product image: ${reference.name}`);
+              const objectUrl = URL.createObjectURL(file);
+
+              // The effect may have been cleaned up while IndexedDB was loading.
+              if (!active) {
+                URL.revokeObjectURL(objectUrl);
+                return null;
+              }
+
+              objectUrls.push(objectUrl);
+              return {
+                id: reference.id,
+                name: reference.name,
+                kind: reference.kind,
+                url: objectUrl,
+              };
+            } catch (error) {
+              console.error(
+                `Unable to load product ${reference.kind}: ${reference.name}`,
+                error,
+              );
               return null;
             }
-
-            const objectUrl = URL.createObjectURL(file);
-            objectUrls.push(objectUrl);
-
-            return {
-              id: reference.id,
-              name: reference.name,
-              url: objectUrl,
-            };
-          } catch (error) {
-            console.error(
-              `Unable to load product image: ${reference.name}`,
-              error,
-            );
-            return null;
-          }
-        }),
+          },
+        ),
       );
 
       if (active) {
-        setImages(
+        setItems(
           resolved.filter(
-            (image): image is ResolvedProductImage => image !== null,
+            (item): item is ResolvedProductMedia => item !== null,
           ),
         );
       }
     };
 
-    void loadImages();
+    void loadMedia();
 
     return () => {
       active = false;
-      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+      objectUrls.forEach((objectUrl) => URL.revokeObjectURL(objectUrl));
     };
   }, [media]);
 
-  return images;
+  return items;
 }

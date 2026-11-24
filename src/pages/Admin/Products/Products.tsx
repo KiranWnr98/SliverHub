@@ -1,12 +1,4 @@
 import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type DragEvent,
-  type FormEvent,
-} from 'react';
-import {
   CalendarDays,
   Check,
   ChevronLeft,
@@ -18,6 +10,7 @@ import {
   Eye,
   EyeOff,
   FileText,
+  Film,
   ImagePlus,
   LayoutGrid,
   List,
@@ -31,6 +24,9 @@ import {
   Upload,
   X,
 } from 'lucide-react';
+
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { DragEvent, FormEvent } from 'react';
 
 import { useProductCatalog } from '../../../hooks/useProducts';
 import { useProductImage, useProductMediaUrl } from '../../../hooks/useProductMedia';
@@ -95,6 +91,7 @@ interface BulkMediaResult {
 
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
 const MAX_PDF_SIZE = 20 * 1024 * 1024;
+const MAX_VIDEO_SIZE = 100 * 1024 * 1024;
 
 const tabLabels: Record<ProductTab, string> = {
   all: 'All Products',
@@ -179,17 +176,22 @@ async function validateMediaFile(file: File): Promise<ValidatedMediaType> {
   const isJpegName = filename.endsWith('.jpg') || filename.endsWith('.jpeg');
   const isPngName = filename.endsWith('.png');
   const isPdfName = filename.endsWith('.pdf');
+  const isMp4Name = filename.endsWith('.mp4');
+
   if ((isJpegName || isPngName) && file.size > MAX_IMAGE_SIZE) {
     throw new Error('Images must be 10 MB or smaller.');
   }
   if (isPdfName && file.size > MAX_PDF_SIZE) {
     throw new Error('PDF documents must be 20 MB or smaller.');
   }
-  if (!isJpegName && !isPngName && !isPdfName) {
-    throw new Error('Unsupported file type. Choose JPG, JPEG, PNG, or PDF.');
+  if (isMp4Name && file.size > MAX_VIDEO_SIZE) {
+    throw new Error('Videos must be 100 MB or smaller.');
+  }
+  if (!isJpegName && !isPngName && !isPdfName && !isMp4Name) {
+    throw new Error('Unsupported file type. Choose JPG, JPEG, PNG, PDF, or MP4.');
   }
 
-  const signature = new Uint8Array(await file.slice(0, 8).arrayBuffer());
+  const signature = new Uint8Array(await file.slice(0, 12).arrayBuffer());
   const isJpeg =
     signature.length >= 3 &&
     signature[0] === 0xff &&
@@ -204,11 +206,16 @@ async function validateMediaFile(file: File): Promise<ValidatedMediaType> {
     signature[2] === 0x44 &&
     signature[3] === 0x46 &&
     signature[4] === 0x2d;
+  const isMp4 =
+    signature.length >= 8 &&
+    String.fromCharCode(...signature.slice(4, 8)) === 'ftyp';
 
   if (isJpeg && isJpegName) return { kind: 'image', mimeType: 'image/jpeg' };
   if (isPng && isPngName) return { kind: 'image', mimeType: 'image/png' };
   if (isPdf && isPdfName) return { kind: 'pdf', mimeType: 'application/pdf' };
-  throw new Error('The file contents do not match a supported JPG, PNG, or PDF file.');
+  if (isMp4 && isMp4Name) return { kind: 'video', mimeType: 'video/mp4' };
+
+  throw new Error('File contents do not match a supported JPG, PNG, PDF, or MP4 file.');
 }
 
 function productMediaReferences(product: Product): ProductMediaReference[] {
@@ -407,7 +414,7 @@ function ProductMediaCard({
 
   return (
     <article
-      className={`products-media-card ${media.kind === 'pdf' ? 'is-document' : ''}`}
+      className={`products-media-card ${media.kind !== 'image' ? 'is-document' : ''} ${media.kind === 'video' ? 'is-video' : ''}`}
       draggable={media.kind === 'image' && allowReorder}
       onDragStart={onDragStart}
       onDragOver={(event) => {
@@ -428,6 +435,20 @@ function ProductMediaCard({
               <Star size={12} fill="currentColor" /> Primary
             </span>
           )}
+        </button>
+      ) : media.kind === 'video' ? (
+        <button
+          type="button"
+          className="products-media-thumbnail products-media-video-thumbnail"
+          onClick={onPreview}
+          aria-label={`Preview video ${media.name}`}
+        >
+          {fileUrl ? (
+            <video src={fileUrl} muted playsInline preload="metadata" />
+          ) : (
+            <Film size={27} />
+          )}
+          <span className="products-video-badge"><Film size={12} /> VIDEO</span>
         </button>
       ) : (
         <div className="products-document-icon">
@@ -480,6 +501,15 @@ function ProductMediaCard({
           >
             Open PDF preview
           </a>
+        )}
+        {media.kind === 'video' && fileUrl && (
+          <button
+            type="button"
+            className="products-media-preview-link"
+            onClick={onPreview}
+          >
+            Play video
+          </button>
         )}
       </div>
       <div className="products-media-actions">
@@ -802,7 +832,11 @@ export default function Products() {
       previewUrls.current.add(previewUrl);
       queued.push({
         id: mediaId(),
-        kind: file.name.toLowerCase().endsWith('.pdf') ? 'pdf' : 'image',
+        kind: file.name.toLowerCase().endsWith('.pdf')
+          ? 'pdf'
+          : file.name.toLowerCase().endsWith('.mp4')
+            ? 'video'
+            : 'image',
         name: file.name,
         mimeType: file.type || 'application/octet-stream',
         size: file.size,
@@ -1595,6 +1629,7 @@ export default function Products() {
 
   const formImages = formMedia.filter((media) => media.kind === 'image');
   const formDocuments = formMedia.filter((media) => media.kind === 'pdf');
+  const formVideos = formMedia.filter((media) => media.kind === 'video');
   const bulkMatchedMedia = bulkMedia.filter(
     (media) => media.matchedProductId != null,
   );
@@ -2138,13 +2173,13 @@ export default function Products() {
                     }}
                   >
                     <ImagePlus size={27} />
-                    <strong>Drop images or PDFs here</strong>
-                    <span>JPG, JPEG, PNG, and PDF · File contents and size are validated</span>
+                    <strong>Drop images, videos, or PDFs here</strong>
+                    <span>JPG, JPEG, PNG, PDF, and MP4 (up to 100 MB) · Files are validated</span>
                     <label className="products-media-browse">
                       <Upload size={15} /> Browse Files
                       <input
                         type="file"
-                        accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf"
+                        accept=".jpg,.jpeg,.png,.pdf,.mp4,image/jpeg,image/png,application/pdf,video/mp4"
                         multiple
                         onChange={(event) => {
                           if (event.target.files) void queueMediaFiles(event.target.files, 'form');
@@ -2211,6 +2246,27 @@ export default function Products() {
                     <div className="products-media-document-list" aria-label="Product documents">
                       <h4>Supporting documents</h4>
                       {formDocuments.map((media) => (
+                        <ProductMediaCard
+                          key={media.id}
+                          media={media}
+                          isPrimary={false}
+                          onSetPrimary={() => undefined}
+                          onRemove={() => removeFormMedia(media.id)}
+                          onPreview={() => setPreviewMedia(media)}
+                          onDragStart={(event) => event.preventDefault()}
+                          onDrop={(event) => event.preventDefault()}
+                          canMoveUp={false}
+                          canMoveDown={false}
+                          onMoveUp={() => undefined}
+                          onMoveDown={() => undefined}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  {formVideos.length > 0 && (
+                    <div className="products-media-document-list" aria-label="Product showcase videos">
+                      <h4>Showcase videos</h4>
+                      {formVideos.map((media) => (
                         <ProductMediaCard
                           key={media.id}
                           media={media}
@@ -2299,12 +2355,12 @@ export default function Products() {
             >
               <Upload size={27} />
               <strong>Drop a batch of product files here</strong>
-              <span>JPG/JPEG/PNG up to 10 MB · PDFs up to 20 MB</span>
+              <span>JPG/JPEG/PNG up to 10 MB · PDFs up to 20 MB · MP4 videos up to 100 MB</span>
               <label className="products-media-browse">
                 <Upload size={15} /> Browse Files
                 <input
                   type="file"
-                  accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf"
+                  accept=".jpg,.jpeg,.png,.pdf,.mp4,image/jpeg,image/png,application/pdf,video/mp4"
                   multiple
                   disabled={bulkMediaSaving}
                   onChange={(event) => {
@@ -2518,6 +2574,15 @@ export default function Products() {
             <div className="products-media-preview-content">
               {previewMediaUrl && previewMedia.kind === 'image' ? (
                 <img src={previewMediaUrl} alt={previewMedia.name} />
+              ) : previewMediaUrl && previewMedia.kind === 'video' ? (
+                <video
+                  src={previewMediaUrl}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                  aria-label={`Video preview: ${previewMedia.name}`}
+                />
               ) : previewMediaUrl && previewMedia.kind === 'pdf' ? (
                 <object data={previewMediaUrl} type="application/pdf" aria-label={`PDF preview: ${previewMedia.name}`}>
                   <a href={previewMediaUrl} target="_blank" rel="noreferrer">Open PDF in a new tab</a>

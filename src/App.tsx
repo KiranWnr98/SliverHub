@@ -21,12 +21,14 @@ import CustomerSignup from './pages/Customer/Signup/Signup';
 import CustomerAccount from './pages/Customer/Account/Account';
 import EditProfile from './pages/Customer/EditProfile/EditProfile';
 import Address from './pages/Customer/Address/Address';
+import MyOrders from './pages/Customer/MyOrders/MyOrders';
 
 import AdminDashboard from './pages/Admin/Dashboard/Dashboard';
 import AdminProducts from './pages/Admin/Products/Products';
 import AdminCategories from './pages/Admin/Categories/Categories';
 import AdminOrders from './pages/Admin/Orders/Orders';
 import AdminInventory from './pages/Admin/Inventory/Inventory';
+import AdminCustomers from './pages/Admin/Customers/Customers';
 
 import PortalPlaceholder from './pages/PortalPlaceholder';
 
@@ -44,6 +46,7 @@ function StoreLayout() {
       <MainLayout>
         <Outlet />
       </MainLayout>
+
       <SparkleBackground />
       <WhatsAppButton />
       <ScrollToTop />
@@ -76,16 +79,18 @@ function App() {
               <Route path="/login" element={<CustomerLogin />} />
               <Route path="/signup" element={<CustomerSignup />} />
 
-              {/* Customer store pages */}
+              {/* Customer pages */}
               <Route element={<StoreLayout />}>
+                <Route path="/orders" element={<MyOrders />} />
+                <Route path="/account/orders" element={<MyOrders />} />
                 <Route path="/account/profile" element={<EditProfile />} />
                 <Route path="/address" element={<Address />} />
                 <Route path="/account/addresses" element={<Address />} />
               </Route>
 
+              {/* Customer account */}
               <Route element={<CustomerLayout />}>
                 <Route path="/account" element={<CustomerAccount />} />
-                <Route path="/account/orders" element={<AdminOrders />} />
               </Route>
 
               {/* Admin portal */}
@@ -95,11 +100,7 @@ function App() {
                 <Route path="/admin/categories" element={<AdminCategories />} />
                 <Route path="/admin/orders" element={<AdminOrders />} />
                 <Route path="/admin/inventory" element={<AdminInventory />} />
-
-                <Route
-                  path="/admin/customers"
-                  element={<PortalPlaceholder title="Customers" admin />}
-                />
+                <Route path="/admin/customers" element={<AdminCustomers />} />
 
                 <Route
                   path="/admin/settings"

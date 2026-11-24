@@ -1,4 +1,3 @@
-
 import { useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -290,7 +289,7 @@ export default function Cart() {
               disabled={!hasAvailableItems}
               onClick={() => navigate('/checkout')}
             >
-              {hasAvailableItems ? 'Proceed to Checkout' : 'No available items to purchase'}
+            {hasAvailableItems ? 'Proceed to Pay' : 'No available items to purchase'}
               <ArrowLeft
                 size={18}
                 className="checkout-arrow"

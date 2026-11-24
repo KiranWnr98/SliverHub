@@ -569,3 +569,79 @@
   .inventory-detail-actions { grid-template-columns: 1fr; }
 
 }
+
+
+
+/* =========================================
+   INVENTORY HEADER — MATCH ORDERS PAGE
+========================================= */
+
+.inventory-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  margin-bottom: 25px;
+}
+
+.inventory-eyebrow {
+  margin-bottom: 20px;
+}
+
+.inventory-header h1 {
+  margin: 0;
+}
+
+.inventory-header p {
+  margin-top: 8px;
+}
+
+.inventory-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.inventory-header-actions .inventory-button {
+  min-height: 42px;
+  padding: 0 17px;
+}
+
+/* Responsive layout */
+@media (max-width: 700px) {
+  .inventory-header {
+    align-items: stretch;
+  }
+
+  .inventory-header-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .inventory-header-actions .inventory-button {
+    width: 100%;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+
+  .inventory-header-actions .inventory-button:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .inventory-header-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory-header-actions .inventory-button:last-child {
+    grid-column: auto;
+  }
+}

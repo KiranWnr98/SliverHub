@@ -482,25 +482,25 @@ export default function Addresses() {
         </div>
       )}
 
-      <div className="addresses-container">
-        {/* Back to Home */}
-        <Link to="/" className="addresses-back-home">
-          <ArrowLeft size={18} />
-          Back to Home
-        </Link>
+<div className="addresses-container">
+
+  {/* BACK TO HOME - COMMON STYLE */}
+
+  <div className="profile-topbar">
+    <Link to="/" className="back-home-link">
+      <ArrowLeft size={19} />
+      <span>Back to Home</span>
+    </Link>
+  </div>
 
         {/* Page Header */}
         <div className="addresses-header">
           <div>
-            <span className="addresses-eyebrow">
-              SILVERHUB · YOUR ACCOUNT
-            </span>
+           
 
             <h1>Manage Addresses</h1>
 
-            <p>
-              Add and manage your jewellery delivery addresses.
-            </p>
+          
           </div>
 
           <div className="addresses-header-icon">

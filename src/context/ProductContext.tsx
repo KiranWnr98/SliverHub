@@ -150,7 +150,8 @@ function normalizeMediaReferences(value: unknown): ProductMediaReference[] {
     const isImage = item.kind === 'image' &&
       (item.mimeType === 'image/jpeg' || item.mimeType === 'image/png');
     const isPdf = item.kind === 'pdf' && item.mimeType === 'application/pdf';
-    return (isImage || isPdf) &&
+    const isVideo = item.kind === 'video' && item.mimeType === 'video/mp4';
+    return (isImage || isPdf || isVideo) &&
       (item.storage === 'indexeddb' || typeof item.url === 'string');
   });
 }
@@ -203,9 +204,14 @@ function normalizeProduct(
       ? product.deletedAt
       : null;
   const media = normalizeMediaReferences(product.media);
+  // A product's primary media must always be an image.
+  // Videos and PDFs remain in the gallery, but cannot replace the product image.
   const primaryMediaId =
     typeof product.primaryMediaId === 'string' &&
-    media.some((reference) => reference.id === product.primaryMediaId)
+    media.some(
+      (reference) =>
+        reference.id === product.primaryMediaId && reference.kind === 'image',
+    )
       ? product.primaryMediaId
       : undefined;
 

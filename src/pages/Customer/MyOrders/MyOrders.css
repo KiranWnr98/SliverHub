@@ -1,0 +1,497 @@
+.my-orders-page {
+  min-height: 80vh;
+  padding: 45px 6% 80px;
+  background: #faf5ee;
+  color: #0b1b2d;
+}
+
+.my-orders-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.orders-back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #0b1b2d;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.orders-back-home:hover {
+  color: #b38a50;
+}
+
+.my-orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.orders-eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #b38a50;
+  font-weight: 700;
+}
+
+.my-orders-header h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(35px, 5vw, 48px);
+  margin: 10px 0;
+}
+
+.my-orders-header p {
+  color: #817467;
+  font-size: 14px;
+}
+
+.orders-header-icon {
+  width: 65px;
+  height: 65px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: #eee1cf;
+  color: #b38a50;
+}
+
+.orders-list {
+  display: grid;
+  gap: 25px;
+}
+
+.customer-order-card {
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #eadfce;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(11, 27, 45, 0.06);
+  animation: orderCardOpen 0.5s ease;
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee4d7;
+}
+
+.order-card-header small {
+  color: #b38a50;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.order-card-header h3 {
+  margin: 7px 0;
+  overflow-wrap: anywhere;
+}
+
+.order-card-header p {
+  font-size: 12px;
+  color: #817467;
+}
+
+.order-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  background: #e8f5ed;
+  color: #168653;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.order-products {
+  display: grid;
+  gap: 18px;
+  padding: 22px 0;
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.order-product-image {
+  width: 100px;
+  height: 110px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #f5ede2;
+  display: grid;
+  place-items: center;
+}
+
+.order-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-product-info h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+
+.order-product-info p {
+  color: #817467;
+  font-size: 13px;
+  margin-bottom: 9px;
+}
+
+.order-product-info strong {
+  color: #0b1b2d;
+  font-size: 16px;
+}
+
+.order-tracking {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 25px 10px;
+  background: #faf5ee;
+  border-radius: 12px;
+  margin: 10px 0 25px;
+}
+
+.order-tracking-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #a29a90;
+  position: relative;
+}
+
+.order-tracking-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + 22px);
+  top: 21px;
+  width: calc(100% - 44px);
+  height: 2px;
+  background: #e3d8ca;
+}
+
+.tracking-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eee7de;
+}
+
+.order-tracking-step.active {
+  color: #168653;
+}
+
+.order-tracking-step.active .tracking-icon {
+  background: #168653;
+  color: #ffffff;
+}
+
+.order-tracking-step span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.order-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.order-detail-box {
+  border: 1px solid #eee4d7;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.order-detail-box h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 13px;
+  color: #b38a50;
+}
+
+.order-detail-box p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #71685f;
+}
+
+.order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #eee4d7;
+  font-weight: 600;
+}
+
+.order-card-footer strong {
+  font-size: 23px;
+  color: #b38a50;
+}
+
+.orders-empty {
+  text-align: center;
+  background: white;
+  padding: 65px 20px;
+  border-radius: 15px;
+  border: 1px solid #eadfce;
+}
+
+.orders-empty > svg {
+  color: #b38a50;
+  margin-bottom: 20px;
+}
+
+.orders-empty h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+}
+
+.orders-empty p {
+  color: #817467;
+  margin: 12px 0;
+}
+
+.orders-shop-btn {
+  display: inline-flex;
+  padding: 13px 25px;
+  margin-top: 20px;
+  background: #0b1b2d;
+  color: white;
+  border-radius: 7px;
+  text-decoration: none;
+}
+
+.orders-shop-btn:hover {
+  background: #b38a50;
+}
+
+@keyframes orderCardOpen {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .my-orders-page {
+    padding: 30px 15px 65px;
+  }
+
+  .customer-order-card {
+    padding: 15px;
+  }
+
+  .orders-header-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+  }
+
+  .order-product-image {
+    width: 75px;
+    height: 90px;
+  }
+
+  .order-product-info h3 {
+    font-size: 19px;
+  }
+
+  .order-product {
+    gap: 12px;
+  }
+
+  .order-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-tracking-step span {
+    font-size: 9px;
+  }
+
+  .order-status {
+    font-size: 10px;
+    padding: 6px 9px;
+  }
+
+  .order-card-footer strong {
+    font-size: 19px;
+  }
+}
+
+/* =========================================
+   MY ORDERS SUMMARY CARDS
+========================================= */
+
+.orders-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin: 28px 0 35px;
+}
+
+.orders-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+  padding: 25px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #fdf8f1
+  );
+
+  border: 1px solid #e8d8be;
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 12px rgba(11, 27, 45, 0.04),
+    0 12px 25px rgba(179, 138, 80, 0.08);
+
+  transition: all 0.3s ease;
+}
+
+.orders-summary-card:hover {
+  transform: translateY(-5px);
+  border-color: #b38a50;
+
+  box-shadow:
+    0 12px 28px rgba(179, 138, 80, 0.15);
+}
+
+.orders-summary-icon {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3e9da;
+  color: #b38a50;
+
+  border-radius: 13px;
+  flex-shrink: 0;
+
+  transition: all 0.3s ease;
+}
+
+.orders-summary-card:hover .orders-summary-icon {
+  background: #0b1b2d;
+  color: #ffffff;
+}
+
+.orders-summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.orders-summary-content span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #817467;
+}
+
+.orders-summary-content h2 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #0b1b2d;
+  overflow-wrap: anywhere;
+}
+
+/* TABLET VIEW */
+
+@media (max-width: 900px) {
+
+  .orders-summary-grid {
+    gap: 14px;
+  }
+
+  .orders-summary-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .orders-summary-content h2 {
+    font-size: 27px;
+  }
+
+}
+
+/* MOBILE VIEW */
+
+@media (max-width: 600px) {
+
+  .orders-summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin: 20px 0 25px;
+  }
+
+  .orders-summary-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 15px 7px;
+    gap: 10px;
+
+    border-radius: 10px;
+  }
+
+  .orders-summary-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+  }
+
+  .orders-summary-icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .orders-summary-content span {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .orders-summary-content h2 {
+    font-size: 20px;
+  }
+
+}

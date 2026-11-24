@@ -290,7 +290,7 @@ const handleLogout = () => {
 </NavLink>
 
 <NavLink
-  to="/orders"
+  to="/account/orders"
   end
   className={({ isActive }) =>
     isActive
