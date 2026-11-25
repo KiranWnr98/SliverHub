@@ -1,0 +1,1309 @@
+/* =========================================
+   SILVERHUB STORE CONFIGURATION
+========================================= */
+
+.sc-page {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  color: #0b1b2d;
+  font-family: 'Inter', sans-serif;
+}
+
+.sc-page * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.sc-page-header {
+  margin-bottom: 27px;
+}
+
+.sc-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: #a67b2c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.sc-page-header h1 {
+  margin: 0 0 5px;
+  color: #0b1b2d;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.sc-page-header p {
+  margin: 0;
+  color: #627084;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   TWO COLUMN LAYOUT
+========================================= */
+
+.sc-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(270px, 29%);
+  align-items: start;
+  gap: 22px;
+}
+
+.sc-main-column,
+.sc-side-column {
+  min-width: 0;
+}
+
+.sc-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.sc-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.sc-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================================
+   GENERAL, STOREFRONT, ABOUT TABS
+========================================= */
+
+.sc-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 44px;
+  padding: 10px 19px;
+
+  border: 1px solid #eee8df;
+  border-radius: 10px;
+
+  background: #fffdfa;
+  color: #0b1b2d;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sc-tab.active {
+  background: linear-gradient(
+    120deg,
+    #ffe5ac,
+    #eac078
+  );
+
+  border-color: #efd29a;
+
+  box-shadow:
+    0 4px 12px rgba(191, 144, 65, 0.15);
+}
+
+.sc-tab:hover:not(.active) {
+  background: #f4e9d8;
+}
+
+.sc-tab:active {
+  transform: scale(0.96);
+}
+
+/* =========================================
+   SAVE CHANGES BUTTON
+========================================= */
+
+.sc-save-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 44px;
+  padding: 10px 18px;
+
+  border: 1px solid #0b1b2d;
+  border-radius: 10px;
+
+  background: #0b1b2d;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-shadow:
+    0 4px 10px rgba(11, 27, 45, 0.1);
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sc-save-button svg {
+  color: #e8c17b;
+}
+
+.sc-save-button:hover {
+  background: #233d57;
+
+  box-shadow:
+    0 5px 15px rgba(11, 27, 45, 0.16);
+}
+
+/* =========================================
+   UNSAVED CHANGES
+========================================= */
+
+.sc-unsaved {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  color: #a67b2c;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sc-unsaved > span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #c99742;
+}
+
+/* =========================================
+   CONFIGURATION CARDS
+========================================= */
+
+.sc-card {
+  min-width: 0;
+
+  padding: 20px;
+  margin-bottom: 17px;
+
+  border: 1px solid #ece5da;
+  border-radius: 15px;
+
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #fdfaf6
+  );
+
+  box-shadow:
+    0 3px 8px rgba(80, 60, 35, 0.04),
+    0 8px 20px rgba(80, 60, 35, 0.025);
+}
+
+.sc-card-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.sc-heading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #a77a24;
+
+  flex-shrink: 0;
+}
+
+.sc-card-heading h2,
+.sc-side-heading h2 {
+  margin: 0;
+
+  color: #0b1b2d;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.sc-card-heading p {
+  margin: 5px 0 0;
+
+  color: #647184;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   STORE BRANDING GRID
+========================================= */
+
+.sc-branding-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  align-items: stretch;
+  gap: 15px;
+}
+
+.sc-branding-item {
+  min-width: 0;
+}
+
+.sc-branding-item:first-child {
+  padding-right: 13px;
+
+  border-right: 1px solid #eee7dd;
+}
+
+.sc-label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #14243a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================================
+   LOGO AND FAVICON UPLOAD
+========================================= */
+
+.sc-upload-layout {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.sc-logo-preview,
+.sc-favicon-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 1px solid #e5e1da;
+  border-radius: 10px;
+
+  background: #f8f8f8;
+
+  flex-shrink: 0;
+}
+
+.sc-logo-preview {
+  width: 100px;
+  height: 100px;
+}
+
+.sc-favicon-preview {
+  width: 62px;
+  height: 62px;
+}
+
+.sc-logo-preview img,
+.sc-favicon-preview img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 7px;
+
+  object-fit: contain;
+}
+
+.sc-upload-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.sc-upload-actions input[type='file'] {
+  display: none;
+}
+
+/* =========================================
+   UPLOAD AND REMOVE BUTTONS
+========================================= */
+
+.sc-outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-height: 32px;
+  padding: 6px 10px;
+
+  border: 1px solid #dcdfe3;
+  border-radius: 7px;
+
+  background: #ffffff;
+  color: #0b1b2d;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sc-outline-button svg {
+  flex-shrink: 0;
+}
+
+.sc-outline-button:hover {
+  background: #f4e9d8;
+  border-color: #d6b77e;
+}
+
+.sc-outline-button:active {
+  transform: scale(0.96);
+}
+
+.sc-upload-actions small {
+  color: #718096;
+
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   PREMIUM BRANDING BANNER
+========================================= */
+
+.sc-brand-preview {
+  position: relative;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  min-height: 150px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(22, 10, 34, 0.05),
+      rgba(22, 10, 34, 0.85)
+    ),
+    url('/images/admin-sidebar.png');
+
+  background-color: #24182e;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sc-brand-preview-content {
+  position: relative;
+
+  width: 100%;
+  padding: 15px 8px;
+
+  text-align: center;
+  color: #ffffff;
+}
+
+.sc-brand-preview-content svg {
+  color: #ead7ff;
+}
+
+.sc-brand-preview-content h3 {
+  margin: 5px 0 2px;
+
+  color: #ffffff;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+
+  overflow-wrap: anywhere;
+}
+
+.sc-brand-preview-content p {
+  margin: 0;
+
+  color: #f1e8f6;
+
+  font-size: 10px;
+}
+
+/* =========================================
+   STORE INFORMATION FORM
+========================================= */
+
+.sc-form-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+.sc-full-width {
+  grid-column: 1 / -1;
+}
+
+.sc-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.sc-field > span {
+  color: #14243a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sc-field b {
+  color: #d64a4a;
+}
+
+/* =========================================
+   INPUT, SELECT AND TEXTAREA
+========================================= */
+
+.sc-field input,
+.sc-field select,
+.sc-field textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #0b1b2d;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sc-field input::placeholder,
+.sc-field textarea::placeholder {
+  color: #9aa3ae;
+}
+
+.sc-field input:focus,
+.sc-field select:focus,
+.sc-field textarea:focus {
+  border-color: #bd9453;
+
+  box-shadow:
+    0 0 0 3px rgba(189, 148, 83, 0.1);
+}
+
+.sc-field select {
+  cursor: pointer;
+}
+
+.sc-field textarea {
+  resize: vertical;
+
+  line-height: 1.5;
+}
+
+/* =========================================
+   DESCRIPTION CHARACTER COUNTER
+========================================= */
+
+.sc-textarea-wrapper {
+  position: relative;
+}
+
+.sc-textarea-wrapper textarea {
+  display: block;
+
+  min-height: 85px;
+
+  padding-bottom: 25px;
+}
+
+.sc-character-count {
+  position: absolute;
+
+  bottom: 8px;
+  right: 12px;
+
+  color: #788597;
+
+  font-size: 11px;
+
+  pointer-events: none;
+}
+
+/* =========================================
+   CONTACT INFORMATION
+========================================= */
+
+.sc-contact-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  align-items: start;
+
+  gap: 15px;
+  margin-top: 17px;
+}
+
+.sc-icon-input {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 10px;
+
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sc-icon-input > svg {
+  flex-shrink: 0;
+
+  color: #14243a;
+}
+
+.sc-icon-input input,
+.sc-icon-input textarea {
+  padding: 10px 0;
+
+  border: none;
+
+  background: transparent;
+
+  box-shadow: none;
+}
+
+.sc-icon-input input:focus,
+.sc-icon-input textarea:focus {
+  box-shadow: none;
+}
+
+.sc-icon-input:focus-within {
+  border-color: #bd9453;
+
+  box-shadow:
+    0 0 0 3px rgba(189, 148, 83, 0.08);
+}
+
+/* =========================================
+   RIGHT SIDE CARDS
+========================================= */
+
+.sc-side-card {
+  padding: 19px;
+  margin: 0;
+}
+
+.sc-side-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 13px;
+}
+
+.sc-side-heading > svg {
+  flex-shrink: 0;
+
+  color: #a77a24;
+}
+
+.sc-side-heading h2 {
+  flex: 1;
+
+  font-size: 23px;
+}
+
+/* =========================================
+   STORE STATUS
+========================================= */
+
+.sc-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 13px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.sc-status.live {
+  background: #d8f5df;
+  color: #258a42;
+}
+
+.sc-status.offline {
+  background: #fbe3e3;
+  color: #bd4141;
+}
+
+.sc-status-description {
+  margin: 0 0 12px;
+
+  color: #65748a;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   QUICK SETTINGS ROWS
+========================================= */
+
+.sc-setting-row {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  min-height: 43px;
+  padding: 9px 0;
+
+  border-top: 1px solid #eee8df;
+}
+
+.sc-setting-row > svg {
+  flex-shrink: 0;
+
+  color: #14243a;
+}
+
+.sc-setting-row > span {
+  flex: 1;
+
+  min-width: 0;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 1.5;
+}
+
+/* =========================================
+   GOLD TOGGLE SWITCH
+========================================= */
+
+.sc-toggle {
+  position: relative;
+
+  width: 43px;
+  height: 24px;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 30px;
+
+  background: #c8cdd3;
+
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sc-toggle span {
+  position: absolute;
+
+  top: 2px;
+  left: 2px;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.15);
+
+  transition: transform 0.25s ease;
+}
+
+.sc-toggle.enabled {
+  background: linear-gradient(
+    110deg,
+    #a77513,
+    #c89936
+  );
+}
+
+.sc-toggle.enabled span {
+  transform: translateX(19px);
+}
+
+.sc-toggle:active {
+  transform: scale(0.94);
+}
+
+/* =========================================
+   STORE LINKS
+========================================= */
+
+.sc-link-item {
+  margin-top: 19px;
+}
+
+.sc-link-label {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 8px;
+
+  color: #14243a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sc-link-label svg {
+  color: #a77a24;
+}
+
+.sc-link-row {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.sc-link-input {
+  display: flex;
+  align-items: center;
+
+  flex: 1;
+  min-width: 0;
+
+  border: 1px solid #dcdfe3;
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+.sc-link-input input {
+  width: 100%;
+  min-width: 0;
+
+  padding: 10px 8px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: #14243a;
+
+  font-family: inherit;
+  font-size: 11px;
+
+  text-overflow: ellipsis;
+}
+
+.sc-link-input a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  color: #14243a;
+
+  flex-shrink: 0;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+/* =========================================
+   COPY LINK BUTTON
+========================================= */
+
+.sc-copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+
+  padding: 0;
+
+  border: 1px solid #dcdfe3;
+  border-radius: 7px;
+
+  background: #ffffff;
+  color: #14243a;
+
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sc-copy-button:hover,
+.sc-link-input a:hover {
+  color: #a77a24;
+  background: #faf3e8;
+}
+
+.sc-copy-button:active {
+  transform: scale(0.94);
+}
+
+/* =========================================
+   DEMO INFORMATION
+========================================= */
+
+.sc-demo-note {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  padding: 2px 4px;
+
+  color: #8a7960;
+
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.sc-demo-note svg {
+  flex-shrink: 0;
+}
+
+.sc-spacing {
+  margin-top: 18px;
+}
+
+/* =========================================
+   SUCCESS AND ERROR NOTIFICATIONS
+========================================= */
+
+.sc-notification {
+  position: fixed;
+
+  top: 90px;
+  right: 25px;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  max-width: calc(100vw - 30px);
+
+  padding: 15px 18px;
+
+  border: 1px solid #dce9df;
+  border-left: 4px solid #32874c;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #32874c;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  box-shadow:
+    0 8px 30px rgba(11, 27, 45, 0.13);
+}
+
+.sc-notification.error {
+  color: #c94a4a;
+
+  border-color: #f0dada;
+  border-left-color: #c94a4a;
+}
+
+.sc-notification > svg {
+  flex-shrink: 0;
+}
+
+.sc-notification > span {
+  flex: 1;
+
+  line-height: 1.5;
+}
+
+.sc-notification button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px;
+
+  border: none;
+  border-radius: 4px;
+
+  background: transparent;
+  color: #8993a0;
+
+  cursor: pointer;
+}
+
+.sc-notification button:hover {
+  background: #f2f3f5;
+  color: #14243a;
+}
+
+/* =========================================
+   KEYBOARD ACCESSIBILITY
+========================================= */
+
+.sc-page button:focus-visible,
+.sc-page a:focus-visible {
+  outline: 2px solid #bd9453;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   LAPTOP RESPONSIVE
+========================================= */
+
+@media (max-width: 1450px) {
+
+  .sc-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .sc-branding-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sc-brand-preview {
+    grid-column: 1 / -1;
+
+    min-height: 155px;
+  }
+
+  .sc-contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sc-contact-grid > :last-child {
+    grid-column: 1 / -1;
+  }
+
+}
+
+/* =========================================
+   SMALL LAPTOP AND TABLET
+========================================= */
+
+@media (max-width: 1150px) {
+
+  .sc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sc-side-column {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+  }
+
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .sc-page-header {
+    margin-bottom: 20px;
+  }
+
+  .sc-page-header h1 {
+    font-size: 32px;
+  }
+
+  .sc-page-header p {
+    font-size: 12px;
+  }
+
+  .sc-layout {
+    gap: 17px;
+  }
+
+  .sc-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 12px;
+  }
+
+  .sc-tabs {
+    width: 100%;
+
+    gap: 7px;
+  }
+
+  .sc-tab {
+    flex: 1;
+
+    min-width: 0;
+    min-height: 43px;
+
+    padding: 10px 7px;
+
+    gap: 6px;
+
+    font-size: 11px;
+  }
+
+  .sc-tab svg {
+    width: 16px;
+
+    flex-shrink: 0;
+  }
+
+  .sc-save-button {
+    width: 100%;
+
+    min-height: 45px;
+  }
+
+  .sc-card {
+    padding: 16px;
+
+    border-radius: 12px;
+  }
+
+  .sc-card-heading {
+    gap: 10px;
+
+    margin-bottom: 17px;
+  }
+
+  .sc-card-heading h2,
+  .sc-side-heading h2 {
+    font-size: 22px;
+  }
+
+  .sc-branding-grid {
+    grid-template-columns: 1fr;
+
+    gap: 17px;
+  }
+
+  .sc-branding-item:first-child {
+    padding-right: 0;
+    padding-bottom: 17px;
+
+    border-right: none;
+    border-bottom: 1px solid #eee7dd;
+  }
+
+  .sc-upload-layout {
+    gap: 15px;
+  }
+
+  .sc-logo-preview {
+    width: 95px;
+    height: 95px;
+  }
+
+  .sc-brand-preview {
+    min-height: 180px;
+  }
+
+  .sc-form-grid,
+  .sc-contact-grid,
+  .sc-side-column {
+    grid-template-columns: 1fr;
+  }
+
+  .sc-form-grid,
+  .sc-contact-grid {
+    gap: 15px;
+  }
+
+  .sc-field input,
+  .sc-field select,
+  .sc-field textarea {
+    min-height: 43px;
+
+    font-size: 16px;
+  }
+
+  .sc-outline-button {
+    min-height: 35px;
+  }
+
+  .sc-setting-row {
+    min-height: 48px;
+  }
+
+  .sc-side-card {
+    margin: 0;
+  }
+
+  .sc-notification {
+    top: 85px;
+    left: 15px;
+    right: 15px;
+
+    max-width: none;
+
+    padding: 13px;
+  }
+
+}
+
+/* =========================================
+   EXTRA SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+
+  .sc-page-header h1 {
+    font-size: 29px;
+  }
+
+  .sc-tab {
+    gap: 4px;
+
+    padding: 9px 5px;
+
+    font-size: 10px;
+  }
+
+  .sc-tab svg {
+    width: 14px;
+  }
+
+  .sc-card {
+    padding: 13px;
+  }
+
+  .sc-side-heading h2 {
+    font-size: 20px;
+  }
+
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sc-page * {
+    transition: none;
+  }
+
+}

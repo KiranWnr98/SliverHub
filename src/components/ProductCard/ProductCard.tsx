@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Minus, Plus, Check } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import type { Product } from '../../types';
 import { useCart } from '../../context/useCart';
@@ -20,8 +20,27 @@ export default function ProductCard({
   product,
   showCartControls = true,
 }: Props) {
-  const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
-  const { toggleWishlist, isWishlisted } = useWishlist();
+
+  // PREVIOUS PAGE INFORMATION
+
+  const location = useLocation();
+
+  const productLinkState = {
+    from: location.pathname,
+    search: location.search,
+  };
+
+  const {
+    cart,
+    addToCart,
+    updateQuantity,
+    removeFromCart,
+  } = useCart();
+
+  const {
+    toggleWishlist,
+    isWishlisted,
+  } = useWishlist();
 
   const [showHeart, setShowHeart] = useState(false);
   const [showAdded, setShowAdded] = useState(false);
@@ -30,10 +49,13 @@ export default function ProductCard({
   const saved = isWishlisted(product.id);
   const imageUrl = useProductImage(product.image);
   const purchasable = isProductPurchasable(product);
-  const [showAuthPopup, setShowAuthPopup] = useState(false);
-  const [authPopupType, setAuthPopupType] = useState<
-  'wishlist' | 'cart'
-  >('wishlist');
+
+  const [showAuthPopup, setShowAuthPopup] =
+    useState(false);
+
+  const [authPopupType, setAuthPopupType] =
+    useState<'wishlist' | 'cart'>('wishlist');
+
   const stockQuantity = product.stockQuantity ?? 0;
 
   useEffect(() => {
@@ -45,64 +67,97 @@ export default function ProductCard({
   );
 
   const quantity = cartItem?.quantity ?? 0;
-  const canIncrease = purchasable && quantity < stockQuantity;
 
- const handleWishlist = () => {
-  const customer = sessionStorage.getItem(
-    'silverhub-demo-customer'
-  );
+  const canIncrease =
+    purchasable && quantity < stockQuantity;
 
- if (!customer) {
-  sessionStorage.setItem(
-    'silverhub-pending-wishlist',
-    String(product.id)
-  );
+  // WISHLIST
 
-  setAuthPopupType('wishlist');
-  setShowAuthPopup(true);
-  return;
-}
+  const handleWishlist = () => {
 
-  toggleWishlist(product.id);
-  setShowHeart(true);
-  setTimeout(() => setShowHeart(false), 700);
-};
+    const customer = sessionStorage.getItem(
+      'silverhub-demo-customer'
+    );
 
+    if (!customer) {
 
-const handleIncrease = () => {
-  const customer = sessionStorage.getItem(
-    'silverhub-demo-customer'
-  );
+      sessionStorage.setItem(
+        'silverhub-pending-wishlist',
+        String(product.id)
+      );
 
-  // Login avvakapothe popup open chey
-if (!customer) {
-  sessionStorage.setItem(
-    'silverhub-pending-cart',
-    String(product.id)
-  );
+      setAuthPopupType('wishlist');
+      setShowAuthPopup(true);
 
-  setAuthPopupType('cart');
-  setShowAuthPopup(true);
-  return;
-}
-
-  // Login ayithe normal cart functionality
-  if (quantity === 0) {
-    if (addToCart(product)) {
-      setShowAdded(true);
-      setTimeout(() => setShowAdded(false), 1400);
+      return;
     }
-  } else {
-    updateQuantity(product.id, quantity + 1);
-  }
-};
 
+    toggleWishlist(product.id);
+
+    setShowHeart(true);
+
+    setTimeout(() => {
+      setShowHeart(false);
+    }, 700);
+  };
+
+  // ADD TO JEWELLERY BOX
+
+  const handleIncrease = () => {
+
+    if (!canIncrease) return;
+
+    const customer = sessionStorage.getItem(
+      'silverhub-demo-customer'
+    );
+
+    if (!customer) {
+
+      sessionStorage.setItem(
+        'silverhub-pending-cart',
+        String(product.id)
+      );
+
+      setAuthPopupType('cart');
+      setShowAuthPopup(true);
+
+      return;
+    }
+
+    if (quantity === 0) {
+
+      if (addToCart(product)) {
+
+        setShowAdded(true);
+
+        setTimeout(() => {
+          setShowAdded(false);
+        }, 1400);
+      }
+
+    } else {
+
+      updateQuantity(
+        product.id,
+        quantity + 1
+      );
+    }
+  };
+
+  // DECREASE QUANTITY
 
   const handleDecrease = () => {
+
     if (quantity === 1) {
+
       removeFromCart(product.id);
+
     } else if (quantity > 1) {
-      updateQuantity(product.id, quantity - 1);
+
+      updateQuantity(
+        product.id,
+        quantity - 1
+      );
     }
   };
 
@@ -112,18 +167,23 @@ if (!customer) {
       layout
       whileHover={{
         y: -7,
-        transition: { duration: 0.25 }
+        transition: { duration: 0.25 },
       }}
     >
+
       {/* PRODUCT IMAGE */}
+
       <div className="product-image">
 
         {!imageFailed && imageUrl ? (
+
           <Link
             to={`/products/${product.id}`}
+            state={productLinkState}
             className="product-card-detail-link"
             aria-label={`View ${product.name} details`}
           >
+
             <motion.img
               src={imageUrl}
               alt={product.name}
@@ -132,78 +192,133 @@ if (!customer) {
               whileHover={{ scale: 1.06 }}
               transition={{ duration: 0.5 }}
             />
+
           </Link>
+
         ) : (
+
           <Link
             to={`/products/${product.id}`}
+            state={productLinkState}
             className="product-card-detail-link product-image-fallback"
             aria-label={`View ${product.name} details; image unavailable`}
           >
             {product.name}
           </Link>
+
         )}
 
         <span className="sale-label">
-          {product.isNew ? 'NEW ARRIVAL' : 'SPECIAL PRICE'}
+          {product.isNew
+            ? 'NEW ARRIVAL'
+            : 'SPECIAL PRICE'}
         </span>
+
         {!purchasable && (
-          <span className="product-stock-badge" role="status">
+
+          <span
+            className="product-stock-badge"
+            role="status"
+          >
             Out of Stock
           </span>
+
         )}
 
         {/* WISHLIST HEART */}
+
         <motion.button
           type="button"
-          className={`product-heart ${saved ? 'saved' : ''}`}
+          className={`product-heart ${
+            saved ? 'saved' : ''
+          }`}
           onClick={handleWishlist}
           whileTap={{ scale: 0.75 }}
           animate={{
-            scale: showHeart ? [1, 1.35, 0.9, 1] : 1,
-            rotate: showHeart ? [0, -12, 12, 0] : 0
+            scale: showHeart
+              ? [1, 1.35, 0.9, 1]
+              : 1,
+
+            rotate: showHeart
+              ? [0, -12, 12, 0]
+              : 0,
           }}
           transition={{ duration: 0.4 }}
-          aria-label={saved ? 'Remove from wishlist' : 'Add to wishlist'}
+          aria-label={
+            saved
+              ? 'Remove from wishlist'
+              : 'Add to wishlist'
+          }
         >
+
           <motion.span
             animate={{
-              color: saved ? '#D94B64' : '#0D1C2E'
+              color: saved
+                ? '#D94B64'
+                : '#0D1C2E',
             }}
           >
+
             <Heart
               size={21}
               fill={saved ? 'currentColor' : 'none'}
             />
+
           </motion.span>
 
           <AnimatePresence>
+
             {showHeart && saved && (
+
               <motion.span
                 className="heart-pop"
-                initial={{ opacity: 0, y: 0, scale: 0.5 }}
-                animate={{ opacity: 1, y: -40, scale: 1.2 }}
-                exit={{ opacity: 0, y: -45 }}
+                initial={{
+                  opacity: 0,
+                  y: 0,
+                  scale: 0.5,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: -40,
+                  scale: 1.2,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -45,
+                }}
                 transition={{ duration: 0.55 }}
               >
                 ♥
               </motion.span>
+
             )}
+
           </AnimatePresence>
+
         </motion.button>
 
       </div>
 
       {/* PRODUCT INFORMATION */}
+
       <div className="product-info">
 
         <span className="product-category">
           {product.category}
         </span>
 
+        {/* PRODUCT NAME LINK */}
+
         <h3>
-          <Link to={`/products/${product.id}`} className="product-name-link">
+
+          <Link
+            to={`/products/${product.id}`}
+            state={productLinkState}
+            className="product-name-link"
+          >
             {product.name}
           </Link>
+
         </h3>
 
         <div className="product-rating">
@@ -211,25 +326,34 @@ if (!customer) {
         </div>
 
         <div className="product-prices">
+
           <strong>
             ₹{product.price.toLocaleString('en-IN')}
           </strong>
 
-          {product.oldPrice != null && product.oldPrice > product.price && (
-            <del>
-              ₹{product.oldPrice.toLocaleString('en-IN')}
-            </del>
+          {product.oldPrice != null &&
+            product.oldPrice > product.price && (
+
+              <del>
+                ₹{product.oldPrice.toLocaleString('en-IN')}
+              </del>
+
           )}
+
         </div>
 
-        {/* CART CONTROLS - HIDDEN IN WISHLIST */}
+        {/* CART CONTROLS */}
+
         {showCartControls && (
+
           <>
+
             <AnimatePresence mode="wait">
 
               {quantity === 0 ? (
 
                 purchasable ? (
+
                   <motion.button
                     key="add-button"
                     type="button"
@@ -238,21 +362,33 @@ if (!customer) {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ backgroundColor: '#BD9456' }}
+                    whileHover={{
+                      backgroundColor: '#BD9456',
+                    }}
                     whileTap={{ scale: 0.95 }}
                   >
+
                     <motion.span
-                      animate={showAdded ? {
-                        rotate: [0, -12, 12, 0],
-                        scale: [1, 1.2, 1]
-                      } : {}}
+                      animate={
+                        showAdded
+                          ? {
+                              rotate: [0, -12, 12, 0],
+                              scale: [1, 1.2, 1],
+                            }
+                          : {}
+                      }
                     >
+
                       <JewelryBoxIcon />
+
                     </motion.span>
 
                     Add to Box
+
                   </motion.button>
+
                 ) : (
+
                   <motion.button
                     key="out-of-stock"
                     type="button"
@@ -265,6 +401,7 @@ if (!customer) {
                   >
                     Out of Stock
                   </motion.button>
+
                 )
 
               ) : (
@@ -272,15 +409,28 @@ if (!customer) {
                 <motion.div
                   key="quantity-control"
                   className="quantity-control"
-                  initial={{ opacity: 0, scale: 0.85, y: 8 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.85 }}
+                  initial={{
+                    opacity: 0,
+                    scale: 0.85,
+                    y: 8,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.85,
+                  }}
                   transition={{
                     type: 'spring',
                     stiffness: 350,
-                    damping: 24
+                    damping: 24,
                   }}
                 >
+
+                  {/* MINUS BUTTON */}
 
                   <motion.button
                     type="button"
@@ -292,18 +442,38 @@ if (!customer) {
                     <Minus size={16} />
                   </motion.button>
 
+                  {/* QUANTITY */}
+
                   <AnimatePresence mode="wait">
+
                     <motion.span
                       key={quantity}
                       className="quantity-value"
-                      initial={{ opacity: 0, y: -8, scale: 0.7 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.7 }}
-                      transition={{ duration: 0.16 }}
+                      initial={{
+                        opacity: 0,
+                        y: -8,
+                        scale: 0.7,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: 8,
+                        scale: 0.7,
+                      }}
+                      transition={{
+                        duration: 0.16,
+                      }}
                     >
                       {quantity}
                     </motion.span>
+
                   </AnimatePresence>
+
+                  {/* PLUS BUTTON */}
 
                   <motion.button
                     type="button"
@@ -327,8 +497,11 @@ if (!customer) {
             </AnimatePresence>
 
             {/* ADDED CONFIRMATION */}
+
             <AnimatePresence>
+
               {showAdded && (
+
                 <motion.div
                   className="added-message"
                   initial={{ opacity: 0, y: 8 }}
@@ -336,20 +509,31 @@ if (!customer) {
                   exit={{ opacity: 0, y: -8 }}
                   role="status"
                 >
+
                   <Check size={14} />
+
                   Added to your jewellery box!
+
                 </motion.div>
+
               )}
+
             </AnimatePresence>
+
           </>
+
         )}
 
       </div>
-<AuthPopup
-  open={showAuthPopup}
-  type={authPopupType}
-  onClose={() => setShowAuthPopup(false)}
-/>
+
+      {/* LOGIN / SIGNUP POPUP */}
+
+      <AuthPopup
+        open={showAuthPopup}
+        type={authPopupType}
+        onClose={() => setShowAuthPopup(false)}
+      />
+
     </motion.article>
   );
 }

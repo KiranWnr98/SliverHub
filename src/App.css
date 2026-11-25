@@ -171,3 +171,39 @@
     box-sizing: border-box;
   }
 }
+
+/* Disable blinking text cursor across website */
+
+body {
+  caret-color: transparent;
+}
+
+/* Enable typing cursor only in editable fields */
+
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: auto;
+}
+
+/* Default mouse cursor */
+
+body {
+  cursor: default;
+}
+
+/* Pointer cursor for clickable elements */
+
+button,
+a,
+select,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Text cursor for input fields */
+
+input,
+textarea {
+  cursor: text;
+}

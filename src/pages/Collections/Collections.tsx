@@ -59,10 +59,7 @@ export default function Collections() {
           <span />
         </div>
 
-        <p>
-          Discover thoughtfully curated silver jewellery for every
-          style, occasion and you.
-        </p>
+        
       </section>
 
       {/* FEATURED COLLECTION */}

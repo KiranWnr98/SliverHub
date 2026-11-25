@@ -88,7 +88,7 @@ export default function NewArrivals() {
           <span />
         </div>
 
-        <p>Discover the latest additions to SilverHub.</p>
+        
       </section>
 
       {/* PRODUCTS AREA */}

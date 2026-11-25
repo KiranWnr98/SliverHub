@@ -175,7 +175,7 @@ export default function Shop() {
           <span />
         </div>
 
-        <p>Explore our complete silver jewellery collection.</p>
+        
       </div>
 
       <div className="shop-layout">

@@ -1,0 +1,518 @@
+/* =========================================
+   SILVERHUB WISHLIST PAGE
+========================================= */
+
+.wishlist-page {
+  width: 100%;
+  min-height: 75vh;
+
+  padding: 30px 6% 100px;
+
+  background: #faf5ee;
+  color: #0b1b2d;
+
+  box-sizing: border-box;
+}
+
+.wishlist-page * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   CONTINUE SHOPPING BUTTON
+========================================= */
+
+.wishlist-topbar {
+  width: 100%;
+  max-width: 1350px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.wishlist-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  width: fit-content;
+
+  padding: 8px 12px;
+  margin: 0;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+  box-shadow: none;
+
+  color: #17283e;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.wishlist-back-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.wishlist-back-button svg {
+  transition: transform 0.3s ease;
+}
+
+.wishlist-back-button:hover:not(:disabled) {
+  color: #a47a40;
+
+  background: rgba(164, 122, 64, 0.08);
+
+  transform: translateX(-4px);
+}
+
+.wishlist-back-button:hover:not(:disabled) svg {
+  transform: translateX(-5px);
+}
+
+.wishlist-back-button:active:not(:disabled) {
+  transform: scale(0.94);
+
+  background: rgba(164, 122, 64, 0.15);
+}
+
+.wishlist-back-button:disabled {
+  cursor: default;
+}
+
+/* NO GOLD UNDERLINE */
+
+.wishlist-back-button span::after {
+  display: none;
+  content: none;
+}
+
+/* =========================================
+   WISHLIST HEADER
+========================================= */
+
+.wishlist-header {
+  width: 100%;
+
+  text-align: center;
+
+  margin-bottom: 55px;
+}
+
+.wishlist-eyebrow {
+  display: block;
+
+  color: #b38a50;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 20px;
+}
+
+.wishlist-header h1 {
+  margin: 0;
+
+  color: #0b1b2d;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+.wishlist-header p {
+  margin: 15px 0 0;
+
+  color: #a47a40;
+
+  font-size: 15px;
+  line-height: 1.6;
+
+  text-align: center;
+}
+
+/* =========================================
+   EMPTY WISHLIST CARD
+========================================= */
+
+.empty-wishlist {
+  width: 100%;
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  padding: 50px 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e9dfd2;
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 25px rgba(11, 27, 45, 0.04),
+    0 15px 40px rgba(11, 27, 45, 0.03);
+}
+
+/* =========================================
+   EMPTY WISHLIST HEART ICON
+========================================= */
+
+.empty-wishlist-icon {
+  width: 90px;
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f8f0e5;
+
+  color: #b38a50;
+
+  border: 1px solid #e9dac5;
+  border-radius: 50%;
+
+  margin-bottom: 25px;
+}
+
+.empty-wishlist h2 {
+  margin: 0 0 12px;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+
+  font-size: 32px;
+  font-weight: 600;
+
+  color: #0b1b2d;
+
+  text-align: center;
+}
+
+.empty-wishlist p {
+  width: 100%;
+
+  margin: 0 auto 28px;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: #85796b;
+
+  text-align: center;
+}
+
+/* =========================================
+   EXPLORE COLLECTION BUTTON
+========================================= */
+
+.wishlist-explore-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-height: 46px;
+
+  padding: 12px 25px;
+
+  background: #0b1b2d;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 30px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wishlist-explore-button:hover:not(:disabled) {
+  background: #b38a50;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 8px 20px rgba(179, 138, 80, 0.2);
+}
+
+.wishlist-explore-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.wishlist-explore-button:disabled {
+  cursor: default;
+}
+
+/* =========================================
+   SAVED PRODUCTS SECTION
+========================================= */
+
+.wishlist-products-section {
+  width: 100%;
+  max-width: 1350px;
+
+  margin: 0 auto;
+}
+
+.wishlist-products-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.wishlist-products-heading h2 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+
+  font-size: 30px;
+  font-weight: 600;
+
+  color: #0b1b2d;
+}
+
+.wishlist-products-heading span {
+  font-size: 13px;
+
+  color: #a47a40;
+}
+
+/* =========================================
+   WISHLIST PRODUCT GRID
+========================================= */
+
+.wishlist-page .wishlist-product-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 25px;
+
+  width: 100%;
+}
+
+.wishlist-product-wrapper {
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wishlist-product-wrapper > * {
+  height: 100%;
+}
+
+/* =========================================
+   PAGE EXIT ANIMATION
+========================================= */
+
+.wishlist-page.wishlist-page-leaving {
+  pointer-events: none;
+
+  animation: wishlistPageExit 0.4s ease forwards;
+}
+
+@keyframes wishlistPageExit {
+
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(25px) scale(0.98);
+  }
+
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 1024px) {
+
+  .wishlist-page .wishlist-product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .wishlist-page .wishlist-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+  .wishlist-header {
+    margin-bottom: 35px;
+  }
+
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .wishlist-page {
+    padding: 20px 15px 65px;
+
+    min-height: 70vh;
+  }
+
+  .wishlist-topbar {
+    margin-bottom: 20px;
+  }
+
+  .wishlist-back-button {
+    font-size: 13px;
+
+    padding: 6px 8px;
+  }
+
+  .wishlist-eyebrow {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+  }
+
+  .wishlist-header h1 {
+    font-size: 38px;
+  }
+
+  .wishlist-header p {
+    font-size: 13px;
+
+    padding: 0 10px;
+  }
+
+  .empty-wishlist {
+    padding: 35px 20px;
+
+    border-radius: 12px;
+  }
+
+  .empty-wishlist-icon {
+    width: 75px;
+    height: 75px;
+
+    margin-bottom: 20px;
+  }
+
+  .empty-wishlist-icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .empty-wishlist h2 {
+    font-size: 27px;
+  }
+
+  .empty-wishlist p {
+    font-size: 13px;
+
+    text-align: center;
+  }
+
+  .wishlist-explore-button {
+    font-size: 13px;
+
+    padding: 10px 20px;
+  }
+
+  .wishlist-products-heading h2 {
+    font-size: 25px;
+  }
+
+  .wishlist-page .wishlist-product-grid {
+    gap: 12px;
+  }
+
+}
+
+/* =========================================
+   KEYBOARD ACCESSIBILITY
+========================================= */
+
+.wishlist-back-button:focus-visible,
+.wishlist-explore-button:focus-visible {
+  outline: 2px solid #b38a50;
+  outline-offset: 4px;
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wishlist-page.wishlist-page-leaving {
+    animation: none;
+  }
+
+  .wishlist-back-button,
+  .wishlist-back-button svg,
+  .wishlist-explore-button {
+    transition: none;
+  }
+
+}
